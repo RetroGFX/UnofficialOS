@@ -17,7 +17,7 @@ if [ ! -d "/storage/.config/drastic/aarch64/drastic" ]; then
 
     echo -e "\nFetching Drastic..."
 
-    curl -Lo drastic.tar.gz https://github.com/brooksytech/JelosAddOns/raw/main/drastic.tar.gz
+    curl -Lo drastic.tar.gz https://github.com/RetroGFX/UnofficialOSAddons/raw/main/drastic.tar.gz
 
     echo -e "\nExtracting...\n"
     tar -xvf drastic.tar.gz
