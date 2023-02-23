@@ -38,12 +38,12 @@ case "${DEVICE}" in
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders drastic"
   ;;
   RG552)
-    PKG_DEPENDS_TARGET+=" duckstationsa dolphinsa dolphin slang-shaders beetle-saturn drastic"
+    PKG_DEPENDS_TARGET+=" bsnes-hd duckstationsa dolphinsa dolphin slang-shaders beetle-saturn drastic"
   ;;
   RG503|RG353P|RG353V2)
     PKG_DEPENDS_TARGET+=" duckstationsa common-shaders glsl-shaders drastic dolphinsa"
   ;;
   handheld)
-    PKG_DEPENDS_TARGET+=" duckstationsa dolphinsa dolphin pcsx2sa lrps2 desmume bsnes citra slang-shaders minivmac minivmacsa play beetle-saturn yuzusa primehack"
+    PKG_DEPENDS_TARGET+=" bsnes-hd duckstationsa dolphinsa dolphin pcsx2sa lrps2 desmume bsnes citra slang-shaders minivmac minivmacsa play beetle-saturn yuzusa primehack"
   ;;
 esac
