@@ -8,25 +8,25 @@
   HARDENING_SUPPORT="no"
 
 # The name of the parent organization for updates
-  GIT_ORGANIZATION="RetroGFX"
+  GIT_ORGANIZATION="JustEnoughLinuxOS"
 
 # The name of the github project for updates
-  GIT_REPO="UnofficialOS"
+  GIT_REPO="distribution"
 
 # Name of the Distro to build (full name, without special characters)
-  DISTRONAME="UnofficialOS"
+  DISTRONAME="JELOS"
 
 # short project description
-  DESCRIPTION="An Open Source firmware powered by JELOS."
+  DESCRIPTION="An Open Source firmware."
 
 # Distribution Home URL
-  HOME_URL="https://unofficialos.org"
+  HOME_URL="https://jelos.org"
 
 # Documentation URL
-  WIKI_URL="https://unofficialos.org"
+  WIKI_URL="https://jelos.org"
 
 # Where to report bugs
-  BUG_REPORT_URL="https://unofficialos.org"
+  BUG_REPORT_URL="https://jelos.org"
 
 # Root password to integrate in the target system
   ROOT_PASSWORD="system generated"
@@ -37,8 +37,23 @@
 # Install glibc locales to the build (yes / no)
   GLIBC_LOCALES="yes"
 
-# build and install PulseAudio support (yes / no)
-  PULSEAUDIO_SUPPORT="yes"
+# build and install pipewire support (yes / no)
+  PIPEWIRE_SUPPORT="yes"
+
+# Define package sets to clean based on the type of build being executed.
+# This should be updated to be more dynamic in the future.
+  CLEAN_OS_BASE="initramfs emulators u-boot-script system-utils modules quirks autostart jelos"
+  CLEAN_NETWORK="RTL8821CS-firmware"
+  CLEAN_EMU_32BIT="lib32 box86 pcsx_rearmed-lr arm"
+  # Sway depends on it, weston will use it if it's built but we don't want that.
+  CLEAN_WESTON="libdisplay-info sway"
+
+# Make sure we clean a minimal number of packages for devices with
+# a BSP kernel and a rotated display when using DEVICE_ROOT.
+  if [ -n "${DEVICE_ROOT}" ]
+  then
+    CLEAN_DEVICE_ROOT="busybox systemd initramfs linux u-boot libmali libmali_rk3588 SDL2 SDL2-rotated retroarch mupen64plus-sa-input-sdl flycast-sa duckstation-sa drastic-sa fileman oga_controls portmaster glew-cmake"
+  fi
 
 # additional drivers to install:
 # for a list of additional drivers see packages/linux-drivers
@@ -64,6 +79,9 @@
 # build and install SFTP Server (yes / no)
   SFTP_SERVER="yes"
 
+# build and install Simple HTTP Server (yes / no)
+  SIMPLE_HTTP_SERVER="no"
+
 # build and install OpenVPN support (yes / no)
   OPENVPN_SUPPORT="no"
 
@@ -83,6 +101,15 @@
 
 # build and install hfs filesystem utilities (yes / no)
   HFSTOOLS="yes"
+
+# Target an emulation device
+  EMULATION_DEVICE="${EMULATION_DEVICE:-yes}"
+
+# Add support for containers
+  CONTAINER_SUPPORT="${CONTAINER_SUPPORT:-no}"
+
+# Support for debug tools such as strace
+  DEBUG_PACKAGES="${DEBUG_PACKAGES:-yes}"
 
 # Windowmanager to use (fluxbox / none)
   WINDOWMANAGER="none"
@@ -111,6 +138,9 @@
 # swapfile size if SWAP_SUPPORT=yes in MB
   SWAPFILESIZE="384"
 
+# Default weston terminal font size
+  WESTONFONTSIZE="14"
+
 # additional packages to install:
 # Space separated list is supported,
 # e.g. ADDITIONAL_PACKAGES="PACKAGE1 PACKAGE2"
@@ -132,18 +162,22 @@
 
 # Distribution Specific source location
   DISTRO_MIRROR=""
-  DISTRO_SRC="https://github.com/RetroGFX"
+  DISTRO_SRC="https://github.com/JustEnoughLinuxOS"
 
 # Default size of system partition, in MB, eg. 512
   SYSTEM_SIZE=2048
+
 # Default system partition offset, in sectors, eg. 2048
   SYSTEM_PART_START=8192
+
+# Size of storage partition, in MB. Must be >=32
+  STORAGE_SIZE=32
 
 # Default supported get handlers (archive, git, file etc.)
   GET_HANDLER_SUPPORT="archive git file"
 
 # Partition labels for USB/SD installation media
-  DISTRO_BOOTLABEL="UNOFFICIALOS"
+  DISTRO_BOOTLABEL="JELOS"
   DISTRO_DISKLABEL="STORAGE"
 
 # Settings package name - blank if not required
