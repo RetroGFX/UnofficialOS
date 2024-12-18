@@ -11,10 +11,9 @@ PKG_PATCH_DIRS+=" ${DEVICE}"
 
 case ${DEVICE} in
   RK3588*)
-	PKG_VERSION="120202c675749c5ef81ae4c8cdc30019b4de08f4"
-	PKG_SITE="https://gitlab.com/panfork/mesa"
+	PKG_VERSION="832c3c7117e4366e415ded92a6f07ec203fd9233"
+	PKG_SITE="https://github.com/ROCKNIX/mesa-panfork"
 	PKG_URL="${PKG_SITE}.git"
-	PKG_GIT_CLONE_BRANCH="csf"
   ;;
   # keep RK3399 and RK-ARMV8-A on same version to maintain cross comaptibility
   RK33*|RK-ARMV8-A|RK3566) #Using upstream dev for panfrost

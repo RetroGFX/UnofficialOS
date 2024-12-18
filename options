@@ -1,0 +1,6 @@
+# Apply for a Screenscraper API Key here: https://www.screenscraper.fr/forumsujets.php?frub=12&numpage=0
+export SCREENSCRAPER_DEV_LOGIN="devid=jelos&devpassword=jelos"
+# Apply for a GamesDB API Key here: https://forums.thegamesdb.net/viewforum.php?f=10
+export GAMESDB_APIKEY="15b4df110a65f7b827316f6bcc3b507c3aa8ea057b4d6364062348a1e222fa70"
+# Find your Cheevos Web API key here: https://retroachievements.org/controlpanel.php
+export CHEEVOS_DEV_LOGIN="z=unofficialos&y=vFwBEYJOIbPCZW0Z2QruW6n9OZ0iiPaQ"
