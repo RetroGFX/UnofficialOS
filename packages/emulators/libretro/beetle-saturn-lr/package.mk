@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="beetle-saturn-lr"
-PKG_VERSION="9bd31a4a42d06ca0f6d30ee38a569e57c150c414"
+PKG_VERSION="0a78a9a5ab0088ba19f21e028dda9f4b4d7c9e48"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/beetle-saturn-libretro"
 PKG_URL="${PKG_SITE}.git"

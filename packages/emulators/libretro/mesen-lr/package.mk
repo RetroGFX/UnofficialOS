@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="mesen-lr"
-PKG_VERSION="d6f2f1797694f87e698c737b068f621889e96fa9"
+PKG_VERSION="791c5e8153ee6e29691d45b5df2cf1151ff416f9"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/Mesen"

@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="opera-lr"
-PKG_VERSION="35e16483be900ea8aa20e87d2710b677437f73ce"
+PKG_VERSION="67a29e60a4d194b675c9272b21b61eaa022f3ba3"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPL with additional notes"

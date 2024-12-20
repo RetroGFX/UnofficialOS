@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="fmsx-lr"
-PKG_VERSION="9b5cf868825a629cc4c7086768338165d3bbf706"
+PKG_VERSION="9eb5f25df5397212a3e3088ca1a64db0740bbe5f"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
