@@ -1,5 +1,5 @@
 BUILD_DIRS=build.*
--include $(HOME)/.JELOS/options
+-include $(HOME)/.UnofficialOS/options
 
 all: world
 
@@ -105,8 +105,8 @@ docker-%: DOCKER_IMAGE := "justenoughlinuxos/jelos-build:latest"
 #   Anytime this directory changes, you must run `make clean` similarly to moving the distribution directory
 docker-%: DOCKER_WORK_DIR := $(shell if [ -n "${DOCKER_WORK_DIR}" ]; then echo ${DOCKER_WORK_DIR}; else echo "$$(pwd)" ; fi)
 
-# ${HOME}/.JELOS/options is a global options file containing developer and build settings.
-docker-%: GLOBAL_SETTINGS := $(shell if [ -f "${HOME}/.JELOS/options" ]; then echo "-v \"${HOME}/.JELOS/options:${HOME}/.JELOS/options\""; else echo ""; fi)
+# ${HOME}/.UnofficialOS/options is a global options file containing developer and build settings.
+docker-%: GLOBAL_SETTINGS := $(shell if [ -f "${HOME}/.UnofficialOS/options" ]; then echo "-v \"${HOME}/.UnofficialOS/options:${HOME}/.UnofficialOS/options\""; else echo ""; fi)
 
 # LOCAL_SSH_KEYS_FILE is a variable that contains the location of the authorized keys file for development build use.  It will be mounted into the container if it exists.
 docker-%: LOCAL_SSH_KEYS_FILE := $(shell if [ -n "${LOCAL_SSH_KEYS_FILE}" ]; then echo "-v \"${LOCAL_SSH_KEYS_FILE}:${LOCAL_SSH_KEYS_FILE}\""; else echo ""; fi)

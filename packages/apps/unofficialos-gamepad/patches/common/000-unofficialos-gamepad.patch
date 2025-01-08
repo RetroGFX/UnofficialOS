@@ -6,7 +6,7 @@ diff -rupN rinputer2.orig/main.c rinputer2/main.c
  
  		// let's not make a loop
 -		if(strncmp("Rinputer", name, 8) == 0)
-+		if(strncmp("JELOS Gamepad", name, 8) == 0)
++		if(strncmp("UnofficialOS Gamepad", name, 8) == 0)
  			continue;
  		// ignore steam-created controllers
  		// they have this name, with a digit at the end
@@ -50,7 +50,7 @@ diff -rupN rinputer2.orig/main.c rinputer2/main.c
  	usetup.id.vendor = 0x1234;
  	usetup.id.product = 0x5678;
 -	strcpy(usetup.name, "Rinputer");
-+	strcpy(usetup.name, "JELOS Gamepad");
++	strcpy(usetup.name, "UnofficialOS Gamepad");
  
  	ioctl(outfd, UI_DEV_SETUP, &usetup);
  	ioctl(outfd, UI_DEV_CREATE);

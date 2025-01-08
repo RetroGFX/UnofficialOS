@@ -3,11 +3,11 @@ Description=Setup debug config
 DefaultDependencies=no
 After=systemd-tmpfiles-setup.service
 ConditionKernelCommandLine=|debugging
-ConditionPathExists=|/storage/.cache/debug.jelos
+ConditionPathExists=|/storage/.cache/debug.unofficialos
 
 [Service]
 Type=oneshot
-ExecStart=/bin/sh -c 'cp /usr/share/debugconf/*.conf /run/jelos/debug'
+ExecStart=/bin/sh -c 'cp /usr/share/debugconf/*.conf /run/unofficialos/debug'
 RemainAfterExit=yes
 
 [Install]

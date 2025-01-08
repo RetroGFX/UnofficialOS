@@ -25,7 +25,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 **Test Configuration**:
 * Build OS name and version:
 * Docker (Y/N):
-* JELOS Branch:
+* UnofficialOS Branch:
 * Any additional information that may be useful:
 
 ## Checklist:

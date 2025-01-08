@@ -1,5 +1,5 @@
 [Unit]
-Description=JELOS user autostart script
+Description=UnofficialOS user autostart script
 Before=emustation.service weston.service
 After=network-base.service graphical.target userconfig.service
 
@@ -10,4 +10,4 @@ ExecStart=-/bin/sh -c ". /etc/profile; exec /bin/sh /usr/bin/autostart"
 RemainAfterExit=yes
 
 [Install]
-WantedBy=jelos.target
+WantedBy=unofficialos.target

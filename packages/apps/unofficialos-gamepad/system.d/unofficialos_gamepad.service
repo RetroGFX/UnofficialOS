@@ -4,7 +4,7 @@ Description=Ragnarok Input Daemon
 [Service]
 Type=simple
 ExecStartPre=/usr/bin/udevadm settle
-ExecStart=/usr/bin/jelos_gamepad
+ExecStart=/usr/bin/UnofficialOS_gamepad
 
 [Install]
 WantedBy=multi-user.target
