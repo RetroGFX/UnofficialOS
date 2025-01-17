@@ -15,7 +15,7 @@
 ################################################################################
 
 PKG_NAME="gearboy-lr"
-PKG_VERSION="def989fcd2442f16d4b629a571b428774372e0d4"
+PKG_VERSION="b2c5c5d8d44a13ed2ae7aef09e5927e8c91a0389"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

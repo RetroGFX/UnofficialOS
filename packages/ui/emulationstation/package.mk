@@ -47,7 +47,7 @@ PKG_CMAKE_OPTS_TARGET+=" -DENABLE_EMUELEC=1 \
 # One time setup:
 # ---------------
 # cd ~
-# git clone https://github.com/JustEnoughLinuxOS/emulationstation.git
+# git clone https://github.com/RetroGFX/emulationstation.git
 # cd emulationstation
 # git submodule update --init
 #
