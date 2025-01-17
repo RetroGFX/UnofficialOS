@@ -12,7 +12,7 @@ PKG_PATCH_DIRS+=" ${DEVICE}"
 case ${DEVICE} in
   RK3588*)
 	PKG_VERSION="832c3c7117e4366e415ded92a6f07ec203fd9233"
-	PKG_SITE="https://github.com/ROCKNIX/mesa-panfork"
+	PKG_SITE="https://github.com/RetroGFX/mesa-panfork"
 	PKG_URL="${PKG_SITE}.git"
   ;;
   # keep RK3399 and RK-ARMV8-A on same version to maintain cross comaptibility
