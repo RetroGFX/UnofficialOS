@@ -47,18 +47,10 @@ UnofficialOS branding and images are licensed under a [Creative Commons Attribut
 ### UnofficialOS Software
 Copyright 2022-present 
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Original software and scripts developed by the UnofficialOS team are licensed under the terms of the [GNU GPL Version 2](https://choosealicense.com/licenses/gpl-2.0/).  The full license can be found in this project's licenses folder.
 
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
+### Bundled Works
+All other software is provided under each component's respective license.  These licenses can be found in the software sources or in this project's licenses folder.  Modifications to bundled software and scripts by the UnofficialOS team are licensed under the terms of the software being modified.
 ## UnofficialOS Documentation
 * [Home](https://github.com/RetroGFX/UnofficialOS/wiki)
 * [Donating to UnofficialOS](https://github.com/RetroGFX/UnofficialOS/wiki/Donating-to-UnofficialOS)
