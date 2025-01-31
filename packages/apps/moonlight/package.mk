@@ -32,7 +32,7 @@ then
 else
   PKG_SITE+="embedded"
   PKG_URL="${PKG_SITE}.git"
-  PKG_VERSION="3b72f5195b6843be772a2eb6846ac10ceed39bf4"
+  PKG_VERSION="a6bf7154a743d4f74a1b377e730f188352a1b80c"
   PKG_TOOLCHAIN="cmake"
   post_makeinstall_target() {
     mkdir -p ${INSTALL}/usr/config/moonlight

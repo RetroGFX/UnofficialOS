@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="retroarch-overlays"
-PKG_VERSION="1ebdc498f8fcc6d3453a8cfdc56310591f6c1d62"
+PKG_VERSION="d591850bfe60ef31cfac582b302f320949dd7807"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/libretro/common-overlays"
 PKG_URL="https://github.com/libretro/common-overlays/archive/${PKG_VERSION}.tar.gz"
@@ -29,7 +29,7 @@ PKG_TOOLCHAIN="manual"
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/share/retroarch-overlays
-  for dir in borders ctr effects gamepads keyboards misc
+  for dir in borders ctr effects keyboards misc
   do
     cp -r ${PKG_BUILD}/${dir} ${INSTALL}/usr/share/retroarch-overlays/
   done
