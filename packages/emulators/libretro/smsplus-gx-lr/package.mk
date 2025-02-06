@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="smsplus-gx-lr"
-PKG_VERSION="96fa9bc65aa27a5ab2779f9f2ff0439fec7cf513"
+PKG_VERSION="c642bbd0680b5959180a420036108893d0aec961"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="Non-commercial"

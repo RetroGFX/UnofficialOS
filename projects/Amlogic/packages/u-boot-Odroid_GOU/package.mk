@@ -21,10 +21,10 @@ make_target() {
   DEBUG=${PKG_DEBUG} CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make ${PKG_UBOOT_CONFIG}
   DEBUG=${PKG_DEBUG} CROSS_COMPILE=aarch64-elf- ARCH=arm CFLAGS="" LDFLAGS="" make HOSTCC="${HOST_CC}" HOSTSTRIP="true"
 
-  # repack odroidbios.bin for jelos
-  ${TOOLCHAIN}/sbin/fsck.cramfs --extract=jelos tools/odroid_resource/ODROIDBIOS.BIN
-  sed -e "s/ODROIDGOU/JELOS/" -i jelos/boot.ini
-  ${TOOLCHAIN}/sbin/mkfs.cramfs -N little jelos tools/odroid_resource/ODROIDBIOS.BIN
+  # repack odroidbios.bin for unofficialos
+  ${TOOLCHAIN}/sbin/fsck.cramfs --extract=unofficialos tools/odroid_resource/ODROIDBIOS.BIN
+  sed -e "s/ODROIDGOU/UnofficialOS/" -i unofficialos/boot.ini
+  ${TOOLCHAIN}/sbin/mkfs.cramfs -N little unofficialos tools/odroid_resource/ODROIDBIOS.BIN
 }
 
 makeinstall_target() {

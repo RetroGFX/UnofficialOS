@@ -3,7 +3,7 @@
 
 PKG_NAME="emulators"
 PKG_LICENSE="GPLv2"
-PKG_SITE="https://jelos.org"
+PKG_SITE="https://UnofficialOS.org"
 PKG_SECTION="emulation" # Do not change to virtual or makeinstall_target will not execute.
 PKG_LONGDESC="Emulation metapackage."
 PKG_TOOLCHAIN="manual"
@@ -53,8 +53,8 @@ case "${DEVICE}" in
   ;;
   RK356*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
-    PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders mupen64plus-sa scummvmsa box64 portmaster"
-    PKG_EMUS+=" amiberry drastic-sa yabasanshiro-sa"
+    PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
+    PKG_EMUS+=" amiberry drastic-sa mupen64plus-sa scummvmsa box64 portmaster yabasanshiro-sa"
     LIBRETRO_CORES+=" uae4arm flycast-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
@@ -106,7 +106,7 @@ makeinstall_target() {
 
   ### Flush cache from previous builds
   clean_es_cache
-  clean_doc_cache
+  #clean_doc_cache
 
   ### Add BIOS directory
   add_system_dir /storage/roms/bios
@@ -118,7 +118,7 @@ makeinstall_target() {
   add_system_dir /storage/roms/savestates
 
   ### Apply documentation header
-  start_system_doc
+  #start_system_doc
 
   ### Panasonic 3DO
   add_emu_core 3do retroarch opera true
@@ -1234,7 +1234,7 @@ makeinstall_target() {
   mk_es_systems
 
   ### Generate document
-  mk_system_doc
+  #mk_system_doc
 
   mkdir -p ${INSTALL}/usr/config/emulationstation
   cp -f ${ESTMP}/es_systems.cfg ${INSTALL}/usr/config/emulationstation

@@ -8,9 +8,9 @@ assignees: ''
 ---
 
 **BEFORE SUBMITTING**
-Be sure to update to the latest version of JELOS and test.  Please do not submit bug requests for older versions of the distribution.
+Be sure to update to the latest version of UnofficialOS and test.  Please do not submit bug requests for older versions of the distribution.
 
-Review the [issue guidelines](https://github.com/JustEnoughLinuxOS/distribution/issues/122) before opening this issue.  Failure to follow the process will result in a closed request.
+Please report all issues to the UnofficialOS Discord.
 
 **Describe the bug**
 A clear and concise description of what the bug is.

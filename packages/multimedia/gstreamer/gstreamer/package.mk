@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="gstreamer"
-PKG_VERSION="1.22.7"
+PKG_VERSION="1.24.8"
 PKG_LICENSE="GPL-2.1-or-later"
 PKG_SITE="https://gstreamer.freedesktop.org"
 PKG_URL="https://gstreamer.freedesktop.org/src/gstreamer/${PKG_NAME}-${PKG_VERSION}.tar.xz"
@@ -15,7 +15,7 @@ PKG_MESON_OPTS_TARGET="-Dlibunwind=disabled \
                        -Dtests=disabled \
                        -Dnls=disabled \
                        -Dpackage-name=gstreamer \
-                       -Dpackage-origin=jelos.org \
+                       -Dpackage-origin=unofficialos.org \
                        -Ddoc=disabled"
 }
 

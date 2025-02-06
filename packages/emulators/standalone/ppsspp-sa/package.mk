@@ -7,7 +7,8 @@ PKG_REV="1"
 PKG_ARCH="any"
 PKG_SITE="https://github.com/hrydgard/ppsspp"
 PKG_URL="${PKG_SITE}.git"
-PKG_VERSION="d479b74ed9c3e321bc3735da29bc125a2ac3b9b2" # 1.17.1
+PKG_VERSION="0f50225f8e741c2f8a3a35cfd3b7d9dd0a16b34f" # v1.18.1
+CHEAT_DB_VERSION="9475ff7b4be805f818f5f40cc3e5116a4a68deac" # Update cheat.db (20/01/2025)
 PKG_LICENSE="GPLv2"
 PKG_DEPENDS_TARGET="toolchain ffmpeg libzip SDL2 zlib zip"
 PKG_SHORTDESC="PPSSPPDL"
@@ -85,7 +86,7 @@ pre_make_target() {
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/bin
-  cp ${PKG_DIR}/scripts/start_ppsspp.sh ${INSTALL}/usr/bin
+  cp ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin
   cp PPSSPPSDL ${INSTALL}/usr/bin/ppsspp
   chmod 0755 ${INSTALL}/usr/bin/*
   ln -sf /storage/.config/ppsspp/assets ${INSTALL}/usr/bin/assets
@@ -98,4 +99,5 @@ makeinstall_target() {
   fi
   rm ${INSTALL}/usr/config/ppsspp/assets/gamecontrollerdb.txt
   ln -sf NotoSansJP-Regular.ttf ${INSTALL}/usr/config/ppsspp/assets/Roboto-Condensed.ttf
+  curl -Lo ${INSTALL}/usr/config/ppsspp/PSP/Cheats/cheat.db https://raw.githubusercontent.com/Saramagrean/CWCheat-Database-Plus-/${CHEAT_DB_VERSION}/cheat.db
 }

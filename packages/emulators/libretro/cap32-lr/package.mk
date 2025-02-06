@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="cap32-lr"
-PKG_VERSION="1569dac2674512fa503dbb95eb32bccbe2908063"
+PKG_VERSION="f8f4b0b704c44970001fcf839d8d010e5af435ff"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"

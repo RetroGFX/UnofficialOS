@@ -15,13 +15,13 @@ pre_configure_target() {
                          -Dtests=disabled \
                          -Dgobject-cast-checks=disabled \
                          -Dpackage-name=gst-plugins-base \
-                         -Dpackage-origin=jelos.org \
+                         -Dpackage-origin=unofficialos.org \
                          -Ddoc=disabled \
                          -Dnls=disabled"
 
   # Fix missing dispmanx
   case ${DEVICE} in
-    RK3*|S922X*)
+    RK3*|S922X|AMD64)
       PKG_MESON_OPTS_TARGET+=" -Dgl-graphene=disabled"
     ;;
   esac

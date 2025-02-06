@@ -1766,75 +1766,74 @@ exec_thread_safe() {
 
 ### Generate System Documentation
 
-clean_doc_cache() {
-  DOCTMP="${ROOT}/.doc_cache/${DEVICE}"
-  if [ -d "${DOCTMP}" ]
-  then
-    rm -rf "${DOCTMP}"
-  fi
-}
+#clean_doc_cache() {
+#  DOCTMP="${ROOT}/.doc_cache/${DEVICE}"
+#  if [ -d "${DOCTMP}" ]
+#  then
+#    rm -rf "${DOCTMP}"
+#  fi
+#}
 
-start_system_doc() {
-  if [ -z "${SYSDOC}" ]
-  then
-    echo "Unable to generate documentation, define SYSDOC in options."
-    exit 1
-  fi
-  if [ ! -d "${SYSDOCROOT}" ]
-  then
-    mkdir ${SYSDOCROOT}
-  fi
-  if [ -e "${SYSDOC}.md" ]
-  then
-    rm -f ${SYSDOC}.md
-  fi
-  if [ -e "${ROOT}/templates/HEADER.md" ]
-  then
-    cat ${ROOT}/templates/HEADER.md >${SYSDOC}.md
-  fi
-  DOCTEMPLATE="$(basename ${SYSDOC})"
-  if [ -e "${ROOT}/templates/${DOCTEMPLATE}.md" ]
-  then
-    cat ${ROOT}/templates/${DOCTEMPLATE}.md >>${SYSDOC}.md
-  fi
-  cat <<EOF >>${SYSDOC}.md
-|Manufacturer|System|Release Date|Games Path|Supported Extensions|Emulator / Core|
-|----|----|----|----|----|----|
-EOF
-}
+#start_system_doc() {
+#  if [ -z "${SYSDOC}" ]
+#  then
+#    echo "Unable to generate documentation, define SYSDOC in options."
+#    exit 1
+#  fi
+#  if [ ! -d "${SYSDOCROOT}" ]
+#  then
+#    mkdir ${SYSDOCROOT}
+#  fi
+#  if [ -e "${SYSDOC}.md" ]
+#  then
+#    rm -f ${SYSDOC}.md
+#  fi
+#  if [ -e "${ROOT}/templates/HEADER.md" ]
+#  then
+#    cat ${ROOT}/templates/HEADER.md >${SYSDOC}.md
+#  fi
+#  DOCTEMPLATE="$(basename ${SYSDOC})"
+#  if [ -e "${ROOT}/templates/${DOCTEMPLATE}.md" ]
+#  then
+#    cat ${ROOT}/templates/${DOCTEMPLATE}.md >>${SYSDOC}.md
+#  fi
+#  cat <<EOF >>${SYSDOC}.md
+#|Manufacturer|System|Release Date|Games Path|Supported Extensions|Emulator / Core|
+#|----|----|----|----|----|----|
+#EOF
+#}
 
-add_system_doc() {
-  echo -n "|${SYSTEM_MANUFACTURER}|${SYSTEM_FULLNAME} (${SYSTEM_NAME})|${SYSTEM_RELEASE}|\`$(basename ${SYSTEM_PATH})\`|${SYSTEM_EXTENSION}|" >>${DOCTMP}/${1}:system.tmp
-}
+#add_system_doc() {
+#  echo -n "|${SYSTEM_MANUFACTURER}|${SYSTEM_FULLNAME} (${SYSTEM_NAME})|${SYSTEM_RELEASE}|\`$(basename ${SYSTEM_PATH})\`|${SYSTEM_EXTENSION}|" >>${DOCTMP}/${1}:system.tmp
+#}
 
-add_emu_doc() {
-  if [ ! -d "${DOCTMP}" ]
-  then
-    mkdir -p "${DOCTMP}"
-  fi
-  if [ "${4}" = "true" ]
-  then
-    DEFAULT=" (default)"
-  else
-    unset DEFAULT
-  fi
-  echo -n "**${2}:** ${3}${DEFAULT}<br>" >>${DOCTMP}/${1}:emulators.tmp
-}
+#add_emu_doc() {
+#  if [ ! -d "${DOCTMP}" ]
+#  then
+#    mkdir -p "${DOCTMP}"
+#  fi
+#  if [ "${4}" = "true" ]
+#  then
+#    DEFAULT=" (default)"
+#  else
+#    unset DEFAULT
+#  fi
+#  echo -n "**${2}:** ${3}${DEFAULT}<br>" >>${DOCTMP}/${1}:emulators.tmp
+#}
 
-mk_system_doc() {
-  for system in $(ls ${DOCTMP}/ | awk 'BEGIN {FS=":"} {print $1}' | sort | uniq)
-  do
-    cat ${DOCTMP}/${system}:system.tmp >>${SYSDOC}.tmp
-    if [ -e "${DOCTMP}/${system}:emulators.tmp" ]
-    then
-      cat ${DOCTMP}/${system}:emulators.tmp >>${SYSDOC}.tmp
-    fi
-    echo "|" >>${SYSDOC}.tmp
-  done
-  cat ${SYSDOC}.tmp | sort -f >>${SYSDOC}.md
-  rm -f ${SYSDOC}.tmp
-}
-
+#mk_system_doc() {
+#  for system in $(ls ${DOCTMP}/ | awk 'BEGIN {FS=":"} {print $1}' | sort | uniq)
+#  do
+#    cat ${DOCTMP}/${system}:system.tmp >>${SYSDOC}.tmp
+#    if [ -e "${DOCTMP}/${system}:emulators.tmp" ]
+#    then
+#      cat ${DOCTMP}/${system}:emulators.tmp >>${SYSDOC}.tmp
+#    fi
+#    echo "|" >>${SYSDOC}.tmp
+#  done
+#  cat ${SYSDOC}.tmp | sort -f >>${SYSDOC}.md
+#  rm -f ${SYSDOC}.tmp
+#}
 ### Generate ES Systems
 
 clean_es_cache() {
@@ -1853,7 +1852,7 @@ add_emu_core() {
 
   # Schema: emulator|core|true/false
   echo "${2}|${3}|${4}" >>${ESTMP}/${1}-emulators.tmp
-  add_emu_doc $*
+#  add_emu_doc $*
 }
 
 mk_es_systems() {
@@ -1971,7 +1970,7 @@ EOF
       fi
     done <${ESTMP}/${SYSTEM_NAME}-emulators.tmp
   fi
-  add_system_doc ${SYSTEM_NAME}
+#  add_system_doc ${SYSTEM_NAME}
 }
 
 # Use distribution functions if any
