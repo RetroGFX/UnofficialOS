@@ -3,12 +3,12 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="cemu-sa"
-PKG_VERSION="8b37e316d0537da9c717cb0698c9141e668d6fff"
+PKG_VERSION="2b0cbf7f6b6c34c748585d255ee7756ff592a502"
 PKG_ARCH="x86_64"
 PKG_LICENSE="MPL-2.0"
 PKG_SITE="https://github.com/cemu-project/Cemu"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain libzip glslang glm curl rapidjson openssl boost libfmt pugixml libpng gtk3 wxwidgets SDL2 libsodium hidapi"
+PKG_DEPENDS_TARGET="toolchain libzip glslang glm curl rapidjson openssl boost libfmt pugixml libpng gtk3 wxwidgets SDL2 libsodium hidapi spirv-tools"
 PKG_LONGDESC="Cemu is a Wii U emulator that is able to run most Wii U games and homebrew in a playable state"
 PKG_GIT_CLONE_BRANCH="main"
 PKG_GIT_CLONE_SINGLE="yes"

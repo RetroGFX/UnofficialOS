@@ -5,7 +5,7 @@
 PKG_NAME="libmali"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="nonfree"
-PKG_SITE="https://github.com/JustEnoughLinuxOS/libmali"
+PKG_SITE="https://github.com/RetroGFX/libmali"
 PKG_URL="${PKG_SITE}.git"
 PKG_VERSION="0c1c1b8e3a687fd10df38935c4dff9ab90285a09"
 MALI_LIB_VERSION="1.9.0"

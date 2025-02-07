@@ -1,18 +1,18 @@
 diff --git a/backends/events/sdl/sdl-events.cpp b/backends/events/sdl/sdl-events.cpp
-index e69f694ecaa..cdd21e3e393 100644
+index 3cd124e6dfa..b7d719a56ca 100644
 --- a/backends/events/sdl/sdl-events.cpp
 +++ b/backends/events/sdl/sdl-events.cpp
-@@ -95,6 +95,9 @@ SdlEventSource::SdlEventSource()
- 
- 		openJoystick(joystick_num);
+@@ -71,6 +71,9 @@ void SdlEventSource::loadGameControllerMappingFile() {
+ 				debug("Game controller DB file loaded: %s", file.getPath().toString(Common::Path::kNativeSeparator).c_str());
+ 		}
  	}
 +#if defined(USE_SDL_TS_VMOUSE)
 +    _touchInitialize();
 +#endif // defined(USE_SDL_TS_VMOUSE)
  }
+ #endif
  
- SdlEventSource::~SdlEventSource() {
-@@ -413,6 +416,10 @@ bool SdlEventSource::pollEvent(Common::Event &event) {
+@@ -722,6 +725,10 @@ bool SdlEventSource::pollEvent(Common::Event &event) {
  	}
  #endif
  
@@ -23,7 +23,7 @@ index e69f694ecaa..cdd21e3e393 100644
  	// If the screen changed, send an Common::EVENT_SCREEN_CHANGED
  	int screenID = g_system->getScreenChangeID();
  	if (screenID != _lastScreenID) {
-@@ -779,6 +786,13 @@ void SdlEventSource::closeJoystick() {
+@@ -1125,6 +1132,13 @@ void SdlEventSource::closeJoystick() {
  	}
  }
  
@@ -37,7 +37,7 @@ index e69f694ecaa..cdd21e3e393 100644
  int SdlEventSource::mapSDLJoystickButtonToOSystem(Uint8 sdlButton) {
  	Common::JoystickButton osystemButtons[] = {
  	    Common::JOYSTICK_BUTTON_A,
-@@ -1077,3 +1091,434 @@ uint32 SdlEventSource::obtainUnicode(const SDL_Keysym keySym) {
+@@ -1423,3 +1437,434 @@ uint32 SdlEventSource::obtainUnicode(const SDL_Keysym keySym) {
  }
  
  #endif
@@ -473,7 +473,7 @@ index e69f694ecaa..cdd21e3e393 100644
 +
 +#endif // defined(USE_SDL_TS_VMOUSE)
 diff --git a/backends/events/sdl/sdl-events.h b/backends/events/sdl/sdl-events.h
-index b3f722dffd3..8b8ff27e546 100644
+index 2fcf289e7bc..0b71181871c 100644
 --- a/backends/events/sdl/sdl-events.h
 +++ b/backends/events/sdl/sdl-events.h
 @@ -109,7 +109,7 @@ protected:
@@ -485,9 +485,9 @@ index b3f722dffd3..8b8ff27e546 100644
  
  	/**
  	 * Dispatchs SDL events for each handler.
-@@ -217,6 +217,104 @@ protected:
- 	 */
- 	Common::Event _fakeKeyUp;
+@@ -262,6 +262,104 @@ private:
+ 	void preprocessFingerMotion(SDL_Event *event);
+ 	void finishSimulatedMouseClicks(void);
  #endif
 +
 +#if defined(USE_SDL_TS_VMOUSE)
@@ -590,17 +590,11 @@ index b3f722dffd3..8b8ff27e546 100644
  };
  
  #endif
-diff --git a/backends/platform/gph/build/clean.sh b/backends/platform/gph/build/clean.sh
-old mode 100755
-new mode 100644
-diff --git a/backends/platform/maemo/debian/rules b/backends/platform/maemo/debian/rules
-old mode 100755
-new mode 100644
 diff --git a/backends/platform/sdl/sdl.cpp b/backends/platform/sdl/sdl.cpp
-index 0e0821ceda3..4908e9a4af0 100644
+index f694923ff9a..bed607288c2 100644
 --- a/backends/platform/sdl/sdl.cpp
 +++ b/backends/platform/sdl/sdl.cpp
-@@ -182,6 +182,9 @@ bool OSystem_SDL::hasFeature(Feature f) {
+@@ -197,6 +197,9 @@ bool OSystem_SDL::hasFeature(Feature f) {
  	if (f == kFeatureJoystickDeadzone || f == kFeatureKbdMouseSpeed) {
  		return _eventSource->isJoystickConnected();
  	}
@@ -610,82 +604,37 @@ index 0e0821ceda3..4908e9a4af0 100644
  #if defined(USE_OPENGL_GAME) || defined(USE_OPENGL_SHADERS)
  	/* Even if we are using the 2D graphics manager,
  	 * we are at one initGraphics3d call of supporting OpenGL */
-@@ -191,6 +194,29 @@ bool OSystem_SDL::hasFeature(Feature f) {
- 	return ModularGraphicsBackend::hasFeature(f);
- }
- 
-+#if defined(USE_SDL_TS_VMOUSE)
-+void OSystem_SDL::setFeatureState(Feature f, bool enable) {
-+	switch (f) {
-+	case kFeatureTouchpadMode:
-+		ConfMan.setBool("touchpad_mouse_mode", enable);
-+		break;
-+	default:
-+		ModularGraphicsBackend::setFeatureState(f, enable);
-+		break;
-+	}
-+}
-+bool OSystem_SDL::getFeatureState(Feature f) {
-+	switch (f) {
-+	case kFeatureTouchpadMode:
-+		return ConfMan.getBool("touchpad_mouse_mode");
-+		break;
-+	default:
-+		return ModularGraphicsBackend::getFeatureState(f);
-+		break;
-+	}
-+}
-+#endif // defined(USE_SDL_TS_VMOUSE)
-+
- void OSystem_SDL::initBackend() {
- 	// Check if backend has not been initialized
- 	assert(!_inited);
-diff --git a/backends/platform/sdl/sdl.h b/backends/platform/sdl/sdl.h
-index 28ba76a09ed..3cf1dcf021a 100644
---- a/backends/platform/sdl/sdl.h
-+++ b/backends/platform/sdl/sdl.h
-@@ -52,6 +52,10 @@ public:
- 	void init() override;
- 
- 	bool hasFeature(Feature f) override;
-+#if defined(USE_SDL_TS_VMOUSE)
-+	void setFeatureState(Feature f, bool enable) override;
-+	bool getFeatureState(Feature f) override;
-+#endif // defined(USE_SDL_TS_VMOUSE)
- 
- 	// Override functions from ModularBackend and OSystem
- 	void initBackend() override;
 diff --git a/configure b/configure
-index e9e3abe6493..f3d4aa91764 100755
+index cacc10675e3..753f6afd6cf 100755
 --- a/configure
 +++ b/configure
-@@ -223,6 +223,7 @@ _nuked_opl=yes
+@@ -229,6 +229,7 @@ _nuked_opl=yes
  _builtin_resources=yes
  _windows_console=yes
  _windows_unicode=yes
 +_sdl_ts_vmouse=no
  _cygwin_build=no
- # Default commands
- _ranlib=ranlib
-@@ -978,6 +979,8 @@ Optional Features:
+ _ext_sse2=auto
+ _ext_avx2=auto
+@@ -987,6 +988,8 @@ Optional Features:
    --disable-windows-console do not show console output on Windows
    --enable-windows-unicode  use Windows Unicode APIs (default)
    --disable-windows-unicode use Windows ANSI APIs
-+  --enable-sdl-ts-vmouse   enable SDL touchscreen virtual mouse support
-+  --disable-sdl-ts-vmouse  disable SDL touchscreen virtual mouse support
- 
- Optional Documentation Options:
-   --with-manual-version=VERSION version to use when generating the manual (optional)
-@@ -1285,6 +1288,8 @@ for ac_option in $@; do
++  --enable-sdl-ts-vmouse    enable SDL touchscreen virtual mouse support
++  --disable-sdl-ts-vmouse   disable SDL touchscreen virtual mouse support
+   --enable-ext-sse2         allow code to use sse2 extensions on x86/amd64
+   --enable-ext-avx2         allow code to use avx2 extensions on x86/amd64
+   --enable-ext-neon         allow code to use neon extensions on ARM
+@@ -1323,6 +1326,8 @@ for ac_option in $@; do
  	--disable-eventrecorder)     _eventrec=no            ;;
  	--enable-text-console)       _text_console=yes       ;;
  	--disable-text-console)      _text_console=no        ;;
 +	--enable-sdl-ts-vmouse)      _sdl_ts_vmouse=yes      ;;
 +	--disable-sdl-ts-vmouse)     _sdl_ts_vmouse=no       ;;
- 	--with-fluidsynth-prefix=*)
- 		arg=`echo $ac_option | cut -d '=' -f 2`
- 		FLUIDSYNTH_CFLAGS="-I$arg/include"
-@@ -5972,6 +5977,9 @@ define_in_config_h_if_yes "$_readline" 'USE_READLINE'
+ 	--enable-ext-sse2)           _ext_sse2=yes           ;;
+ 	--disable-ext-sse2)          _ext_sse2=no            ;;
+ 	--enable-ext-avx2)           _ext_avx2=yes           ;;
+@@ -6122,6 +6127,9 @@ define_in_config_h_if_yes "$_readline" 'USE_READLINE'
  
  define_in_config_h_if_yes "$_text_console" 'USE_TEXT_CONSOLE_FOR_DEBUGGER'
  

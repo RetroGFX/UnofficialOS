@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="quicknes-lr"
-PKG_VERSION="cd73f021be7dd5b1a21b71155a320364c02de4ac"
+PKG_VERSION="dbf19f73e3eb9701d1c7f5898f57c097e05c9fbd"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPLv2.1+"

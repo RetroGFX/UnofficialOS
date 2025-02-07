@@ -15,7 +15,7 @@
 ################################################################################
 
 PKG_NAME="gearcoleco-lr"
-PKG_VERSION="169780b22acb0ac0b6d9725501ac8faf177e0632"
+PKG_VERSION="ccbb6cdff77d90536811c892c32180652cb12123"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

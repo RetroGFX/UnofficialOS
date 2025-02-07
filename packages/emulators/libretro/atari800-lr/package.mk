@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="atari800-lr"
-PKG_VERSION="410d7bf0c215f3444793a9cec51c129e7b67c400"
+PKG_VERSION="6a18cb23cc4a7cecabd9b16143d2d7332ae8d44b"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

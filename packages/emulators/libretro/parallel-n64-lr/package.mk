@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="parallel-n64-lr"
-PKG_VERSION="1b57f9199b1f8a4510f7f89f14afa9cabf9b3bdd"
+PKG_VERSION="e372c5e327dcd649e9d840ffc3d88480b6866eda"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/parallel-n64"

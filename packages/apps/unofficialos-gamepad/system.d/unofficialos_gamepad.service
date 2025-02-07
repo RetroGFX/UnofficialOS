@@ -1,0 +1,10 @@
+[Unit]
+Description=Ragnarok Input Daemon
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/udevadm settle
+ExecStart=/usr/bin/UnofficialOS_gamepad
+
+[Install]
+WantedBy=multi-user.target

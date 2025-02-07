@@ -17,7 +17,7 @@
 /target/
 
 # options
-.jelos
+.unofficialos
 
 # private working directory
 /.work/
@@ -60,4 +60,4 @@ linaro/linux/
 linaro/u-boot/
 
 # Documentation for virtuals devices
-documentation/PER_DEVICE_DOCUMENTATION/RK-ARMV8-A/
+#documentation/PER_DEVICE_DOCUMENTATION/RK-ARMV8-A/
