@@ -42,6 +42,7 @@
 # crap
 .DS_Store
 .directory
+.vscode
 
 # es generation files
 .es_cache/
