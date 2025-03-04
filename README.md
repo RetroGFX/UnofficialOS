@@ -23,7 +23,7 @@ UnofficialOS (uOS) is a community developed Linux distribution for handheld gami
 
 # UnofficialOS
 ## Community
-The UnofficialOS community utilizes Discord for discussion, if you would like to join us please use this link: [Discord](https://discord.gg/BdNey2kZrv)
+* The UnofficialOS community utilizes Discord for discussion, if you would like to join us please use this link: [Discord](https://discord.gg/BdNey2kZrv)
 
 ## UnofficialOS Documentation
 * The UnofficialOS wiki can be found [here](https://github.com/RetroGFX/UnofficialOS/wiki)
