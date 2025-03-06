@@ -55,4 +55,4 @@ Original software and scripts developed by the UnofficialOS team are licensed un
 All other software is provided under each component's respective license.  These licenses can be found in the software sources or in this project's licenses folder.  Modifications to bundled software and scripts by the UnofficialOS team are licensed under the terms of the software being modified.
 
 ## Credits
-Like any Linux distribution, this project is not the work of one person.  It is the work of many persons all over the world who have developed the open source bits without which this project could not exist.  Special thanks to JELOS, CoreELEC, LibreELEC, AmberELEC, ArkOS, and to developers and contributors across the handheld community.
+Like any Linux distribution, this project is not the work of one person.  It is the work of many persons all over the world who have developed the open source bits without which this project could not exist.  Special thanks to JELOS and ROCKNIX, CoreELEC, LibreELEC, AmberELEC, ArkOS, and to developers and contributors across the handheld community.
