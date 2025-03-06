@@ -1,0 +1,20 @@
+diff --git a/Makefile b/Makefile
+index 639e288..2a54b4c 100644
+--- a/Makefile
++++ b/Makefile
+@@ -5,12 +5,9 @@ all:
+ 	@echo "Nothing to make for slang-shaders."
+ 
+ install:
+-	mkdir -p $(DESTDIR)$(INSTALLDIR)
+-	cp -r ./. $(DESTDIR)$(INSTALLDIR)
+-	rm -f $(DESTDIR)$(INSTALLDIR)/Makefile
+-	rm -f $(DESTDIR)$(INSTALLDIR)/configure
+-	rm -f $(DESTDIR)$(INSTALLDIR)/.gitlab-ci.yml
+-	rm -rf $(DESTDIR)$(INSTALLDIR)/.git
++	cp -ar -t $(DESTDIR)$(INSTALLDIR) *
++	rm -f $(DESTDIR)$(INSTALLDIR)/Makefile \
++		$(DESTDIR)$(INSTALLDIR)/configure
+ 
+ test-install: all
+ 	DESTDIR=/tmp/build $(MAKE) install
