@@ -5,7 +5,7 @@ dolphin-sa # Wayland patch is now broken upstream
 drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
 duckstation-sa # Patches need to be reworked.
-flycast-sa # Patched need to rebased
+flycast-sa # Manually update to release versions.
 gptokeyb # Newer versions break hotkeys
 gzdoom-sa # Stick to release versions.
 idtech-lr # Just a dummy package
@@ -22,6 +22,5 @@ retroarch # Manually update to release versions.
 rpcs3-sa # Need to update to llvm 16
 scummvmsa # Updating breaks build packages
 tic80-lr # patches need to be rebased
-vice-lr # Updating breaks build patches
 vice-sa # Doesn't support updating with the script.
 vita3k-sa # Should be manually updated.
