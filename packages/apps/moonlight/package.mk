@@ -14,7 +14,7 @@ if [ "${TARGET_ARCH}" = "x86_64" ]
 then
   PKG_SITE+="qt"
   PKG_URL="${PKG_SITE}.git"
-  PKG_VERSION="fabb4fdadc302493d02bb23485dbc15d7988834b"
+  PKG_VERSION="47452371dbc148d8fd99856fa99999fb9eed4a01"
   PKG_DEPENDS_TARGET+=" qt5"
   PKG_TOOLCHAIN="manual"
   make_target() {
