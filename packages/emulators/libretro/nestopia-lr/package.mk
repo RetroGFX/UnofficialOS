@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="nestopia-lr"
-PKG_VERSION="72003d06eb9fbc2191f5a7a874abc039bde3157f"
+PKG_VERSION="b3eb368603cd519d54bb4886d2934ee4fd188081"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
