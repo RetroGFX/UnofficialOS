@@ -32,6 +32,9 @@
 # Go cache
 /.cache
 
+# Go Telemetry
+/.config
+
 # backup files
 *.orig
 *.rej
