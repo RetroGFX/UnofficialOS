@@ -2,10 +2,10 @@
 # Copyright (C) 2024-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="wine"
-PKG_VERSION="9.4"
+PKG_VERSION="10.7"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/Kron4ek/Wine-Builds"
-PKG_URL="${PKG_SITE}/releases/download/${PKG_VERSION}/wine-${PKG_VERSION}-x86.tar.xz"
+PKG_URL="${PKG_SITE}/releases/download/${PKG_VERSION}/wine-${PKG_VERSION}-amd64.tar.xz"
 PKG_DEPENDS_TARGET="toolchain libXcomposite libXdmcp cups"
 PKG_LONGDESC="Wine is a compatibility layer capable of running Windows applications"
 PKG_TOOLCHAIN="manual"

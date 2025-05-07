@@ -8,7 +8,7 @@ PKG_SECTION="emulation" # Do not change to virtual or makeinstall_target will no
 PKG_LONGDESC="Emulation metapackage."
 PKG_TOOLCHAIN="manual"
 
-PKG_EMUS="flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight openbor pico-8 ppsspp-sa
+PKG_EMUS="amiberry flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight openbor pico-8 ppsspp-sa
           vice-sa"
 
 PKG_RETROARCH="core-info libretro-database retroarch retroarch-assets retroarch-joypads retroarch-overlays     \
@@ -61,14 +61,14 @@ case "${DEVICE}" in
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa mupen64plus-sa yabasanshiro-sa     \
-                box64 portmaster"
+                box64 portmaster scummvmsa"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr flycast-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3326*)
-    [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="desmume-lr gpsp-lr pcsx_rearmed-lr"
+    [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
-    PKG_EMUS+=" amiberry drastic-sa mupen64plus-sa scummvmsa yabasanshiro-sa portmaster mednafen"
+    PKG_EMUS+=" amiberry box64 drastic-sa mupen64plus-sa scummvmsa yabasanshiro-sa portmaster mednafen"
     LIBRETRO_CORES+=" uae4arm flycast-lr flycast2021-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
