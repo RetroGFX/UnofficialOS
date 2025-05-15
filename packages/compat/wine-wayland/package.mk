@@ -2,15 +2,15 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="wine-wayland"
-PKG_VERSION="8.2.1"
+PKG_VERSION="10.5.3"
 PKG_LICENSE="free"
 PKG_SITE="https://github.com/varmd/wine-wayland"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="wine wayland"
 PKG_TOOLCHAIN="manual"
 
-PKG_SITE_X32="${PKG_SITE}/releases/download/v${PKG_VERSION}/lib32-${PKG_NAME}-8.2-1-x86_64.pkg.tar.zst"
-PKG_SITE_X64="${PKG_SITE}/releases/download/v${PKG_VERSION}/${PKG_NAME}-8.2-1-x86_64.pkg.tar.zst"
+PKG_SITE_X32="${PKG_SITE}/releases/download/v${PKG_VERSION}/lib32-${PKG_NAME}-10.5-1-x86_64.pkg.tar.zst"
+PKG_SITE_X64="${PKG_SITE}/releases/download/v${PKG_VERSION}/${PKG_NAME}-10.5-1-x86_64.pkg.tar.zst"
 
 makeinstall_target() {
   mkdir -p ${INSTALL}/usr/bin

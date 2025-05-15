@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="emulationstation"
-PKG_VERSION="2532471157e7df15ca70e0881e2411b81a1d2daa"
+PKG_VERSION="48f267a199bf1fc26d2f1f2de59b7efaac45700e"
 PKG_GIT_CLONE_BRANCH="main"
 PKG_REV="1"
 PKG_ARCH="any"
@@ -53,11 +53,11 @@ PKG_CMAKE_OPTS_TARGET+=" -DENABLE_EMUELEC=1 \
 #
 # Cleanup old files:
 # ------------------
-# DEVICE=RG351V ARCH=aarch64 ./scripts/clean emulationstation
+# DEVICE=RK3326 ARCH=aarch64 ./scripts/clean emulationstation
 #
 # Build from local copy:
 # ----------------------
-# EMULATIONSTATION_SRC=~/emulationstation DEVICE=RG351V ARCH=aarch64 ./scripts/build emulationstation
+# EMULATIONSTATION_SRC=~/emulationstation DEVICE=RK3326 ARCH=aarch64 ./scripts/build emulationstation
 #
 # Run from the device:
 # --------------------
