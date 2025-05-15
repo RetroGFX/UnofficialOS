@@ -20,9 +20,9 @@
 ################################################################################
 
 PKG_NAME="flycast2021-lr"
-PKG_VERSION="4c293f306bc16a265c2d768af5d0cea138426054"
+PKG_VERSION="603814c9f73b773c455d9a497f389d2f93a257fd"
 PKG_LICENSE="GPLv2"
-PKG_SITE="https://github.com/libretro/flycast"
+PKG_SITE="https://github.com/metallic77/flycast"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_LONGDESC="Flycast is a multiplatform Sega Dreamcast emulator "
