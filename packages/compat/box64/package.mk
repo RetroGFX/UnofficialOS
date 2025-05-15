@@ -2,11 +2,11 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="box64"
-PKG_VERSION="211fee2e4e4ce1f7132660469df613df5a74ac88"
+PKG_VERSION="v0.3.4"
 PKG_ARCH="aarch64"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/ptitSeb/box64"
-PKG_URL="${PKG_SITE}.git"
+PKG_URL="${PKG_SITE}/archive/refs/tags/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain ncurses SDL_sound"
 PKG_LONGDESC="Box64 lets you run x86_64 Linux programs (such as games) on non-x86_64 Linux systems, like ARM."
 PKG_TOOLCHAIN="cmake"
@@ -23,7 +23,7 @@ makeinstall_target() {
 
   mkdir -p ${INSTALL}/usr/bin
   cp ${PKG_BUILD}/.${TARGET_NAME}/box64 ${INSTALL}/usr/bin
-  cp ${PKG_BUILD}/tests/bash ${INSTALL}/usr/bin/bash-x64
+  cp ${PKG_BUILD}/tests/box64-bash ${INSTALL}/usr/bin/bash-x64
 
   mkdir -p ${INSTALL}/usr/config
   cp ${PKG_DIR}/config/box64.box64rc ${INSTALL}/usr/config/box64.box64rc

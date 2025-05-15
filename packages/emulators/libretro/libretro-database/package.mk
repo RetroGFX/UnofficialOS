@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="libretro-database"
-PKG_VERSION="631f86ea2e1e08064a4f58dfc4b5ac43d6546766"
+PKG_VERSION="c2b26123664ee485d91adf6689c35d8966b6fcf5"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

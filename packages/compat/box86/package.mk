@@ -2,11 +2,11 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="box86"
-PKG_VERSION="266392e315bb5e7827928512c930e04448f137d1"
+PKG_VERSION="v0.3.8"
 PKG_ARCH="arm aarch64"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/ptitSeb/box86"
-PKG_URL="${PKG_SITE}.git"
+PKG_URL="${PKG_SITE}/archive/refs/tags/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain ncurses SDL_sound wine"
 PKG_LONGDESC="Box86 lets you run x86 Linux programs (such as games) on non-x86 Linux systems, like ARM."
 PKG_TOOLCHAIN="cmake"

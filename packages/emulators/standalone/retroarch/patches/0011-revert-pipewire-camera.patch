@@ -1,0 +1,55 @@
+diff --git a/Makefile.common b/Makefile.common
+index c9ed19834..148a5cdf5 100644
+--- a/Makefile.common
++++ b/Makefile.common
+@@ -932,10 +932,6 @@ ifeq ($(HAVE_PIPEWIRE), 1)
+       OBJ += audio/drivers_microphone/pipewire.o
+    endif
+ 
+-   ifeq ($(HAVE_PIPEWIRE_STABLE), 1)
+-      OBJ += camera/drivers/pipewire.o
+-   endif
+-
+    LIBS += $(PIPEWIRE_LIBS)
+    DEF_FLAGS += $(PIPEWIRE_CFLAGS)
+ endif
+diff --git a/camera/camera_driver.c b/camera/camera_driver.c
+index e09d01110..ae2f7b403 100644
+--- a/camera/camera_driver.c
++++ b/camera/camera_driver.c
+@@ -55,9 +55,6 @@ const camera_driver_t *camera_drivers[] = {
+ #ifdef HAVE_V4L2
+    &camera_v4l2,
+ #endif
+-#ifdef HAVE_PIPEWIRE_STABLE
+-   &camera_pipewire,
+-#endif
+ #ifdef EMSCRIPTEN
+    &camera_rwebcam,
+ #endif
+diff --git a/camera/camera_driver.h b/camera/camera_driver.h
+index 02be83135..efbc2f32b 100644
+--- a/camera/camera_driver.h
++++ b/camera/camera_driver.h
+@@ -64,7 +64,6 @@ extern const camera_driver_t *camera_drivers[];
+ 
+ 
+ extern camera_driver_t camera_v4l2;
+-extern camera_driver_t camera_pipewire;
+ extern camera_driver_t camera_android;
+ extern camera_driver_t camera_rwebcam;
+ extern camera_driver_t camera_avfoundation;
+diff --git a/griffin/griffin.c b/griffin/griffin.c
+index 82e74922f..c29b5be5c 100644
+--- a/griffin/griffin.c
++++ b/griffin/griffin.c
+@@ -811,9 +811,6 @@ CAMERA
+ #ifdef HAVE_V4L2
+ #include "../camera/drivers/video4linux2.c"
+ #endif
+-#ifdef HAVE_PIPEWIRE
+-#include "../camera/drivers/pipewire.c"
+-#endif
+ 
+ #ifdef HAVE_FFMPEG
+ #include "../camera/drivers/ffmpeg.c"
