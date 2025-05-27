@@ -868,15 +868,8 @@ makeinstall_target() {
   add_es_system pokemini
 
   ### ScummVM
-  case ${DEVICE} in
-    S922X*)
-      add_emu_core scummvm retroarch scummvm true
-    ;;
-    *)
-      add_emu_core scummvm scummvmsa scummvm true
-      add_emu_core scummvm retroarch scummvm false
-    ;;
-  esac
+  add_emu_core scummvm scummvmsa scummvm true
+  add_emu_core scummvm retroarch scummvm false
   add_es_system scummvm
   install_script "Start ScummVM.sh"
 
