@@ -495,7 +495,7 @@ diff -rupN linux.orig/drivers/input/joystick/Makefile linux/drivers/input/joysti
  obj-$(CONFIG_JOYSTICK_GF2K)		+= gf2k.o
  obj-$(CONFIG_JOYSTICK_GRIP)		+= grip.o
  obj-$(CONFIG_JOYSTICK_GRIP_MP)		+= grip_mp.o
-@@ -25,6 +26,10 @@ obj-$(CONFIG_JOYSTICK_JOYDUMP)		+= joydu
+@@ -25,6 +26,11 @@ obj-$(CONFIG_JOYSTICK_JOYDUMP)		+= joydu
  obj-$(CONFIG_JOYSTICK_MAGELLAN)		+= magellan.o
  obj-$(CONFIG_JOYSTICK_MAPLE)		+= maplecontrol.o
  obj-$(CONFIG_JOYSTICK_N64)		+= n64joy.o
@@ -503,6 +503,7 @@ diff -rupN linux.orig/drivers/input/joystick/Makefile linux/drivers/input/joysti
 +obj-$(CONFIG_JOYSTICK_ODROIDGO2_V11)	+= odroidgo2-v11-joypad.o
 +obj-$(CONFIG_JOYSTICK_ODROIDGO3)	+= odroidgo3-joypad.o
 +obj-$(CONFIG_JOYSTICK_RGB20S)		+= rgb20s-joypad.o
++obj-$(CONFIG_JOYSTICK_RG552)		+= rg552_joypad.o
  obj-$(CONFIG_JOYSTICK_PSXPAD_SPI)	+= psxpad-spi.o
  obj-$(CONFIG_JOYSTICK_PXRC)		+= pxrc.o
  obj-$(CONFIG_JOYSTICK_QWIIC)		+= qwiic-joystick.o
