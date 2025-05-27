@@ -80,9 +80,6 @@
   # e.g. FIRMWARE=""
     FIRMWARE="esp8089-firmware"
 
-  # build and install rocknix joypad driver (yes / no)
-    ROCKNIX_JOYPAD="yes"
-
   # additional drivers to install:
   # for a list of additional drivers see packages/linux-drivers
   # Space separated list is supported,
