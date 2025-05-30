@@ -99,7 +99,8 @@ def ensure_directories():
 def check_joystick_compatibility() -> bool:
     """Check if a compatible joystick is connected"""
     compatible_joysticks = [
-        'r36s_Gamepad'
+        'r36s_Gamepad',
+	'k36_gamepad'
     ]
 
     try:
