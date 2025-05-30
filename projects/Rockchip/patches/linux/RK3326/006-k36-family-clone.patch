@@ -17,7 +17,7 @@ new file mode 100644
 +
 +/ {
 +    model = "K36 family clone";
-+    compatible = "gameconsole,r36max", "rockchip,rk3326";
++    compatible = "various,k36", "rockchip,rk3326";
 +
 +    aliases {
 +        mmc0 = &emmc;
@@ -107,9 +107,9 @@ new file mode 100644
 +    };
 +
 +    joypad: joypad {
-+        compatible = "rg552_joypad";
++        compatible = "unofficialos-singleadc-joypad";
 +
-+        joypad-name = "r36s_Gamepad";
++        joypad-name = "k36_gamepad";
 +        joypad-product = <0x1188>;
 +        joypad-revision = <0x0188>;
 +

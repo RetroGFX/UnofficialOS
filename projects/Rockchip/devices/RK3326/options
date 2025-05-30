@@ -46,13 +46,13 @@
   # Additional kernel make parameters (for example to specify the u-boot loadaddress)
     KERNEL_MAKE_EXTRACMD=""
     KERNEL_MAKE_EXTRACMD=" $(for DTB in "${DEVICE_DTB[@]}"; do echo -n "rockchip/${DTB}.dtb "; done)"
- 
+
   # Define the CPU
     HW_CPU="Rockchip RK3326"
 
   # Display Resolution
     SPLASH_RESOLUTION="320x480"
- 
+
   # Mali GPU family
     MALI_FAMILY="bifrost-g31"
     GRAPHIC_DRIVERS="panfrost"
@@ -68,7 +68,7 @@
 
   # Windowmanager to use (fluxbox / weston / no)
     WINDOWMANAGER="weston"
-  
+
   # kernel serial console
     EXTRA_CMDLINE="quiet rootwait console=ttyFIQ0 console=tty0 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
 
@@ -86,9 +86,12 @@
   # e.g. ADDITIONAL_DRIVERS="DRIVER1 DRIVER2"
     ADDITIONAL_DRIVERS="RTL8812AU RTL8814AU RTL8821AU RTL8821CU RTL88x2BU RTL8723DS"
 
+  # build with UnofficialOS Joypad support
+    UNOFFICIALOS_JOYPAD="yes"
+
   # build and install driver addons (yes / no)
     DRIVER_ADDONS_SUPPORT="no"
-  
+
   # driver addons to install:
   # for a list of additinoal drivers see packages/linux-driver-addons
   # Space separated list is supported,
@@ -96,7 +99,7 @@
 
   # debug tty path
     DEBUG_TTY="/dev/ttyFIQ0"
-   
+
   # Disable 32BIT support
     ENABLE_32BIT="true"
 
@@ -126,7 +129,7 @@
 
   # build and install ZeroTier support (yes / no)
     ZEROTIER_SUPPORT="yes"
-    
+
   # build and install diskmounter support (udevil)
   # this service provide auto mounting support for external drives in the
   # mediacenter also automount internally drives at boottime via udev (yes / no)
