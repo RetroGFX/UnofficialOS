@@ -55,6 +55,9 @@
     CLEAN_DEVICE_ROOT="busybox systemd initramfs linux u-boot libmali libmali_rk3588 SDL2 SDL2-rotated retroarch mupen64plus-sa-input-sdl flycast-sa duckstation-sa drastic-sa fileman oga_controls portmaster glew-cmake"
   fi
 
+# build and install unofficialos joypad driver (yes / no)
+  UNOFFICIALOS_JOYPAD="no"
+
 # additional drivers to install:
 # for a list of additional drivers see packages/linux-drivers
 # Space separated list is supported,
