@@ -74,9 +74,8 @@ RK3326:
 	PROJECT=Rockchip DEVICE=RK3326 ARCH=aarch64 ./scripts/build_distro
 
 RK3326-CLONE:
-	unset DEVICE_ROOT
-	PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=arm ./scripts/build_distro
-	PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=aarch64 ./scripts/build_distro
+	DEVICE_ROOT=RK3326 PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=arm ./scripts/build_distro
+	DEVICE_ROOT=RK3326 PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=aarch64 ./scripts/build_distro
 
 RK3399:
 	unset DEVICE_ROOT
