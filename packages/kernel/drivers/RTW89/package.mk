@@ -3,7 +3,6 @@
 
 PKG_NAME="RTW89"
 PKG_VERSION="fce040c12fbf93bfd904ded48df60dea2c8d4423"
-PKG_ARCH="aarch64 x86_64"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/lwfinger/rtw89"
 PKG_URL="https://github.com/lwfinger/rtw89/archive/${PKG_VERSION}.tar.gz"
