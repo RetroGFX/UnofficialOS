@@ -84,6 +84,26 @@ def remount_flash_rw():
     subprocess.run(["mount","-o","remount,ro","/flash"], check=True)
 
 
+def detect_right_stick_present() -> bool:
+    try:
+        result = subprocess.run(
+            ["jstest-sdl", "-l"],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
+            text=True,
+            timeout=3
+        )
+        for line in result.stdout.splitlines():
+            if "Number of Axes:" in line:
+                try:
+                    num_axes = int(line.split(":")[-1].strip())
+                    return num_axes == 4
+                except ValueError:
+                    return False
+        return False
+    except Exception as e:
+        logger.warning(f"Failed to detect number of axes: {e}")
+        return False
 
 def show_dialog(msg:str,width:int=60,height:int=7):
     try:
@@ -288,6 +308,9 @@ def main():
         input()  # Wait for any key press
         sys.exit(1)
 
+    has_right_stick = detect_right_stick_present()
+    logger.info(f"Right stick present: {has_right_stick}")
+
     ensure_directories()
     show_dialog("Starting calibration...\nPress any joystick button to abort.", 60, 7)
     time.sleep(2)
@@ -296,6 +319,10 @@ def main():
     samples = defaultdict(list)
 
     for axis_key, axis_config in AXES_CONFIG.items():
+        if "absr" in axis_key and not has_right_stick:
+            logger.info(f"Skipping {axis_key} – no right stick detected.")
+            continue
+
         show_dialog(axis_config.human_prompt, 60, 7)
         try:
             values = collect_axis_samples(axis_config.axis_id)
