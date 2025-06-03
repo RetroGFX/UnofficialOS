@@ -3,12 +3,9 @@
 
 PKG_NAME="RTW89"
 PKG_VERSION="fce040c12fbf93bfd904ded48df60dea2c8d4423"
-PKG_ARCH="aarch64 x86_64"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/lwfinger/rtw89"
 PKG_URL="https://github.com/lwfinger/rtw89/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain linux linux-firmware"
-PKG_NEED_UNPACK="${LINUX_DEPENDS}"
 PKG_LONGDESC="Realtek RTL8852xx Linux driver"
 PKG_IS_KERNEL_PKG="yes"
 PKG_TOOLCHAIN="make"

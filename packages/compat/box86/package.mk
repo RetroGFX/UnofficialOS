@@ -33,7 +33,7 @@ case ${DEVICE} in
   RK3399)
     PKG_CMAKE_OPTS_TARGET+=" -DRK3399=On"
   ;;
-  RK3326)
+  RK3326*)
     PKG_CMAKE_OPTS_TARGET+=" -DGOA_CLONE=On"
   ;;
   S922X)
