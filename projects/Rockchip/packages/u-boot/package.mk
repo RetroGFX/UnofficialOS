@@ -30,7 +30,7 @@ case ${DEVICE} in
     PKG_VERSION="2024.01"
     PKG_URL="https://ftp.denx.de/pub/u-boot/${PKG_NAME}-${PKG_VERSION}.tar.bz2"
   ;;
-  RK3326)
+  RK3326*)
     PKG_URL="https://github.com/hardkernel/u-boot.git"
     PKG_VERSION="0e26e35cb18a80005b7de45c95858c86a2f7f41e"
     PKG_GIT_CLONE_BRANCH="odroidgoA-v2017.09"
