@@ -75,7 +75,7 @@ case "${PKG_SOC}" in
     dd if=u-boot.img.rk of="${UBOOT_FIT_IMAGE}" seek=16320 conv=fsync,notrunc > /dev/null 2>&1 || exit 1
     "${PKG_RKBIN}"/tools/trust_merger --ignore-bl32 --prepath "${PKG_RKBIN}"/ "${PKG_ATF_INI}" || exit 1
     dd if=trust.img of="${UBOOT_FIT_IMAGE}" seek=24512 conv=fsync,notrunc > /dev/null 2>&1 || exit 1
-  
+
     echo "uboot: copy ${UBOOT_FIT_IMAGE} to ${INSTALL}/usr/share/bootloader..."
     cp -av ${UBOOT_FIT_IMAGE} ${INSTALL}/usr/share/bootloader
   ;;
@@ -87,7 +87,7 @@ case "${PKG_SOC}" in
 esac
 
 case "${DEVICE}" in
-  RK3326)
+  RK3326*)
 if [ -n "${PKG_BL31}" ]; then
   echo "trust: create trust.ini..."
   cat >trust.ini <<EOF

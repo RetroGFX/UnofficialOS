@@ -24,7 +24,7 @@ src-pkg:
 docs:
 	./tools/foreach './scripts/clean emulators && ./scripts/build emulators'
 
-world: AMD64 RK3566-BSP RK3566-BSP-X55 RK3588 S922X RK3326 RK3399
+world: AMD64 RK3566-BSP RK3566-BSP-X55 RK3588 S922X RK3326 RK3326-CLONE RK3399
 
 AMD64:
 	unset DEVICE_ROOT
@@ -72,6 +72,10 @@ RK3326:
 	unset DEVICE_ROOT
 	PROJECT=Rockchip DEVICE=RK3326 ARCH=arm ./scripts/build_distro
 	PROJECT=Rockchip DEVICE=RK3326 ARCH=aarch64 ./scripts/build_distro
+
+RK3326-CLONE:
+	DEVICE_ROOT=RK3326 PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=arm ./scripts/build_distro
+	DEVICE_ROOT=RK3326 PROJECT=Rockchip DEVICE=RK3326-CLONE ARCH=aarch64 ./scripts/build_distro
 
 RK3399:
 	unset DEVICE_ROOT
@@ -152,4 +156,3 @@ docker-image-pull:
 # Wire up docker to call equivalent make files using % to match and $* to pass the value matched by %
 docker-%:
 	BUILD_DIR=$(DOCKER_WORK_DIR) $(DOCKER_CMD) run $(PODMAN_ARGS) $(INTERACTIVE) --init --env-file .env --rm --user $(UID):$(GID) $(GLOBAL_SETTINGS) $(LOCAL_SSH_KEYS_FILE) -v $(PWD):$(DOCKER_WORK_DIR) -w $(DOCKER_WORK_DIR) $(DOCKER_EXTRA_OPTS) $(DOCKER_IMAGE) $(COMMAND)
-
