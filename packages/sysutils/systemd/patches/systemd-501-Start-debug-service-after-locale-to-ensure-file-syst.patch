@@ -1,11 +1,11 @@
-diff -rupN systemd-stable-253.16.orig/units/debug-shell.service.in systemd-stable-253.16/units/debug-shell.service.in
---- systemd-stable-253.16.orig/units/debug-shell.service.in     2024-01-26 14:53:42.000000000 -0500
-+++ systemd-stable-253.16/units/debug-shell.service.in  2024-02-14 12:25:50.660872467 -0500
-@@ -13,6 +13,7 @@ Documentation=man:systemd-debug-generato
- DefaultDependencies=no
+diff -rupN systemd.orig/units/debug-shell.service.in systemd/units/debug-shell.service.in
+--- systemd.orig/units/debug-shell.service.in	2025-06-05 16:44:46.350978244 +0000
++++ systemd/units/debug-shell.service.in	2025-06-05 16:48:30.025700764 +0000
+@@ -14,6 +14,7 @@ DefaultDependencies=no
  IgnoreOnIsolate=yes
  ConditionPathExists={{DEBUGTTY}}
+ After=systemd-vconsole-setup.service
 +After=locale.service
-
+ 
  [Service]
  Environment=TERM=linux
