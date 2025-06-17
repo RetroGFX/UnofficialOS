@@ -1,0 +1,20 @@
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-rg-arc-linux.dts b/arch/arm64/boot/dts/rockchip/rk3566-rg-arc-linux.dts
+index e90fd46b3..0625c5a80 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-rg-arc-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-rg-arc-linux.dts
+@@ -2452,7 +2452,6 @@
+ 
+ 		panel@0 {
+ 			status = "okay";
+-			logo_rotate = <0x04>;
+ 			compatible = "elida,kd35t133\0simple-panel-dsi";
+ 			reg = <0x00>;
+ 			num = <0x00>;
+@@ -2468,6 +2467,7 @@
+ 			dsi,flags = <0xa03>;
+ 			dsi,format = <0x00>;
+ 			dsi,lanes = <0x02>;
++			rotation = <180>;
+ 			panel-init-sequence = [39 00 06 ff 77 01 00 00 13 15 00 02 ef 08 39 00 06 ff 77 01 00 00 10 39 00 03 c0 4f 03 39 00 03 c1 0c 02 39 00 03 c2 10 06 15 00 02 c7 04 15 00 02 cc 38 39 00 11 b0 40 16 1d 0e 12 06 0c 0a 09 25 00 03 00 3f 3f 1c 39 00 11 b1 40 16 1e 0e 11 06 0c 08 09 26 00 15 00 3f 3f 1c 39 00 06 ff 77 01 00 00 11 15 00 02 b0 4d 15 00 02 b1 35 15 00 02 b2 07 15 00 02 b3 80 15 00 02 b5 47 15 00 02 b7 85 15 00 02 b8 20 15 00 02 b9 10 15 00 02 bc 03 15 00 02 c0 89 15 00 02 c1 78 15 00 02 c2 78 15 00 02 d0 88 39 00 04 e0 00 00 02 39 00 0c e1 04 00 00 00 05 00 00 00 00 20 20 39 00 0e e2 00 00 00 00 00 00 00 00 00 00 00 00 00 39 00 05 e3 00 00 33 00 39 00 03 e4 22 00 39 00 11 e5 04 5c a0 a0 06 5c a0 a0 00 00 00 00 00 00 00 00 39 00 05 e6 00 00 33 00 39 00 03 e7 22 00 39 00 11 e8 05 5c a0 a0 07 5c a0 a0 00 00 00 00 00 00 00 00 39 00 08 eb 02 00 40 40 00 00 00 39 00 03 ec 00 00 39 00 11 ed fa 45 0b ff ff ff ff ff ff ff ff ff ff b0 54 af 39 00 07 ef 08 08 08 45 3f 54 39 00 06 ff 77 01 00 00 00 15 00 02 36 17 15 00 02 3a 77 05 c8 01 11 05 0a 01 29];
+ 			panel-exit-sequence = <0x5140128 0x50a0110>;
+ 			panel-read-id-sequence = [05 00 02 00 00];

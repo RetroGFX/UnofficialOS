@@ -22,7 +22,7 @@ case ${DEVICE} in
   ;;
   RK3566-BSP)
     PKG_URL="https://github.com/RetroGFX/rk356x-kernel.git"
-    PKG_VERSION="bf340e252cd15e5857560b10e28be1746b0d0260"
+    PKG_VERSION="3e709e40909016fdf4394d56544ab86a3bd5603d"
     GET_HANDLER_SUPPORT="git"
     PKG_GIT_CLONE_BRANCH="main"
   ;;
