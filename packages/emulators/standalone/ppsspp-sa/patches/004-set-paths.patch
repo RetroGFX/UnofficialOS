@@ -1,21 +1,21 @@
 diff --git a/Core/Config.cpp b/Core/Config.cpp
-index fac682fb84..e1db1d288a 100644
+index 6b8c868d1..2d81b2376 100644
 --- a/Core/Config.cpp
 +++ b/Core/Config.cpp
-@@ -1091,7 +1091,7 @@ void Config::Reload() {
- void Config::UpdateIniLocation(const char *iniFileName, const char *controllerIniFilename) {
+@@ -1151,7 +1151,7 @@ void Config::UpdateIniLocation(const char *iniFileName, const char *controllerIn
  	const bool useIniFilename = iniFileName != nullptr && strlen(iniFileName) > 0;
  	const char *ppssppIniFilename = IsVREnabled() ? "ppssppvr.ini" : "ppsspp.ini";
--	iniFilename_ = FindConfigFile(useIniFilename ? iniFileName : ppssppIniFilename);
+ 	bool exists;
+-	iniFilename_ = FindConfigFile(useIniFilename ? iniFileName : ppssppIniFilename, &exists);
 +	iniFilename_ = Path("/storage/.config/ppsspp/PSP/SYSTEM") / ppssppIniFilename;
  	const bool useControllerIniFilename = controllerIniFilename != nullptr && strlen(controllerIniFilename) > 0;
  	const char *controlsIniFilename = IsVREnabled() ? "controlsvr.ini" : "controls.ini";
- 	controllerIniFilename_ = FindConfigFile(useControllerIniFilename ? controllerIniFilename : controlsIniFilename);
+ 	controllerIniFilename_ = FindConfigFile(useControllerIniFilename ? controllerIniFilename : controlsIniFilename, &exists);
 diff --git a/Core/SaveState.cpp b/Core/SaveState.cpp
-index 49ac73c0af..a2c254c18b 100644
+index f70098d4d..c9b5a13ca 100644
 --- a/Core/SaveState.cpp
 +++ b/Core/SaveState.cpp
-@@ -532,7 +532,7 @@ namespace SaveState
+@@ -542,7 +542,7 @@ double g_lastSaveTime = -1.0;
  
  	Path GenerateSaveSlotFilename(const Path &gameFilename, int slot, const char *extension)
  	{
@@ -25,10 +25,10 @@ index 49ac73c0af..a2c254c18b 100644
  	}
  
 diff --git a/Core/System.cpp b/Core/System.cpp
-index 155c3bbba3..8fbb29dd19 100644
+index fdc439e38..8d0923788 100644
 --- a/Core/System.cpp
 +++ b/Core/System.cpp
-@@ -651,14 +651,8 @@ std::string PSP_GetLoading() {
+@@ -766,14 +766,8 @@ void PSP_RunLoopFor(int cycles) {
  }
  
  Path GetSysDirectory(PSPDirectories directoryType) {
@@ -45,7 +45,7 @@ index 155c3bbba3..8fbb29dd19 100644
  
  	switch (directoryType) {
  	case DIRECTORY_PSP:
-@@ -668,9 +662,9 @@ Path GetSysDirectory(PSPDirectories directoryType) {
+@@ -783,9 +777,9 @@ Path GetSysDirectory(PSPDirectories directoryType) {
  	case DIRECTORY_GAME:
  		return pspDirectory / "GAME";
  	case DIRECTORY_SAVEDATA:
@@ -57,7 +57,7 @@ index 155c3bbba3..8fbb29dd19 100644
  	case DIRECTORY_SYSTEM:
  		return pspDirectory / "SYSTEM";
  	case DIRECTORY_PAUTH:
-@@ -680,7 +674,7 @@ Path GetSysDirectory(PSPDirectories directoryType) {
+@@ -795,7 +789,7 @@ Path GetSysDirectory(PSPDirectories directoryType) {
  	case DIRECTORY_DUMP:
  		return pspDirectory / "SYSTEM/DUMP";
  	case DIRECTORY_SAVESTATE:
@@ -66,7 +66,7 @@ index 155c3bbba3..8fbb29dd19 100644
  	case DIRECTORY_CACHE:
  		return pspDirectory / "SYSTEM/CACHE";
  	case DIRECTORY_TEXTURES:
-@@ -702,11 +696,11 @@ Path GetSysDirectory(PSPDirectories directoryType) {
+@@ -817,11 +811,11 @@ Path GetSysDirectory(PSPDirectories directoryType) {
  		return pspDirectory / "themes";
  
  	case DIRECTORY_MEMSTICK_ROOT:
@@ -81,41 +81,41 @@ index 155c3bbba3..8fbb29dd19 100644
  }
  
 diff --git a/SDL/SDLJoystick.cpp b/SDL/SDLJoystick.cpp
-index a0d206ee21..3bdca780b6 100644
+index 94a6f481b..2ab655f14 100644
 --- a/SDL/SDLJoystick.cpp
 +++ b/SDL/SDLJoystick.cpp
-@@ -25,7 +25,7 @@ SDLJoystick::SDLJoystick(bool init_SDL ) : registeredAsEventHandler(false) {
+@@ -24,7 +24,7 @@ SDLJoystick::SDLJoystick(bool init_SDL ) : registeredAsEventHandler(false) {
  		SDL_Init(SDL_INIT_JOYSTICK | SDL_INIT_VIDEO | SDL_INIT_GAMECONTROLLER);
  	}
  
 -	const char *dbPath = "gamecontrollerdb.txt";
 +	const char *dbPath = "/storage/.config/SDL-GameControllerDB/gamecontrollerdb.txt";
- 	cout << "loading control pad mappings from " << dbPath << ": ";
+ 	INFO_LOG(Log::System, "loading control pad mappings from %s:", dbPath);
  
  	size_t size;
-@@ -34,7 +34,7 @@ SDLJoystick::SDLJoystick(bool init_SDL ) : registeredAsEventHandler(false) {
+@@ -33,7 +33,7 @@ SDLJoystick::SDLJoystick(bool init_SDL ) : registeredAsEventHandler(false) {
  		SDL_RWops *rw = SDL_RWFromConstMem(mappingData, size);
  		// 1 to free the rw after use
  		if (SDL_GameControllerAddMappingsFromRW(rw, 1) == -1) {
--			cout << "Failed to read mapping data - corrupt?" << endl;
-+			cout << "/storage/.config/SDL-GameControllerDB/gamecontrollerdb.txt missing" << endl;
+-			ERROR_LOG(Log::System, "Failed to read mapping data - corrupt?");
++			ERROR_LOG(Log::System, "/storage/.config/SDL-GameControllerDB/gamecontrollerdb.txt missing");
  		}
  		delete[] mappingData;
  	} else {
 diff --git a/UI/NativeApp.cpp b/UI/NativeApp.cpp
-index 272ff35e16..91a58b5691 100644
+index e99cfc4ca..2a8aa85ec 100644
 --- a/UI/NativeApp.cpp
 +++ b/UI/NativeApp.cpp
-@@ -390,7 +390,7 @@ void NativeInit(int argc, const char *argv[], const char *savegame_dir, const ch
+@@ -385,7 +385,7 @@ void NativeInit(int argc, const char *argv[], const char *savegame_dir, const ch
+ #if !defined(MOBILE_DEVICE) && !defined(_WIN32) && !PPSSPP_PLATFORM(SWITCH)
+ 	g_VFS.Register("", new DirectoryReader(File::GetExeDirectory() / "assets"));
  	g_VFS.Register("", new DirectoryReader(File::GetExeDirectory()));
- 	g_VFS.Register("", new DirectoryReader(Path("/usr/local/share/ppsspp/assets")));
- 	g_VFS.Register("", new DirectoryReader(Path("/usr/local/share/games/ppsspp/assets")));
--	g_VFS.Register("", new DirectoryReader(Path("/usr/share/ppsspp/assets")));
+-	g_VFS.Register("", new DirectoryReader(Path("/usr/local/share/ppsspp/assets")));
 +	g_VFS.Register("", new DirectoryReader(Path("/storage/.config/ppsspp/assets")));
+ 	g_VFS.Register("", new DirectoryReader(Path("/usr/local/share/games/ppsspp/assets")));
+ 	g_VFS.Register("", new DirectoryReader(Path("/usr/share/ppsspp/assets")));
  	g_VFS.Register("", new DirectoryReader(Path("/usr/share/games/ppsspp/assets")));
- #endif
- 
-@@ -495,7 +495,7 @@ void NativeInit(int argc, const char *argv[], const char *savegame_dir, const ch
+@@ -492,7 +492,7 @@ void NativeInit(int argc, const char *argv[], const char *savegame_dir, const ch
  	else // Just in case
  		config = "./config";
  
