@@ -12,13 +12,13 @@ if [ -f "/storage/.config/mupen64plus/mupen64plus.cfg.gen_2s" ]; then
   cp /storage/.config/mupen64plus/mupen64plus.cfg.gen_2s /storage/.config/mupen64plus/mupen64plus.cfg
 fi
 
-#Set drastic-sa config for OGA
+#Set drastic-sa config for K36
 if [ ! -d "/storage/.config/drastic" ]; then
   mkdir -p "/storage/.config/drastic"
   cp -r "/usr/config/drastic" "/storage/.config/"
 fi
-if [ -f "/storage/.config/drastic/config/drastic.cfg.gen_2s" ]; then
-  cp /storage/.config/drastic/config/drastic.cfg.gen_2s /storage/.config/drastic/config/drastic.cfg
+if [ -f "/storage/.config/drastic/config/drastic.cfg.k36" ]; then
+  cp /storage/.config/drastic/config/drastic.cfg.k36 /storage/.config/drastic/config/drastic.cfg
 fi
 
 #Set ppsspp config for OGA
