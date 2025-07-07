@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="beetle-pce-fast-lr"
-PKG_VERSION="baa35513545b011faa8b0b5db334d24ba15539ed"
+PKG_VERSION="04a6f2e85c7b4e79bb1bb402a8ea7d8f55132ad3"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
