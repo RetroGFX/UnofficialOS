@@ -1,6 +1,18 @@
 <?xml version="1.0"?>
 <gameList>
     <game>
+        <path>./Generate Device Diagnostic.sh</path>
+        <name>Generate Device Diagnostic Tool</name>
+        <desc>Generates an info dump into a text file located in the roms folder to help devs locate problems.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2025</releasedate>
+        <genre>Tool</genre>
+        <players>1</players>
+        <image>./images/diagnostic.svg</image>
+    </game>
+    <game>
         <path>./Joystick Calibration.py</path>
         <name>Joystick Calibration Tool</name>
         <desc>Calibrates your gamepad by detecting stick directions and updates your system’s overlay file so controls feel right—no guesswork, no manual edits.</desc>
