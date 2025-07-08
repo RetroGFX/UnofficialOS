@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="flycast2021-lr"
-PKG_VERSION="603814c9f73b773c455d9a497f389d2f93a257fd"
+PKG_VERSION="8b32dd8779b3ab40a79acf7f7aea8b3f47114f13"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/metallic77/flycast"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"

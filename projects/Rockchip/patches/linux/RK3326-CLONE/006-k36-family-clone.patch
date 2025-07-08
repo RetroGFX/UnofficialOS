@@ -16,7 +16,7 @@ new file mode 100644
 +#include "rk3326.dtsi"
 +
 +/ {
-+    model = "K36 family clone";
++    model = "Game Console K36";
 +    compatible = "various,k36", "rockchip,rk3326";
 +
 +    aliases {
