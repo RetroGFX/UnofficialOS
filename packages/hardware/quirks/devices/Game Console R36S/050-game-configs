@@ -14,14 +14,14 @@ if [ -f "/storage/.config/mupen64plus/mupen64plus.cfg.ogs" ]; then
   mv /storage/.config/mupen64plus/mupen64plus.cfg.ogs /storage/.config/mupen64plus/mupen64plus.cfg
 fi
 
-#Set drastic-sa config for R36S (think it can use the same as RG20S)
+#Set drastic-sa config for R36S 
 if [ ! -d "/storage/.config/drastic" ]; then
     mkdir -p "/storage/.config/drastic"
         cp -r "/usr/config/drastic" "/storage/.config/"
 fi
-if [ -f "/storage/.config/drastic/config/drastic.cfg.rgb20s" ]; then
+if [ -f "/storage/.config/drastic/config/drastic.cfg.r36s" ]; then
   rm /storage/.config/drastic/config/drastic.cfg
-  mv /storage/.config/drastic/config/drastic.cfg.rgb20s /storage/.config/drastic/config/drastic.cfg
+  mv /storage/.config/drastic/config/drastic.cfg.r36s /storage/.config/drastic/config/drastic.cfg
 fi
 
 #Map ppsspp controls
