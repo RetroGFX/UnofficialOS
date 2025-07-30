@@ -1,6 +1,7 @@
 aethersx2-sa # package is EOL
 amiberry # Updating breaks build packages
 control-gen # package does not update
+cemu-sa # patches need rebasing
 dolphin-sa # Wayland patch is now broken upstream
 drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
@@ -10,6 +11,7 @@ gptokeyb # Newer versions break hotkeys
 gzdoom-sa # Stick to release versions.
 idtech-lr # Just a dummy package
 kronos-sa # Using the release version of kronos had better results.
+lrps2-lr # Source moved
 melonds-sa # Broken OpenGL renderer upstream
 mupen64plus-sa-ui-console # Causes segfaults
 nanoboyadvance-sa # SDL version removed after this commit
