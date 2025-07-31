@@ -134,18 +134,18 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-batlexp-g350.dts linux
 +                };
 +                sw11 {
 +                        gpios = <&gpio2 RK_PA2 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F3";
-+                        linux,code = <BTN_TRIGGER_HAPPY3>; // 0x2c2
++                        label = "GPIO BTN_THUMBL";
++                        linux,code = <BTN_THUMBL>; // 0x2c2
 +                };
 +                sw12 {
 +                        gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F4";
-+                        linux,code = <BTN_THUMBL>; // 0x2c3
++                        label = "GPIO BTN_THUMBR";
++                        linux,code = <BTN_THUMBR>; // 0x2c3
 +                };
 +                sw13 {
 +                        gpios = <&gpio2 RK_PA4 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F5";
-+                        linux,code = <BTN_THUMBR>; // 0x2c4
++                        label = "GPIO BTN_FN";
++                        linux,code = <BTN_MODE>; // 0x2c4
 +                };
 +                /*sw14 {
 +                        gpios = <&gpio2 RK_PA5 GPIO_ACTIVE_LOW>;
@@ -164,7 +164,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-batlexp-g350.dts linux
 +                };
 +                sw19 {
 +                        gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F1";
++                        label = "GPIO BTN_SELECT";
 +                        linux,code = <BTN_SELECT>;
 +                };
 +                sw20 {
@@ -179,7 +179,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-batlexp-g350.dts linux
 +                };
 +                sw22 {
 +                        gpios = <&gpio3 RK_PB4 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F2";
++                        label = "GPIO BTN_START";
 +                        linux,code = <BTN_START>;
 +                };
 +        };
