@@ -4,14 +4,14 @@
 
 . /etc/profile
 
-#Set mupen64-plus-sa config for R36S, can use same profile as OGS
+#Set mupen64-plus-sa config for R36S
 if [ ! -d "/storage/.config/mupen64plus" ]; then
     mkdir -p "/storage/.config/mupen64plus/"
         cp -r /usr/local/share/mupen64plus/mupen64plus.cfg* /storage/.config/mupen64plus/
 fi
-if [ -f "/storage/.config/mupen64plus/mupen64plus.cfg.ogs" ]; then
+if [ -f "/storage/.config/mupen64plus/mupen64plus.cfg.r36s" ]; then
   rm /storage/.config/mupen64plus/mupen64plus.cfg
-  mv /storage/.config/mupen64plus/mupen64plus.cfg.ogs /storage/.config/mupen64plus/mupen64plus.cfg
+  mv /storage/.config/mupen64plus/mupen64plus.cfg.r36s /storage/.config/mupen64plus/mupen64plus.cfg
 fi
 
 #Set drastic-sa config for R36S 
