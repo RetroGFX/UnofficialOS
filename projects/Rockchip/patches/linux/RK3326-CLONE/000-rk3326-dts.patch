@@ -1,7 +1,7 @@
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boot/dts/rockchip/Makefile
 --- linux.orig/arch/arm64/boot/dts/rockchip/Makefile	2024-02-15 14:44:49.334307319 +0000
 +++ linux/arch/arm64/boot/dts/rockchip/Makefile	2024-02-17 06:35:22.915906533 +0000
-@@ -9,9 +9,17 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
+@@ -9,9 +9,18 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-rock-pi-s.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3318-a95x-z2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-anbernic-rg351m.dtb
@@ -10,6 +10,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boo
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-gameconsole-r36s.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-gameforce-chi.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-k36-clone.dts
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-k36-clone-v2.dts
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu10.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2-v11.dtb
@@ -555,18 +556,18 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r36s.dts l
 +                };
 +                sw11 {
 +                        gpios = <&gpio2 RK_PA2 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F3";
-+                        linux,code = <BTN_TRIGGER_HAPPY3>; // 0x2c2
++                        label = "GPIO BTN_THUMBL";
++                        linux,code = <BTN_THUMBL>; // 0x2c2
 +                };
 +                sw12 {
 +                        gpios = <&gpio2 RK_PA3 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F4";
-+                        linux,code = <BTN_THUMBL>; // 0x2c3
++                        label = "GPIO BTN_THUMBR";
++                        linux,code = <BTN_THUMBR>; // 0x2c3
 +                };
 +                sw13 {
 +                        gpios = <&gpio2 RK_PA4 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F5";
-+                        linux,code = <BTN_THUMBR>; // 0x2c4
++                        label = "GPIO BTN_FN";
++                        linux,code = <BTN_MODE>; // 0x2c4
 +                };
 +                /*sw14 {
 +                        gpios = <&gpio2 RK_PA5 GPIO_ACTIVE_LOW>;
@@ -585,7 +586,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r36s.dts l
 +                };
 +                sw19 {
 +                        gpios = <&gpio3 RK_PB1 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F1";
++                        label = "GPIO BTN_SELECT";
 +                        linux,code = <BTN_SELECT>;
 +                };
 +                sw20 {
@@ -600,7 +601,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r36s.dts l
 +                };
 +                sw22 {
 +                        gpios = <&gpio3 RK_PB4 GPIO_ACTIVE_LOW>;
-+                        label = "GPIO F2";
++                        label = "GPIO BTN_START";
 +                        linux,code = <BTN_START>;
 +                };
 +        };
@@ -3553,7 +3554,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-odroid-go2.dts linux/a
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts linux/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts
 --- linux.orig/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts	2024-02-15 14:44:49.334307319 +0000
 +++ linux/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts	2024-02-17 06:32:20.487322762 +0000
-@@ -12,67 +12,196 @@
+@@ -12,67 +12,200 @@
  	model = "ODROID-GO Super";
  	compatible = "hardkernel,rk3326-odroid-go3", "rockchip,rk3326";
  
@@ -3563,6 +3564,10 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-odroid-go3.dts linux/a
 -		#mux-control-cells = <0>;
 +	joypad: odroidgo3-joypad {
 +        compatible = "odroidgo3-joypad";
++		joypad-name = "odroidgo3-joypad";
++		joypad-product = <0x0001>;
++		joypad-revision = <0x0101>;
++
 +		status = "okay";
 +                /*
 +                  - odroidgo3-joypad sysfs list -
