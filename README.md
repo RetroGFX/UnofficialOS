@@ -31,6 +31,9 @@ UnofficialOS (uOS) is a community developed Linux distribution for handheld gami
 ## Contributing to UnofficialOS
 * If you are interested in contributing to UnofficialOS, please see [here](https://github.com/RetroGFX/UnofficialOS/blob/main/BUILDING.md) for information
 
+## Donate
+Love this project? Please consider [supporting us on Ko-Fi](https://ko-fi.com/unofficialos)
+
 ## Licenses
 UnofficialOS is a Linux distribution that is made up of many open-source components.  Components are provided under their respective licenses.  This distribution includes components licensed for non-commercial use only.
 
