@@ -18,7 +18,7 @@ JOYNAME=$(echo "${GAMEPADINFO}" | grep "Joystick 0 name " | sed "s|Joystick 0 na
 #
 
 for file in /usr/share/libretro/autoconfig/*.cfg; do
-	GAMEPAD=$(cat "$file" | grep input_device|  cut -d'"' -f 2)
+	GAMEPAD=$(cat "$file" | grep "^input_device = " |  cut -d'"' -f 2)
     if [ "${JOYNAME}" == "${GAMEPAD}" ]; then
         GPFILE="${file}"
         # Other keys to consider KEY_SCREENSHOT KEY_QUIT KEY_PAUSE
