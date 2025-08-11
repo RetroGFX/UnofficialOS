@@ -54,6 +54,6 @@ diff -rupN SDL2-2.28.5.orig/src/video/kmsdrm/SDL_kmsdrmopengles.c SDL2-2.28.5/sr
 +      viddata->rga_buffer_index = (viddata->rga_buffer_index + 1) % RGA_BUFFERS_MAX;
 +    }
 +
-     if (fb_info == NULL) {
+     if (!fb_info) {
          SDL_LogError(SDL_LOG_CATEGORY_VIDEO, "Could not get a framebuffer");
          return 0;

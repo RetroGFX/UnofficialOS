@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="SDL2"
-PKG_VERSION="2.28.5"
+PKG_VERSION="2.32.8"
 PKG_LICENSE="GPL"
 PKG_SITE="https://www.libsdl.org/"
 PKG_URL="https://www.libsdl.org/release/SDL2-${PKG_VERSION}.tar.gz"
@@ -131,7 +131,7 @@ pre_configure_target(){
                          -DDIRECTX=OFF \
                          -DSDL_DLOPEN=ON \
                          -DCLOCK_GETTIME=OFF \
-                         -DRPATH=OFF \
+                         -DSDL_RPATH=OFF \
                          -DRENDER_D3D=OFF \
                          -DPIPEWIRE=ON \
                          -DPULSEAUDIO=ON"
