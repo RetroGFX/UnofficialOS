@@ -12,4 +12,10 @@ PKG_SITE="https://github.com/KhronosGroup/SPIRV-Tools"
 PKG_URL="https://github.com/KhronosGroup/SPIRV-Tools/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_HOST=""
 PKG_LONGDESC="The SPIR-V Tools project provides an API and commands for processing SPIR-V modules."
-PKG_TOOLCHAIN="manual"
+
+post_unpack() {
+  mkdir -p ${PKG_BUILD}/external/spirv-headers
+    tar --strip-components=1 \
+      -xf "${SOURCES}/spirv-headers/spirv-headers-$(get_pkg_version spirv-headers).tar.gz" \
+      -C "${PKG_BUILD}/external/spirv-headers"
+}
