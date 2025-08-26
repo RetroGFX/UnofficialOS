@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="gearsystem-lr"
-PKG_VERSION="4b7334f2e38e48af4797509ee3953e56a691bea2"
+PKG_VERSION="3671746ba070d3e2a4815f547f5290a3192c06f1"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"
