@@ -22,6 +22,18 @@ case "$1" in
         export DEVICE=S922X
         export ARCH=aarch64
     ;;
+    "RK3566-BSP")
+        export DEVICE_ROOT=RK3566-BSP
+        export PROJECT=Rockchip
+        export DEVICE=RK3566-BSP
+        export ARCH=aarch64
+    ;;
+    "RK3566-BSP-X55")
+        export DEVICE_ROOT=RK3566-BSP
+        export PROJECT=Rockchip
+        export DEVICE=RK3566-BSP-X55
+        export ARCH=aarch64
+    ;;
     "RK3566")
         export DEVICE_ROOT=RK3566
         export PROJECT=Rockchip
@@ -35,11 +47,17 @@ case "$1" in
         export ARCH=aarch64
     ;;
     "RK3326")
-        unset DEVICE_ROOT
+        export DEVICE_ROOT
         export PROJECT=Rockchip
         export DEVICE=RK3326
         export ARCH=aarch64
     ;;
+    "RK3326-CLONE")
+        export DEVICE_ROOT
+        export PROJECT=Rockchip
+        export DEVICE=RK3326-CLONE
+        export ARCH=aarch64
+    ;;    
     "AMD64-32")
         unset DEVICE_ROOT
         export PROJECT=PC
@@ -58,6 +76,18 @@ case "$1" in
         export DEVICE=S922X
         export ARCH=arm
     ;;
+    "RK3566-BSP-32")
+        export DEVICE_ROOT=RK3566-BSP
+        export PROJECT=Rockchip
+        export DEVICE=RK3566-BSP
+        export ARCH=arm
+    ;;
+    "RK3566-BSP-X55-32")
+        export DEVICE_ROOT=RK3566-BSP
+        export PROJECT=Rockchip
+        export DEVICE=RK3566-BSP-X55
+        export ARCH=arm
+    ;;
     "RK3566-32")
         export DEVICE_ROOT=RK3566
         export PROJECT=Rockchip
@@ -71,11 +101,17 @@ case "$1" in
         export ARCH=arm
     ;;
     "RK3326-32")
-        unset DEVICE_ROOT
+        export DEVICE_ROOT
         export PROJECT=Rockchip
         export DEVICE=RK3326
         export ARCH=arm
     ;;
+    "RK3326-CLONE-32")
+        export DEVICE_ROOT
+        export PROJECT=Rockchip
+        export DEVICE=RK3326-CLONE
+        export ARCH=arm
+    ;;   
     *)
         echo "Unknown device."
     ;;
