@@ -29,7 +29,7 @@ diff -rupN u-boot.orig/cmd/hwrev.c u-boot/cmd/hwrev.c
 +                env_set("dtb_name", "rk3326-k36-clone.dtb");
 +	} else if(check_range(140, 190, hwrev_adc)) {
 +                env_set("hwrev", "r33s");
-+                env_set("dtb_name", "rk3326-gameconsole-r33s");
++                env_set("dtb_name", "rk3326-gameconsole-r33s.dtb");
  	}
  
  	printf("adc0 (hw rev) %d\n", hwrev_adc);

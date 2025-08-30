@@ -42,7 +42,7 @@ index e1db1da09..a1f4cbfc9 100644
         fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_CHEATS], base_path,
               "cheats", sizeof(g_defaults.dirs[DEFAULT_DIR_CHEATS]));
 -   fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_OVERLAY], base_path,
-+   fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_OVERLAY], "/tmp",
++   fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_OVERLAY], "/tmp/",
           "overlays", sizeof(g_defaults.dirs[DEFAULT_DIR_OVERLAY]));
 -   fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_OSK_OVERLAY], base_path,
 +   fill_pathname_join(g_defaults.dirs[DEFAULT_DIR_OSK_OVERLAY], "/tmp/",
