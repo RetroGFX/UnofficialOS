@@ -4,37 +4,19 @@
 
 PKG_NAME="mesa"
 PKG_LICENSE="OSS"
-PKG_DEPENDS_TARGET="toolchain expat libdrm Mako:host"
+PKG_DEPENDS_TARGET="toolchain expat libdrm zstd Mako:host pyyaml:host"
 PKG_LONGDESC="Mesa is a 3-D graphics library with an API."
 PKG_TOOLCHAIN="meson"
 PKG_PATCH_DIRS+=" ${DEVICE}"
-
-case ${DEVICE} in
-  RK3588*)
-	PKG_VERSION="832c3c7117e4366e415ded92a6f07ec203fd9233"
-	PKG_SITE="https://github.com/RetroGFX/mesa-panfork"
-	PKG_URL="${PKG_SITE}.git"
-  ;;
-  # keep RK3399 and RK-ARMV8-A on same version to maintain cross comaptibility
-  RK33*|RK-ARMV8-A|RK3566) #Using upstream dev for panfrost
-	PKG_VERSION="eac703f69128d5aa6879c9becbad627ce08a7920"
-	PKG_SITE="https://gitlab.freedesktop.org/mesa/mesa"
-	PKG_URL="${PKG_SITE}.git"
-	PKG_PATCH_DIRS+=" panfrost"
-  ;;
-  *)
-	PKG_VERSION="24.0.2"
-	PKG_SITE="http://www.mesa3d.org/"
-	PKG_URL="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-${PKG_VERSION}/mesa-mesa-${PKG_VERSION}.tar.gz"
-  ;;
-esac
+PKG_VERSION="24.3.4"
+PKG_SITE="http://www.mesa3d.org/"
+PKG_URL="https://gitlab.freedesktop.org/mesa/mesa/-/archive/mesa-${PKG_VERSION}/mesa-mesa-${PKG_VERSION}.tar.gz"
 
 get_graphicdrivers
 
-PKG_MESON_OPTS_TARGET="-Dgallium-drivers=${GALLIUM_DRIVERS// /,} \
+PKG_MESON_OPTS_TARGET=" ${MESA_LIBS_PATH_OPTS} \
+                       -Dgallium-drivers=${GALLIUM_DRIVERS// /,} \
                        -Dgallium-extra-hud=false \
-                       -Dgallium-omx=disabled \
-                       -Dgallium-nine=false \
                        -Dgallium-opencl=disabled \
                        -Dgallium-xa=disabled \
                        -Dshader-cache=enabled \
@@ -45,29 +27,28 @@ PKG_MESON_OPTS_TARGET="-Dgallium-drivers=${GALLIUM_DRIVERS// /,} \
                        -Dlibunwind=disabled \
                        -Dlmsensors=disabled \
                        -Dbuild-tests=false \
-                       -Dselinux=false \
                        -Dosmesa=false"
 
 if [ "${DISPLAYSERVER}" = "x11" ]; then
   PKG_DEPENDS_TARGET+=" xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libglvnd glfw"
   export X11_INCLUDES=
   PKG_MESON_OPTS_TARGET+="	-Dplatforms=x11 \
-				-Ddri3=enabled \
+				-Dgallium-nine=true \
 				-Dglx=dri \
-				-Dglvnd=true"
+				-Dglvnd=enabled"
 elif [ "${DISPLAYSERVER}" = "wl" ]; then
   PKG_DEPENDS_TARGET+=" wayland wayland-protocols libglvnd glfw"
   PKG_MESON_OPTS_TARGET+=" 	-Dplatforms=wayland,x11 \
-				-Ddri3=enabled \
+				-Dgallium-nine=true \
 				-Dglx=dri \
-				-Dglvnd=true"
+				-Dglvnd=enabled"
   PKG_DEPENDS_TARGET+=" xorgproto libXext libXdamage libXfixes libXxf86vm libxcb libX11 libxshmfence libXrandr libglvnd"
   export X11_INCLUDES=
 else
   PKG_MESON_OPTS_TARGET+="	-Dplatforms="" \
-				-Ddri3=disabled \
+				-Dgallium-nine=false \
 				-Dglx=disabled \
-				-Dglvnd=false"
+				-Dglvnd=disabled"
 fi
 
 if [ "${LLVM_SUPPORT}" = "yes" ]; then
