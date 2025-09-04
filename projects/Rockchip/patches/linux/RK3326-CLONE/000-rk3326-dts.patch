@@ -1,7 +1,7 @@
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boot/dts/rockchip/Makefile
 --- linux.orig/arch/arm64/boot/dts/rockchip/Makefile	2024-02-15 14:44:49.334307319 +0000
 +++ linux/arch/arm64/boot/dts/rockchip/Makefile	2024-02-17 06:35:22.915906533 +0000
-@@ -9,9 +9,19 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
+@@ -9,9 +9,20 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-rock-pi-s.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3318-a95x-z2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-anbernic-rg351m.dtb
@@ -13,6 +13,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boo
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-k36-clone-v2.dts
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-u8-clone.dts
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu10.dtb
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu-mini-m.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2-v11.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go3.dtb
@@ -2006,7 +2007,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameforce-chi.dts linu
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-magicx-xu10.dts linux/arch/arm64/boot/dts/rockchip/rk3326-magicx-xu10.dts
 --- linux.orig/arch/arm64/boot/dts/rockchip/rk3326-magicx-xu10.dts	1969-12-31 19:00:00.000000000 -0500
 +++ linux/arch/arm64/boot/dts/rockchip/rk3326-magicx-xu10.dts	2024-03-02 10:29:31.858552489 -0500
-@@ -0,0 +1,870 @@
+@@ -0,0 +1,872 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2019 Hardkernel Co., Ltd
@@ -2149,8 +2150,10 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-magicx-xu10.dts linux/
 +
 +        /* poll device interval (ms), adc read interval */
 +        poll-interval = <10>;
-+        btn-lr-to-absx;
-+        btn-ud-to-absy;
++
++        /* required for XU10 */
++        invert-absx;
++        invert-absy;
 +        
 +        /* gpio button auto repeat set value : default disable */
 +        /*
