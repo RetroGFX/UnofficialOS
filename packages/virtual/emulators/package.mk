@@ -35,13 +35,13 @@ case "${DEVICE}" in
     PKG_EMUS+=" amiberry cemu-sa dolphin-sa mednafen melonds-sa minivmacsa mupen64plus-sa kronos-sa   \
                nanoboyadvance-sa pcsx2-sa rpcs3-sa scummvmsa vita3k-sa xemu-sa"
     LIBRETRO_CORES+=" beetle-psx-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr flycast-lr lrps2-lr   \
-                     play-lr ppsspp-lr kronos-lr beetle-saturn-lr"
+                     play-lr panda3ds-lr ppsspp-lr kronos-lr beetle-saturn-lr"
   ;;
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa melonds-sa mupen64plus-sa box64 scummvmsa   \
                yabasanshiro-sa portmaster beetle-saturn-lr mednafen"
-    LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr geolith-lr pcsx_rearmed-lr"
+    LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr geolith-lr panda3ds-lr pcsx_rearmed-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3399)
@@ -123,6 +123,14 @@ makeinstall_target() {
   ### Panasonic 3DO
   add_emu_core 3do retroarch opera true
   add_es_system 3do
+
+  ### Nintendo 3DS
+  case ${DEVICE} in
+    AMD64|RK3588*)
+      add_emu_core 3ds retroarch panda3ds true
+      add_es_system 3ds
+    ;;
+  esac
 
   ### Commodore Amiga
   case ${DEVICE} in
