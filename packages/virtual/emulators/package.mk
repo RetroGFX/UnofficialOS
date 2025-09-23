@@ -35,7 +35,7 @@ case "${DEVICE}" in
     PKG_EMUS+=" amiberry cemu-sa dolphin-sa mednafen melonds-sa minivmacsa mupen64plus-sa kronos-sa   \
                nanoboyadvance-sa pcsx2-sa rpcs3-sa scummvmsa vita3k-sa xemu-sa"
     LIBRETRO_CORES+=" beetle-psx-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr flycast-lr lrps2-lr   \
-                     play-lr panda3ds-lr ppsspp-lr kronos-lr beetle-saturn-lr"
+                     play-lr ps2-lr panda3ds-lr ppsspp-lr kronos-lr beetle-saturn-lr"
   ;;
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gpsp-lr pcsx_rearmed-lr"
@@ -843,6 +843,7 @@ makeinstall_target() {
     AMD64)
       add_emu_core ps2 pcsx2 pcsx2-sa true
       add_emu_core ps2 retroarch pcsx2 false
+      add_emu_core ps2 retroarch ps2 false
       add_emu_core ps2 retroarch play false
       add_es_system ps2
       install_script "Start PCSX2.sh"
