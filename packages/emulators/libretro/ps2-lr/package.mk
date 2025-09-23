@@ -30,23 +30,6 @@ if [ "${DISPLAYSERVER}" = "wl" ]; then
   PKG_DEPENDS_TARGET+=" wayland ${WINDOWMANAGER}"
 fi
 
-KG_CMAKE_OPTS_TARGET=" \
-                        -DSDL2_API=TRUE \
-                        -DDISABLE_PCSX2_WRAPPER=1 \
-                        -DPACKAGE_MODE=FALSE \
-                        -DPCSX2_TARGET_ARCHITECTURES=x86_64 \
-                        -DENABLE_TESTS=OFF \
-                        -DEXTRA_PLUGINS=OFF \
-                        -DQT_BUILD=FALSE \
-                        -DBUILD_SHARED_LIBS=OFF \
-                        -DUSE_SYSTEM_LIBS=OFF \
-                        -DDISABLE_ADVANCE_SIMD=ON \
-                        -DUSE_VTUNE=OFF \
-                        -DUSE_VULKAN=ON \
-			                  -DGTK3_API=FALSE \
-                        -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=FALSE \
-                        -DCMAKE_BUILD_TYPE=Release"
-
 pre_configure_target() {
   export LDFLAGS="${LDFLAGS} -laio"
 }
