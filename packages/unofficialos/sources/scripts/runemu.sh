@@ -181,6 +181,8 @@ case ${EMULATOR} in
     case ${HW_ARCH} in
       aarch64)
         if [[ "${CORE}" =~ pcsx_rearmed32 ]] || \
+           [[ "${CORE}" =~ ludicrousn64_xtreme32 ]] || \
+           [[ "${CORE}" =~ morpheuscast_xtreme32 ]] || \
            [[ "${CORE}" =~ gpsp ]] || \
            [[ "${CORE}" =~ desmume ]]
         then
