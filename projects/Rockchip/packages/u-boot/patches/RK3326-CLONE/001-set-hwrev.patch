@@ -1,7 +1,7 @@
 diff -rupN u-boot.orig/cmd/hwrev.c u-boot/cmd/hwrev.c
 --- u-boot.orig/cmd/hwrev.c	2025-05-31 22:49:00.193557511 +0000
 +++ u-boot/cmd/hwrev.c	2025-05-31 22:51:17.817163331 +0000
-@@ -19,25 +19,15 @@ int do_hwrev(cmd_tbl_t *cmdtp, int flag,
+@@ -19,25 +19,20 @@ int do_hwrev(cmd_tbl_t *cmdtp, int flag,
  		return CMD_RET_FAILURE;
  	}
  
@@ -24,13 +24,18 @@ diff -rupN u-boot.orig/cmd/hwrev.c u-boot/cmd/hwrev.c
 -	else {
 -		env_set("hwrev", "v00");
 -		env_set("dtb_name", "rk3326-odroidgo2-linux.dtb");
++	/* BattleXP G350 K36 Clones*/
 +	if (check_range(490, 540, hwrev_adc)) {
-+                env_set("hwrev", "k36");
-+                env_set("dtb_name", "rk3326-k36-clone.dtb");
-+	} else if(check_range(140, 190, hwrev_adc)) {
++                env_set("hwrev", "g350");
++                env_set("dtb_name", "rk3326-batlexp-g350.dtb");
++	}
++	/* Game Console R3xS */ 
++	else if(check_range(140, 190, hwrev_adc)) {
 +                env_set("hwrev", "r33s");
 +                env_set("dtb_name", "rk3326-gameconsole-r33s.dtb");
-+ 	} else if(check_range(1000, 1050, hwrev_adc)) {
++ 	}
++	/* MagicX XU Mini M */
++	else if(check_range(1000, 1050, hwrev_adc)) {
 +                env_set("hwrev", "xumini");
 +                env_set("dtb_name", "rk3326-magicx-xu-mini-m.dtb");
 	}
