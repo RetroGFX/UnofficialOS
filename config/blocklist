@@ -3,7 +3,6 @@ amiberry # Updating breaks build packages
 control-gen # package does not update
 cemu-sa # patches need rebasing
 dolphin-sa # Wayland patch is now broken upstream
-doublecherrygb-lr # Makefile broken
 drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
 duckstation-sa # Patches need to be reworked.
@@ -14,7 +13,6 @@ idtech-lr # Just a dummy package
 kronos-sa # Using the release version of kronos had better results.
 lrps2-lr # Source moved
 melonds-sa # Broken OpenGL renderer upstream
-melonds-ds-lr # Compiling issues
 mupen64plus-sa-ui-console # Causes segfaults
 nanoboyadvance-sa # SDL version removed after this commit
 np2kai-lr # Last major commit before hiatus is broken.
