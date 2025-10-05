@@ -15,7 +15,7 @@ case ${DEVICE} in
     PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
   ;;
   *)
-    PKG_VERSION="1be4ce5cdf7e540360bfa556eceec2652fa1b1db"
+    PKG_VERSION="86986bfd82fb130d4d4739d93159acd986921808"
     PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
   ;;
 esac

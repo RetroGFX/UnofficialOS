@@ -2,7 +2,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="wasm4-lr"
-PKG_VERSION="cfb3afdbbe00b550968ddd8283eabcd6d8c99a59"
+PKG_VERSION="aaa77f4402e4ff467ebac92882ba00ddf4a2d709"
 PKG_LICENSE="ISC"
 PKG_SITE="https://github.com/aduros/wasm4"
 PKG_URL="${PKG_SITE}.git"
