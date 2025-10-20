@@ -1,0 +1,84 @@
+diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
+index 8e7d5c1..191ad76 100644
+--- a/es-app/src/guis/GuiMenu.cpp
++++ b/es-app/src/guis/GuiMenu.cpp
+@@ -1033,6 +1033,79 @@ void GuiMenu::openSystemSettings_batocera()
+         });
+         }
+ 
++        if (GetEnv("DEVICE_DTB_SWITCH_K36") == "true") {
++        s->addGroup(_("HARDWARE / DEVICE"));
++        
++        // K36 Clone Device Switch
++        auto k36_device_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool k36deviceEnabled = SystemConf::getInstance()->get("system.device-k36-clone") == "1";
++        k36_device_switch->setState(k36deviceEnabled);
++        s->addWithLabel(_("DEVICE IS K36 / CLONE"), k36_device_switch);
++        k36_device_switch->setOnChangedCallback([this, k36_device_switch] {
++                if (!k36_device_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, k36_device_switch] {
++                                bool dswitchenabled = k36_device_switch->getState();
++                                SystemConf::getInstance()->set("system.device-k36-clone", dswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 K36_CLONE", " ", nullptr);
++                        }, _("NO"),
++                        [k36_device_switch] {
++                                k36_device_switch->setState(false);
++                        }));
++        });
++        
++        // K36 Clone Audio Inversion Switch
++        auto k36_audio_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool k36audioEnabled = SystemConf::getInstance()->get("system.device-k36-clone-v2") == "1";
++        k36_audio_switch->setState(k36audioEnabled);
++        s->addWithLabel(_("K36 / CLONE V2 AUDIO INVERT"), k36_audio_switch);
++        k36_audio_switch->setOnChangedCallback([this, k36_audio_switch] {
++                if (!k36_audio_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, k36_audio_switch] {
++                                bool aswitchenabled = k36_audio_switch->getState();
++                                SystemConf::getInstance()->set("system.device-k36-clone-v2", aswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 K36_CLONE_V2", " ", nullptr);
++                        }, _("NO"),
++                        [k36_audio_switch] {
++                                k36_audio_switch->setState(false);
++                        }));
++        });
++        
++        // XiFan MyMini Switch
++        auto mymini_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool myminiEnabled = SystemConf::getInstance()->get("system.device-xifan-mymini") == "1";
++        mymini_switch->setState(myminiEnabled);
++        s->addWithLabel(_("DEVICE IS XIFAN MYMINI"), mymini_switch);
++        mymini_switch->setOnChangedCallback([this, mymini_switch] {
++                if (!mymini_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, mymini_switch] {
++                                bool mswitchenabled = mymini_switch->getState();
++                                SystemConf::getInstance()->set("system.device-xifan-mymini", mswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 XIFAN_MYMINI", " ", nullptr);
++                        }, _("NO"),
++                        [mymini_switch] {
++                                mymini_switch->setState(false);
++                        }));
++        });
++        }
++		
+ 	s->addGroup(_("HARDWARE / STORAGE"));
+ 	if (GetEnv("DEVICE_MMC_EJECT") != "false") {
+ 
