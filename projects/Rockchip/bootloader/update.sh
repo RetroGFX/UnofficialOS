@@ -105,14 +105,26 @@ if [ -f $SYSTEM_ROOT/usr/share/bootloader/boot.ini ]; then
       -e "s/@UUID_STORAGE@/${UUID_STORAGE}/" \
       -i $BOOT_ROOT/boot.ini
 
-  # Set correct R3xS dtb in boot.ini
+  # Set correct R3xS/K36/CLONE dtb in boot.ini
   DTB_NAME=$(cat $BOOT_ROOT/device.name)
-  if [ $DTB_NAME = 'R33S' ]; then
+  if [ "$DTB_NAME" = 'R33S' ]; then
     echo "Setting R33S dtb in boot.ini..."
     sed -i '/rk3326-gameconsole-r3/c\  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r33s.dtb' $BOOT_ROOT/boot.ini
-  elif [ $DTB_NAME = 'R36S' ]; then
+  elif [ "$DTB_NAME" = 'R36S' ]; then
     echo "Setting R36S/R35S dtb in boot.ini..."
     sed -i '/rk3326-gameconsole-r3/c\  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r36s.dtb' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'K36_CLONE' ]; then
+    echo "Setting K36 Clone dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-k36.*\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-k36-clone.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'K36_CLONE_V2' ]; then
+    echo "Setting K36 Clone V2 dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-k36.*\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-k36-clone-v2.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'XIFAN_MYMINI' ]; then
+    echo "Setting XiFan MyMini dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-mymini\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-mymini.dtb|' $BOOT_ROOT/boot.ini
   fi
 fi
 
