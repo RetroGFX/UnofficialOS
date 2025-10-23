@@ -31,7 +31,7 @@
     BOOTLOADER="u-boot"
     TRUST_LABEL="trust"
     PARTITION_TABLE="msdos"
-    DEVICE_DTB=("rk3326-k36-clone" "rk3326-k36-clone-v2" "rk3326-xifan-mymini" "rk3326-gameconsole-r33s" "rk3326-gameconsole-r36s" "rk3326-magicx-xu10" "rk3326-magicx-xu-mini-m" "rk3326-batlexp-g350")
+    DEVICE_DTB=("rk3326-k36-clone" "rk3326-k36-clone-v2" "rk3326-xifan-mymini" "rk3326-xifan-xf35-40h" "rk3326-gameconsole-r33s" "rk3326-gameconsole-r36s" "rk3326-magicx-xu10" "rk3326-magicx-xu-mini-m" "rk3326-batlexp-g350")
     UBOOT_DTB="${DEVICE_DTB[0]}"
     UBOOT_CONFIG="odroidgoa_defconfig"
     PKG_SOC="px30"
@@ -73,7 +73,7 @@
     EXTRA_CMDLINE="quiet rootwait console=ttyFIQ0 console=tty0 ssh consoleblank=0 systemd.show_status=0 loglevel=0 panic=20"
 
   # additional packages to install
-    ADDITIONAL_PACKAGES="device-switch generic-dsi"
+    ADDITIONAL_PACKAGES="device-switch generic-dsi mcu-led"
 
   # additional Firmware to use ( )
   # Space separated list is supported,

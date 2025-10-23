@@ -1,7 +1,7 @@
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boot/dts/rockchip/Makefile
 --- linux.orig/arch/arm64/boot/dts/rockchip/Makefile	2024-02-15 14:44:49.334307319 +0000
 +++ linux/arch/arm64/boot/dts/rockchip/Makefile	2024-02-17 06:35:22.915906533 +0000
-@@ -9,9 +9,20 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
+@@ -9,9 +9,21 @@ dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-ro
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3308-rock-pi-s.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3318-a95x-z2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-anbernic-rg351m.dtb
@@ -14,6 +14,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boo
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu10.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu-mini-m.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-xifan-mymini.dtb
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-xifan-xf35-40h.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go2-v11.dtb
  dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-odroid-go3.dtb

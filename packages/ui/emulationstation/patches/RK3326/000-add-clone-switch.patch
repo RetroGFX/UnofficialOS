@@ -1,15 +1,15 @@
 diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
-index 8e7d5c1..191ad76 100644
+index 8e7d5c1..b8a7124 100644
 --- a/es-app/src/guis/GuiMenu.cpp
 +++ b/es-app/src/guis/GuiMenu.cpp
-@@ -1033,6 +1033,79 @@ void GuiMenu::openSystemSettings_batocera()
+@@ -1033,6 +1033,102 @@ void GuiMenu::openSystemSettings_batocera()
          });
          }
  
 +        if (GetEnv("DEVICE_DTB_SWITCH_K36") == "true") {
 +        s->addGroup(_("HARDWARE / DEVICE"));
 +        
-+        // K36 Clone Device Switch
++        // K36 / Clone Device Switch
 +        auto k36_device_switch = std::make_shared<SwitchComponent>(mWindow);
 +        bool k36deviceEnabled = SystemConf::getInstance()->get("system.device-k36-clone") == "1";
 +        k36_device_switch->setState(k36deviceEnabled);
@@ -32,11 +32,11 @@ index 8e7d5c1..191ad76 100644
 +                        }));
 +        });
 +        
-+        // K36 Clone Audio Inversion Switch
++        // K36 / Clone Audio Inversion Switch
 +        auto k36_audio_switch = std::make_shared<SwitchComponent>(mWindow);
 +        bool k36audioEnabled = SystemConf::getInstance()->get("system.device-k36-clone-v2") == "1";
 +        k36_audio_switch->setState(k36audioEnabled);
-+        s->addWithLabel(_("K36 / CLONE V2 AUDIO INVERT"), k36_audio_switch);
++        s->addWithLabel(_("DEVICE IS K36 / CLONE V2"), k36_audio_switch);
 +        k36_audio_switch->setOnChangedCallback([this, k36_audio_switch] {
 +                if (!k36_audio_switch->getState()) return;
 +                
@@ -75,6 +75,29 @@ index 8e7d5c1..191ad76 100644
 +                        }, _("NO"),
 +                        [mymini_switch] {
 +                                mymini_switch->setState(false);
++                        }));
++        });
++        
++        // XiFan XF35H / XF40H Switch
++        auto xf35_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool xf35Enabled = SystemConf::getInstance()->get("system.device-xifan-xf35-40h") == "1";
++        xf35_switch->setState(xf35Enabled);
++        s->addWithLabel(_("DEVICE IS XIFAN XF35H / XF40H"), xf35_switch);
++        xf35_switch->setOnChangedCallback([this, xf35_switch] {
++                if (!xf35_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, xf35_switch] {
++                                bool xswitchenabled = xf35_switch->getState();
++                                SystemConf::getInstance()->set("system.device-xifan-xf35-40h", xswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 XIFAN_XF35_40H", " ", nullptr);
++                        }, _("NO"),
++                        [xf35_switch] {
++                                xf35_switch->setState(false);
 +                        }));
 +        });
 +        }
