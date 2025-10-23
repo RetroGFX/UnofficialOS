@@ -10,6 +10,7 @@ mount -o remount,rw /flash
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' /flash/boot.ini
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-k36.*\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-k36-clone.dtb|' /flash/boot.ini
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-mymini\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-mymini.dtb|' /flash/boot.ini
+sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' /flash/boot.ini
 
 case $1 in
   K36_CLONE)
@@ -20,6 +21,9 @@ case $1 in
     ;;
   XIFAN_MYMINI)
     sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-mymini\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-mymini.dtb|' /flash/boot.ini
+    ;;
+  XIFAN_XF35_40H)
+    sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' /flash/boot.ini
     ;;
 esac
 
