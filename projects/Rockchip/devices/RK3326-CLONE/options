@@ -31,7 +31,7 @@
     BOOTLOADER="u-boot"
     TRUST_LABEL="trust"
     PARTITION_TABLE="msdos"
-    DEVICE_DTB=("rk3326-clone" "rk3326-clone-v2" "rk3326-xifan-mymini" "rk3326-xifan-xf35-40h" "rk3326-gameconsole-r33s" "rk3326-gameconsole-r36s" "rk3326-magicx-xu10" "rk3326-magicx-xu-mini-m" "rk3326-batlexp-g350")
+    DEVICE_DTB=("rk3326-clone" "rk3326-clone-v2" "rk3326-kinhank-k36" "rk3326-xifan-mymini" "rk3326-xifan-xf35-40h" "rk3326-gameconsole-r33s" "rk3326-gameconsole-r36s" "rk3326-magicx-xu10" "rk3326-magicx-xu-mini-m" "rk3326-batlexp-g350")
     UBOOT_DTB="${DEVICE_DTB[0]}"
     UBOOT_CONFIG="odroidgoa_defconfig"
     PKG_SOC="px30"

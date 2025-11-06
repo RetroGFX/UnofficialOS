@@ -1,8 +1,8 @@
 diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
-index 8e7d5c1..4a4f002 100644
+index 8e7d5c1..9782f7a 100644
 --- a/es-app/src/guis/GuiMenu.cpp
 +++ b/es-app/src/guis/GuiMenu.cpp
-@@ -1033,6 +1033,102 @@ void GuiMenu::openSystemSettings_batocera()
+@@ -1033,6 +1033,125 @@ void GuiMenu::openSystemSettings_batocera()
          });
          }
  
@@ -52,6 +52,29 @@ index 8e7d5c1..4a4f002 100644
 +                        }, _("NO"),
 +                        [clone_v2_switch] {
 +                                clone_v2_switch->setState(false);
++                        }));
++        });
++        
++        // Kinhank K36 Switch
++        auto k36_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool k36Enabled = SystemConf::getInstance()->get("system.device-kinhank-k36") == "1";
++        k36_switch->setState(k36Enabled);
++        s->addWithLabel(_("DEVICE IS KINHANK K36"), k36_switch);
++        k36_switch->setOnChangedCallback([this, k36_switch] {
++                if (!k36_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, k36_switch] {
++                                bool kswitchenabled = k36_switch->getState();
++                                SystemConf::getInstance()->set("system.device-kinhank-k36", kswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 KINHANK_K36", " ", nullptr);
++                        }, _("NO"),
++                        [k36_switch] {
++                                k36_switch->setState(false);
 +                        }));
 +        });
 +        
