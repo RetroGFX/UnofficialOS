@@ -1,5 +1,5 @@
 diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
-index 8e7d5c1..b8a7124 100644
+index 8e7d5c1..4a4f002 100644
 --- a/es-app/src/guis/GuiMenu.cpp
 +++ b/es-app/src/guis/GuiMenu.cpp
 @@ -1033,6 +1033,102 @@ void GuiMenu::openSystemSettings_batocera()
@@ -9,49 +9,49 @@ index 8e7d5c1..b8a7124 100644
 +        if (GetEnv("DEVICE_DTB_SWITCH_K36") == "true") {
 +        s->addGroup(_("HARDWARE / DEVICE"));
 +        
-+        // K36 / Clone Device Switch
-+        auto k36_device_switch = std::make_shared<SwitchComponent>(mWindow);
-+        bool k36deviceEnabled = SystemConf::getInstance()->get("system.device-k36-clone") == "1";
-+        k36_device_switch->setState(k36deviceEnabled);
-+        s->addWithLabel(_("DEVICE IS K36 / CLONE"), k36_device_switch);
-+        k36_device_switch->setOnChangedCallback([this, k36_device_switch] {
-+                if (!k36_device_switch->getState()) return;
++        // Clone Device Switch
++        auto clone_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool cloneEnabled = SystemConf::getInstance()->get("system.device-clone") == "1";
++        clone_switch->setState(cloneEnabled);
++        s->addWithLabel(_("DEVICE IS CLONE"), clone_switch);
++        clone_switch->setOnChangedCallback([this, clone_switch] {
++                if (!clone_switch->getState()) return;
 +                
 +                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
 +                msg += _("Do you want to continue?");
 +                
 +                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
-+                        [this, k36_device_switch] {
-+                                bool dswitchenabled = k36_device_switch->getState();
-+                                SystemConf::getInstance()->set("system.device-k36-clone", dswitchenabled ? "1" : "0");
++                        [this, clone_switch] {
++                                bool dswitchenabled = clone_switch->getState();
++                                SystemConf::getInstance()->set("system.device-clone", dswitchenabled ? "1" : "0");
 +                                SystemConf::getInstance()->saveSystemConf();
-+                                runSystemCommand("/usr/bin/device-switch-k36 K36_CLONE", " ", nullptr);
++                                runSystemCommand("/usr/bin/device-switch-k36 CLONE", " ", nullptr);
 +                        }, _("NO"),
-+                        [k36_device_switch] {
-+                                k36_device_switch->setState(false);
++                        [clone_switch] {
++                                clone_switch->setState(false);
 +                        }));
 +        });
 +        
-+        // K36 / Clone Audio Inversion Switch
-+        auto k36_audio_switch = std::make_shared<SwitchComponent>(mWindow);
-+        bool k36audioEnabled = SystemConf::getInstance()->get("system.device-k36-clone-v2") == "1";
-+        k36_audio_switch->setState(k36audioEnabled);
-+        s->addWithLabel(_("DEVICE IS K36 / CLONE V2"), k36_audio_switch);
-+        k36_audio_switch->setOnChangedCallback([this, k36_audio_switch] {
-+                if (!k36_audio_switch->getState()) return;
++        // Clone V2 Switch
++        auto clone_v2_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool cloneV2Enabled = SystemConf::getInstance()->get("system.device-clone-v2") == "1";
++        clone_v2_switch->setState(cloneV2Enabled);
++        s->addWithLabel(_("DEVICE IS CLONE V2"), clone_v2_switch);
++        clone_v2_switch->setOnChangedCallback([this, clone_v2_switch] {
++                if (!clone_v2_switch->getState()) return;
 +                
 +                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
 +                msg += _("Do you want to continue?");
 +                
 +                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
-+                        [this, k36_audio_switch] {
-+                                bool aswitchenabled = k36_audio_switch->getState();
-+                                SystemConf::getInstance()->set("system.device-k36-clone-v2", aswitchenabled ? "1" : "0");
++                        [this, clone_v2_switch] {
++                                bool aswitchenabled = clone_v2_switch->getState();
++                                SystemConf::getInstance()->set("system.device-clone-v2", aswitchenabled ? "1" : "0");
 +                                SystemConf::getInstance()->saveSystemConf();
-+                                runSystemCommand("/usr/bin/device-switch-k36 K36_CLONE_V2", " ", nullptr);
++                                runSystemCommand("/usr/bin/device-switch-k36 CLONE_V2", " ", nullptr);
 +                        }, _("NO"),
-+                        [k36_audio_switch] {
-+                                k36_audio_switch->setState(false);
++                        [clone_v2_switch] {
++                                clone_v2_switch->setState(false);
 +                        }));
 +        });
 +        

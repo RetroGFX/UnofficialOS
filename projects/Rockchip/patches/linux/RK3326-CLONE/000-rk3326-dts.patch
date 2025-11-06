@@ -9,8 +9,8 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/Makefile linux/arch/arm64/boo
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-gameconsole-r33s.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-gameconsole-r36s.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-gameforce-chi.dtb
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-k36-clone.dts
-+dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-k36-clone-v2.dts
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-clone.dts
++dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-clone-v2.dts
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu10.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-magicx-xu-mini-m.dtb
 +dtb-$(CONFIG_ARCH_ROCKCHIP) += rk3326-xifan-mymini.dtb
