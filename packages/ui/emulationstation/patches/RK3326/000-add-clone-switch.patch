@@ -1,0 +1,130 @@
+diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
+index 8e7d5c1..9782f7a 100644
+--- a/es-app/src/guis/GuiMenu.cpp
++++ b/es-app/src/guis/GuiMenu.cpp
+@@ -1033,6 +1033,125 @@ void GuiMenu::openSystemSettings_batocera()
+         });
+         }
+ 
++        if (GetEnv("DEVICE_DTB_SWITCH_K36") == "true") {
++        s->addGroup(_("HARDWARE / DEVICE"));
++        
++        // Clone Device Switch
++        auto clone_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool cloneEnabled = SystemConf::getInstance()->get("system.device-clone") == "1";
++        clone_switch->setState(cloneEnabled);
++        s->addWithLabel(_("DEVICE IS CLONE"), clone_switch);
++        clone_switch->setOnChangedCallback([this, clone_switch] {
++                if (!clone_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, clone_switch] {
++                                bool dswitchenabled = clone_switch->getState();
++                                SystemConf::getInstance()->set("system.device-clone", dswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 CLONE", " ", nullptr);
++                        }, _("NO"),
++                        [clone_switch] {
++                                clone_switch->setState(false);
++                        }));
++        });
++        
++        // Clone V2 Switch
++        auto clone_v2_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool cloneV2Enabled = SystemConf::getInstance()->get("system.device-clone-v2") == "1";
++        clone_v2_switch->setState(cloneV2Enabled);
++        s->addWithLabel(_("DEVICE IS CLONE V2"), clone_v2_switch);
++        clone_v2_switch->setOnChangedCallback([this, clone_v2_switch] {
++                if (!clone_v2_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, clone_v2_switch] {
++                                bool aswitchenabled = clone_v2_switch->getState();
++                                SystemConf::getInstance()->set("system.device-clone-v2", aswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 CLONE_V2", " ", nullptr);
++                        }, _("NO"),
++                        [clone_v2_switch] {
++                                clone_v2_switch->setState(false);
++                        }));
++        });
++        
++        // Kinhank K36 Switch
++        auto k36_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool k36Enabled = SystemConf::getInstance()->get("system.device-kinhank-k36") == "1";
++        k36_switch->setState(k36Enabled);
++        s->addWithLabel(_("DEVICE IS KINHANK K36"), k36_switch);
++        k36_switch->setOnChangedCallback([this, k36_switch] {
++                if (!k36_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, k36_switch] {
++                                bool kswitchenabled = k36_switch->getState();
++                                SystemConf::getInstance()->set("system.device-kinhank-k36", kswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 KINHANK_K36", " ", nullptr);
++                        }, _("NO"),
++                        [k36_switch] {
++                                k36_switch->setState(false);
++                        }));
++        });
++        
++        // XiFan MyMini Switch
++        auto mymini_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool myminiEnabled = SystemConf::getInstance()->get("system.device-xifan-mymini") == "1";
++        mymini_switch->setState(myminiEnabled);
++        s->addWithLabel(_("DEVICE IS XIFAN MYMINI"), mymini_switch);
++        mymini_switch->setOnChangedCallback([this, mymini_switch] {
++                if (!mymini_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, mymini_switch] {
++                                bool mswitchenabled = mymini_switch->getState();
++                                SystemConf::getInstance()->set("system.device-xifan-mymini", mswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 XIFAN_MYMINI", " ", nullptr);
++                        }, _("NO"),
++                        [mymini_switch] {
++                                mymini_switch->setState(false);
++                        }));
++        });
++        
++        // XiFan XF35H / XF40H Switch
++        auto xf35_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool xf35Enabled = SystemConf::getInstance()->get("system.device-xifan-xf35-40h") == "1";
++        xf35_switch->setState(xf35Enabled);
++        s->addWithLabel(_("DEVICE IS XIFAN XF35H / XF40H"), xf35_switch);
++        xf35_switch->setOnChangedCallback([this, xf35_switch] {
++                if (!xf35_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, xf35_switch] {
++                                bool xswitchenabled = xf35_switch->getState();
++                                SystemConf::getInstance()->set("system.device-xifan-xf35-40h", xswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 XIFAN_XF35_40H", " ", nullptr);
++                        }, _("NO"),
++                        [xf35_switch] {
++                                xf35_switch->setState(false);
++                        }));
++        });
++        }
++		
+ 	s->addGroup(_("HARDWARE / STORAGE"));
+ 	if (GetEnv("DEVICE_MMC_EJECT") != "false") {
+ 

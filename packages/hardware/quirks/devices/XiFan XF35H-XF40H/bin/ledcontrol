@@ -1,0 +1,111 @@
+#!/bin/bash
+
+. /etc/profile
+
+# Get the first parameter of the script, which is the color name
+COLOR=$1
+UART_DEV=/dev/ttyS2
+
+if [ "$1" != "off" -a "$1" != "list" ]; then
+    echo 1 > /sys/class/gpio/gpio65/value
+fi
+
+# Set LED state based on color name
+case $COLOR in
+    battery)
+        # Assume battery corresponds to green (can be adjusted based on actual needs)
+	set_setting led.color ${1}
+	mcu_led "$UART_DEV" chgmode 1 1
+	systemctl restart batteryledstatus.service
+        ;;
+    red)
+	mcu_led "$UART_DEV" chgmode 3 1
+	set_setting led.color ${1}
+        ;;
+    green)
+	mcu_led "$UART_DEV" chgmode 1 1
+	set_setting led.color ${1}
+        ;;
+    blue)
+	mcu_led "$UART_DEV" chgmode 2 1
+	set_setting led.color ${1}
+        ;;
+    white)
+	mcu_led "$UART_DEV" chgmode 7 1
+	set_setting led.color ${1}
+        ;;
+    orange)
+	mcu_led "$UART_DEV" chgmode 5 1
+	set_setting led.color ${1}
+        ;;
+    purple)
+	mcu_led "$UART_DEV" chgmode 6 1
+	set_setting led.color ${1}
+        ;;
+    cyan)
+	mcu_led "$UART_DEV" chgmode 4 1
+	set_setting led.color ${1}
+        ;;
+    breath_red)
+	mcu_led "$UART_DEV" chgmode 19 1
+	set_setting led.color ${1}
+        ;;
+    breath_green)
+	mcu_led "$UART_DEV" chgmode 17 1
+	set_setting led.color ${1}
+        ;;
+    breath_blue)
+	mcu_led "$UART_DEV" chgmode 18 1
+	set_setting led.color ${1}
+        ;;
+    breath_white)
+	mcu_led "$UART_DEV" chgmode 23 1
+	set_setting led.color ${1}
+        ;;
+    breath_orange)
+	mcu_led "$UART_DEV" chgmode 21 1
+	set_setting led.color ${1}
+        ;;
+    breath_purple)
+	mcu_led "$UART_DEV" chgmode 22 1
+	set_setting led.color ${1}
+        ;;
+    breath_cyan)
+	mcu_led "$UART_DEV" chgmode 20 1
+	set_setting led.color ${1}
+        ;;
+    breath)
+	mcu_led "$UART_DEV" chgmode 24 1
+	set_setting led.color ${1}
+	;;
+    flow)
+	mcu_led "$UART_DEV" chgmode 8 1
+	set_setting led.color ${1}
+        ;;
+    off)
+	echo 0 > /sys/class/gpio/gpio65/value
+	set_setting led.color ${1}
+    ;;
+    list)
+cat <<EOF
+off
+battery
+red
+green
+blue
+orange
+purple
+cyan
+white
+breath_red
+breath_green
+breath_blue
+breath_orange
+breath_purple
+breath_cyan
+breath_white
+breath
+flow
+EOF
+  ;;
+esac

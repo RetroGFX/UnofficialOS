@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# Get the first parameter of the script, which is the color name
+COLOR=$1
+
+# Define the LED path corresponding to each color
+LED_BLUE="/sys/class/leds/blue:status/brightness"
+LED_GREEN="/sys/class/leds/green:status/brightness"
+LED_RED="/sys/class/leds/red:charging/brightness"
+
+# Define a function to set the brightness of the LED
+set_led_brightness() {
+    local led=$1
+    local brightness=$2
+    if [ -w "$led" ]; then
+        echo "$brightness" > "$led"
+    else
+        echo "Error: Unable to write to $led"
+    fi
+}
+
+# Set the LED state based on the color name
+case $COLOR in
+    battery)
+        # Assume that battery corresponds to green (can be adjusted according to actual needs)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 0
+		set_setting led.color ${1}
+		systemctl restart batteryledstatus.service
+        ;;
+    red)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 0
+        set_led_brightness "$LED_RED" 1
+		set_setting led.color ${1}
+        ;;
+    green)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 0
+		set_setting led.color ${1}
+        ;;
+    blue)
+        set_led_brightness "$LED_BLUE" 1
+        set_led_brightness "$LED_GREEN" 0
+        set_led_brightness "$LED_RED" 0
+		set_setting led.color ${1}
+        ;;
+    white)
+        set_led_brightness "$LED_BLUE" 1
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 1
+		set_setting led.color ${1}
+        ;;
+    orange)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 1
+		set_setting led.color ${1}
+        ;;
+    yellow)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 1  
+		set_setting led.color ${1}
+        ;;
+    purple)
+        set_led_brightness "$LED_BLUE" 1
+        set_led_brightness "$LED_GREEN" 0
+        set_led_brightness "$LED_RED" 1
+		set_setting led.color ${1}
+        ;;
+    off)
+        set_led_brightness "$LED_BLUE" 0
+        set_led_brightness "$LED_GREEN" 0
+        set_led_brightness "$LED_RED" 0
+		set_setting led.color ${1}
+    ;;
+    list)
+cat <<EOF
+off
+battery
+red
+green
+blue
+white
+orange
+yellow
+purple
+EOF
+  ;;
+esac

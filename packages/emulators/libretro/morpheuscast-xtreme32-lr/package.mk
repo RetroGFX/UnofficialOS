@@ -21,7 +21,8 @@
 
 PKG_NAME="morpheuscast-xtreme32-lr"
 PKG_VERSION="1.0"
-PKG_URL="https://github.com/RetroGFX/UnofficialOSAddOns/raw/refs/heads/main/morpheuscast-xtreme32-lr.tar.xz"
+PKG_SITE="https://github.com/RetroGFX/UnofficialOSAddOns"
+PKG_URL="${PKG_SITE}/raw/refs/heads/main/cores/${PKG_NAME}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
 PKG_SHORTDESC="KMFDManic MorpheusCast DC Core"
 PKG_LONGDESC="MorpheusCast Xtreme is a multi-platform Sega Dreamcast emulator, built for lower-end devices"

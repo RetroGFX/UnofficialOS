@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present AmberELEC (https://github.com/AmberELEC)
 
 PKG_NAME="mojozork-lr"
-PKG_VERSION="1aab1f23625cf073e978f9f613b02fbb6ebc426e"
+PKG_VERSION="465168b076619d1ee9cd99f34dc866326340a37b"
 PKG_SITE="https://github.com/icculus/mojozork"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain"
@@ -10,7 +10,11 @@ PKG_LONGDESC="A simple Z-Machine implementation in a single C file"
 PKG_TOOLCHAIN="cmake"
 
 pre_configure_target() {
-  PKG_CMAKE_OPTS_TARGET+=" -DMOJOZORK_LIBRETRO=ON -DMOJOZORK_STANDALONE_DEFAULT=OFF -DMOJOZORK_MULTIZORK_DEFAULT=OFF "
+  PKG_CMAKE_OPTS_TARGET+="-DLIBRETRO=ON \
+                          -DMOJOZORK_LIBRETRO=ON \
+                          -DMOJOZORK_STANDALONE_DEFAULT=OFF \
+                          -DMOJOZORK_MULTIZORK_DEFAULT=OFF \
+                          -DMOJOZORK_SDL3_DEFAULT=OFF"
 }
 
 makeinstall_target() {

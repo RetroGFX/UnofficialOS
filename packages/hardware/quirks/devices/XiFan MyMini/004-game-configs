@@ -1,0 +1,15 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
+
+. /etc/profile
+
+#Set mupen64-plus-sa config for MYMINI
+if [ ! -d "/storage/.config/mupen64plus" ]; then
+    mkdir -p "/storage/.config/mupen64plus/"
+        cp -r /usr/local/share/mupen64plus/mupen64plus.cfg* /storage/.config/mupen64plus/
+fi
+if [ -f "/storage/.config/mupen64plus/mupen64plus.cfg.mymini" ]; then
+  rm /storage/.config/mupen64plus/mupen64plus.cfg
+  mv /storage/.config/mupen64plus/mupen64plus.cfg.mymini /storage/.config/mupen64plus/mupen64plus.cfg
+fi

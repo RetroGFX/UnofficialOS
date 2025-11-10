@@ -149,6 +149,7 @@ declare -a IS_32BIT=(   gpsp
                         pcsx_rearmed
                         ludicrousn64_xtreme32
                         morpheuscast_xtreme32
+                        gametank32
 )
 
 declare -a CORE_RATIOS=(    4/3
