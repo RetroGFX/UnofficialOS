@@ -184,6 +184,7 @@ case ${EMULATOR} in
            [[ "${CORE}" =~ ludicrousn64_xtreme32 ]] || \
            [[ "${CORE}" =~ morpheuscast_xtreme32 ]] || \
            [[ "${CORE}" =~ gpsp ]] || \
+           [[ "${CORE}" =~ gametank32 ]] || \
            [[ "${CORE}" =~ desmume ]]
         then
           ### Configure for 32bit Retroarch
