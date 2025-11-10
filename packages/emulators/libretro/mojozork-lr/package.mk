@@ -10,11 +10,11 @@ PKG_LONGDESC="A simple Z-Machine implementation in a single C file"
 PKG_TOOLCHAIN="cmake"
 
 pre_configure_target() {
-  PKG_CMAKE_OPTS_TARGET+="-DMOJOZORK_LIBRETRO=ON \
+  PKG_CMAKE_OPTS_TARGET+="-DLIBRETRO=ON \
+                          -DMOJOZORK_LIBRETRO=ON \
                           -DMOJOZORK_STANDALONE_DEFAULT=OFF \
                           -DMOJOZORK_MULTIZORK_DEFAULT=OFF \
-                          -DSDL_X11_XTEST=OFF \
-                          -DSDL_X11_XSCRNSAVER=OFF"
+                          -DMOJOZORK_SDL3_DEFAULT=OFF"
 }
 
 makeinstall_target() {
