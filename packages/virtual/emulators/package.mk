@@ -277,11 +277,6 @@ makeinstall_target() {
   add_emu_core cps1 retroarch mame2003_plus false
   add_emu_core cps1 retroarch mame2010 false
   add_emu_core cps1 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps1 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps1
 
   ### Capcom Playsystem 2
@@ -289,11 +284,6 @@ makeinstall_target() {
   add_emu_core cps2 retroarch mame2003_plus false
   add_emu_core cps2 retroarch mame2010 false
   add_emu_core cps2 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps2 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps2
 
   ### Capcom Playsystem 3
@@ -301,11 +291,6 @@ makeinstall_target() {
   add_emu_core cps3 retroarch mame2003_plus false
   add_emu_core cps3 retroarch mame2010 false
   add_emu_core cps3 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps3 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps3
 
   ### Daphne
