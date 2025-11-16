@@ -6,18 +6,33 @@ PKG_VERSION="a2c875f7275541e7724199ce8e504fb578b819a6"
 PKG_LICENSE="MIT"
 PKG_SITE="https://github.com/nesbox/TIC-80"
 PKG_URL="${PKG_SITE}.git"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_DEPENDS_TARGET="toolchain zlib"
 PKG_LONGDESC="TIC-80 is a fantasy computer for making, playing and sharing tiny games."
 GET_HANDLER_SUPPORT="git"
 
-PKG_CMAKE_OPTS_TARGET="-DBUILD_PLAYER=ON \
-                       -DBUILD_SOKOL=OFF \
+PKG_CMAKE_OPTS_TARGET="-DBUILD_LIBRETRO=ON \
+                       -DBUILD_PLAYER=OFF \
                        -DBUILD_SDL=OFF \
+                       -DBUILD_SDLGPU=OFF \
+                       -DBUILD_SOKOL=OFF \
                        -DBUILD_TOUCH_INPUT=ON \
                        -DBUILD_DEMO_CARTS=OFF \
-                       -DBUILD_LIBRETRO=ON \
+                       -DBUILD_EDITORS=OFF \
+                       -DBUILD_PRO=OFF \
+                       -DBUILD_STATIC=ON \
+                       -DBUILD_WITH_ZLIB=ON \
+                       -DBUILD_WITH_ALL=OFF \
+                       -DBUILD_WITH_LUA=ON \
+                       -DBUILD_WITH_WREN=ON \
+                       -DBUILD_WITH_FENNEL=ON \
                        -DBUILD_WITH_MRUBY=OFF \
                        -DBUILD_WITH_JANET=OFF \
+                       -DBUILD_WITH_WASM=OFF \
+                       -DBUILD_WITH_SCHEME=OFF \
+                       -DBUILD_WITH_SQUIRREL=OFF \
+                       -DBUILD_WITH_POCKETPY=OFF \
+                       -DBUILD_WITH_QUICKJS=OFF \
+                       -DBUILD_TOOLS=OFF \
                        -DCMAKE_BUILD_TYPE=Release"
 
 makeinstall_target() {
