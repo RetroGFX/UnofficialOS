@@ -408,7 +408,6 @@ makeinstall_target() {
 
   ### Nintendo GameBoy Advance
   add_emu_core gba retroarch mgba true
-  add_emu_core gba retroarch gbsp false
   add_emu_core gba retroarch vbam false
   add_emu_core gba retroarch vba_next false
   add_emu_core gba retroarch beetle_gba false
@@ -433,7 +432,6 @@ makeinstall_target() {
 
   ### Nintendo GameBoy Advance Hacks
   add_emu_core gbah retroarch mgba true
-  add_emu_core gbah retroarch gbsp false
   add_emu_core gbah retroarch vbam false
   add_emu_core gbah retroarch vba_next false
   add_emu_core gbah retroarch beetle_gba false
