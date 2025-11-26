@@ -28,7 +28,7 @@ PKG_CONFIGURE_OPTS_TARGET="   --disable-qt \
                               --disable-vg \
                               --disable-sdl \
                               --enable-sdl2 \
-			      --enable-kms \
+			                        --enable-kms \
                               --enable-ffmpeg"
 
 case ${DEVICE} in
