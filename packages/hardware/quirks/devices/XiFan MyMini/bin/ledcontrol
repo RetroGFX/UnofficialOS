@@ -23,60 +23,82 @@ set_led_brightness() {
 case $COLOR in
     battery)
         # Assume that battery corresponds to green (can be adjusted according to actual needs)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 0
         set_led_brightness "$LED_GREEN" 1
         set_led_brightness "$LED_RED" 0
-		set_setting led.color ${1}
-		systemctl restart batteryledstatus.service
+        set_setting led.color ${1}
+        systemctl restart batteryledstatus.service
         ;;
     red)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 0
         set_led_brightness "$LED_GREEN" 0
         set_led_brightness "$LED_RED" 1
-		set_setting led.color ${1}
+        set_setting led.color ${1}
         ;;
     green)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 0
         set_led_brightness "$LED_GREEN" 1
         set_led_brightness "$LED_RED" 0
-		set_setting led.color ${1}
+        set_setting led.color ${1}
         ;;
     blue)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 1
         set_led_brightness "$LED_GREEN" 0
         set_led_brightness "$LED_RED" 0
-		set_setting led.color ${1}
+        set_setting led.color ${1}
+        ;;
+    cyan)
+        pkill -f "bash.*ledcontrol flow"
+        set_led_brightness "$LED_BLUE" 1
+        set_led_brightness "$LED_GREEN" 1
+        set_led_brightness "$LED_RED" 0
+        set_setting led.color ${1}
         ;;
     white)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 1
         set_led_brightness "$LED_GREEN" 1
         set_led_brightness "$LED_RED" 1
-		set_setting led.color ${1}
+        set_setting led.color ${1}
         ;;
-    orange)
+    yellow)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 0
         set_led_brightness "$LED_GREEN" 1
         set_led_brightness "$LED_RED" 1
-		set_setting led.color ${1}
-        ;;
-    yellow)
-        set_led_brightness "$LED_BLUE" 0
-        set_led_brightness "$LED_GREEN" 1
-        set_led_brightness "$LED_RED" 1  
-		set_setting led.color ${1}
+        set_setting led.color ${1}
         ;;
     purple)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 1
         set_led_brightness "$LED_GREEN" 0
         set_led_brightness "$LED_RED" 1
-		set_setting led.color ${1}
+        set_setting led.color ${1}
+        ;;
+    flow)
+        # Cycle through colors: red, green, blue, cyan, white, yellow, purple
+        while true; do
+        echo 0 > "$LED_BLUE"; echo 0 > "$LED_GREEN"; echo 1 > "$LED_RED"; sleep 1  # red
+        echo 0 > "$LED_BLUE"; echo 1 > "$LED_GREEN"; echo 0 > "$LED_RED"; sleep 1  # green
+        echo 1 > "$LED_BLUE"; echo 0 > "$LED_GREEN"; echo 0 > "$LED_RED"; sleep 1  # blue
+        echo 1 > "$LED_BLUE"; echo 1 > "$LED_GREEN"; echo 0 > "$LED_RED"; sleep 1  # cyan
+        echo 1 > "$LED_BLUE"; echo 1 > "$LED_GREEN"; echo 1 > "$LED_RED"; sleep 1  # white
+        echo 0 > "$LED_BLUE"; echo 1 > "$LED_GREEN"; echo 1 > "$LED_RED"; sleep 1  # yellow
+        echo 1 > "$LED_BLUE"; echo 0 > "$LED_GREEN"; echo 1 > "$LED_RED"; sleep 1  # purple
+        done &
+        set_setting led.color ${1}
         ;;
     off)
+        pkill -f "bash.*ledcontrol flow"
         set_led_brightness "$LED_BLUE" 0
         set_led_brightness "$LED_GREEN" 0
         set_led_brightness "$LED_RED" 0
-		set_setting led.color ${1}
-    ;;
+        set_setting led.color ${1}
+        ;;
     list)
 cat <<EOF
 off
@@ -84,10 +106,11 @@ battery
 red
 green
 blue
+cyan
 white
-orange
 yellow
 purple
+flow
 EOF
   ;;
 esac
