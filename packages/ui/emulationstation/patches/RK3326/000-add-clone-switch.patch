@@ -1,8 +1,8 @@
 diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
-index 8e7d5c1..9782f7a 100644
+index 8e7d5c1..0fbc0eb 100644
 --- a/es-app/src/guis/GuiMenu.cpp
 +++ b/es-app/src/guis/GuiMenu.cpp
-@@ -1033,6 +1033,125 @@ void GuiMenu::openSystemSettings_batocera()
+@@ -1033,6 +1033,148 @@ void GuiMenu::openSystemSettings_batocera()
          });
          }
  
@@ -52,6 +52,29 @@ index 8e7d5c1..9782f7a 100644
 +                        }, _("NO"),
 +                        [clone_v2_switch] {
 +                                clone_v2_switch->setState(false);
++                        }));
++        });
++        
++        // Game Console R36 Ultra Switch
++        auto r36ultra_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool r36ultraEnabled = SystemConf::getInstance()->get("system.device-r36-ultra") == "1";
++        r36ultra_switch->setState(r36ultraEnabled);
++        s->addWithLabel(_("DEVICE IS GAME CONSOLE R36 ULTRA"), r36ultra_switch);
++        r36ultra_switch->setOnChangedCallback([this, r36ultra_switch] {
++                if (!r36ultra_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, r36ultra_switch] {
++                                bool rswitchenabled = r36ultra_switch->getState();
++                                SystemConf::getInstance()->set("system.device-r36-ultra", rswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 R36_ULTRA", " ", nullptr);
++                        }, _("NO"),
++                        [r36ultra_switch] {
++                                r36ultra_switch->setState(false);
 +                        }));
 +        });
 +        
