@@ -106,7 +106,7 @@ makeinstall_target() {
 
   ### Flush cache from previous builds
   clean_es_cache
-  #clean_doc_cache
+  clean_doc_cache
 
   ### Add BIOS directory
   add_system_dir /storage/roms/bios
@@ -118,7 +118,7 @@ makeinstall_target() {
   add_system_dir /storage/roms/savestates
 
   ### Apply documentation header
-  #start_system_doc
+  start_system_doc
 
   ### Panasonic 3DO
   add_emu_core 3do retroarch opera true
@@ -277,11 +277,6 @@ makeinstall_target() {
   add_emu_core cps1 retroarch mame2003_plus false
   add_emu_core cps1 retroarch mame2010 false
   add_emu_core cps1 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps1 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps1
 
   ### Capcom Playsystem 2
@@ -289,11 +284,6 @@ makeinstall_target() {
   add_emu_core cps2 retroarch mame2003_plus false
   add_emu_core cps2 retroarch mame2010 false
   add_emu_core cps2 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps2 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps2
 
   ### Capcom Playsystem 3
@@ -301,11 +291,6 @@ makeinstall_target() {
   add_emu_core cps3 retroarch mame2003_plus false
   add_emu_core cps3 retroarch mame2010 false
   add_emu_core cps3 retroarch fbalpha2012 false
-  case ${TARGET_ARCH} in
-    aarch64)
-      add_emu_core cps3 AdvanceMame AdvanceMame false
-    ;;
-  esac
   add_es_system cps3
 
   ### Daphne
@@ -423,7 +408,6 @@ makeinstall_target() {
 
   ### Nintendo GameBoy Advance
   add_emu_core gba retroarch mgba true
-  add_emu_core gba retroarch gbsp false
   add_emu_core gba retroarch vbam false
   add_emu_core gba retroarch vba_next false
   add_emu_core gba retroarch beetle_gba false
@@ -448,7 +432,6 @@ makeinstall_target() {
 
   ### Nintendo GameBoy Advance Hacks
   add_emu_core gbah retroarch mgba true
-  add_emu_core gbah retroarch gbsp false
   add_emu_core gbah retroarch vbam false
   add_emu_core gbah retroarch vba_next false
   add_emu_core gbah retroarch beetle_gba false
@@ -1306,7 +1289,7 @@ makeinstall_target() {
   mk_es_systems
 
   ### Generate document
-  #mk_system_doc
+  mk_system_doc
 
   mkdir -p ${INSTALL}/usr/config/emulationstation
   cp -f ${ESTMP}/es_systems.cfg ${INSTALL}/usr/config/emulationstation

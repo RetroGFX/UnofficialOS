@@ -7,6 +7,7 @@ drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
 duckstation-sa # Patches need to be reworked.
 flycast-sa # Manually update to release versions.
+freeintv-lr # Broken upstream
 gptokeyb # Newer versions break hotkeys
 gzdoom-sa # Stick to release versions.
 idtech-lr # Just a dummy package
@@ -17,12 +18,12 @@ mupen64plus-sa-ui-console # Causes segfaults
 nanoboyadvance-sa # SDL version removed after this commit
 np2kai-lr # Last major commit before hiatus is broken.
 openbor # Newer versions break controls, needs research.
-panda3ds-lr # broken submodule upstream.
 pico-8 # Metapackage, doesn't need to update
 portmaster # Manually update to release versions.
 ppsspp-sa # Manually update to release versions.
 retroarch # Manually update to release versions.
 rpcs3-sa # Need to update to llvm 16
 scummvmsa # Manually update to release versions.
+vbam-lr # Broken upstream
 vice-sa # Doesn't support updating with the script.
 vita3k-sa # Should be manually updated.

@@ -34,7 +34,7 @@ case $COLOR in
 	mcu_led "$UART_DEV" chgmode 7 1
 	set_setting led.color ${1}
         ;;
-    orange)
+    yellow)
 	mcu_led "$UART_DEV" chgmode 5 1
 	set_setting led.color ${1}
         ;;
@@ -62,7 +62,7 @@ case $COLOR in
 	mcu_led "$UART_DEV" chgmode 23 1
 	set_setting led.color ${1}
         ;;
-    breath_orange)
+    breath_yellow)
 	mcu_led "$UART_DEV" chgmode 21 1
 	set_setting led.color ${1}
         ;;
@@ -93,14 +93,14 @@ battery
 red
 green
 blue
-orange
+yellow
 purple
 cyan
 white
 breath_red
 breath_green
 breath_blue
-breath_orange
+breath_yellow
 breath_purple
 breath_cyan
 breath_white

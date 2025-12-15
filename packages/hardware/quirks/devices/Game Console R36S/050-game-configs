@@ -48,7 +48,7 @@ An.Up = 10-4003
 An.Down = 10-4002
 An.Left = 10-4001
 An.Right = 10-4000
-Pause = 10-107
+Pause = 10-4,10-107
 Fast-forward = 1-61
 EOF
 fi

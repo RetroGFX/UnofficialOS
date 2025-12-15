@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="ludicrousn64-xtreme32-lr"
-PKG_VERSION="1.0"
+PKG_VERSION="1.1"
 PKG_SITE="https://github.com/RetroGFX/UnofficialOSAddOns"
 PKG_URL="${PKG_SITE}/raw/refs/heads/main/cores/${PKG_NAME}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
