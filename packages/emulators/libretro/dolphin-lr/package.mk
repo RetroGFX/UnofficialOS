@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="dolphin-lr"
-PKG_VERSION="a6a8cbdb02a7ca912888a9952dc9270a877cd45c"
+PKG_VERSION="df2b1a754bba4f0595d3ed07ccd0711019e014b8"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
 PKG_DEPENDS_TARGET="toolchain libevdev libdrm ffmpeg zlib libpng lzo libusb"

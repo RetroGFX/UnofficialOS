@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="gametank-lr"
-PKG_VERSION="0.1.2"
+PKG_VERSION="0.1.3"
 PKG_SITE="https://github.com/RetroGFX/UnofficialOSAddOns"
 PKG_URL="${PKG_SITE}/raw/refs/heads/main/cores/${PKG_NAME}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain"
