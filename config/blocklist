@@ -15,6 +15,7 @@ kronos-sa # Using the release version of kronos had better results.
 lrps2-lr # Source moved
 melonds-sa # Broken OpenGL renderer upstream
 mupen64plus-sa-ui-console # Causes segfaults
+mupen64plus-nx-lr # Upstream breaks video out. 
 nanoboyadvance-sa # SDL version removed after this commit
 np2kai-lr # Last major commit before hiatus is broken.
 openbor # Newer versions break controls, needs research.
