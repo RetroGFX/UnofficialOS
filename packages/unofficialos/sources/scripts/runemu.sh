@@ -366,6 +366,14 @@ then
   fi
 fi
 
+### Mesa Panfrost Forcepack if selected.
+FORCEPACK=$(get_setting "forcepack" "${PLATFORM}" "${ROMNAME##*/}")
+if [ ! -z "${FORCEPACK}" ] && ([ "${FORCEPACK}" = "1" ] || [ "${FORCEPACK}" = "On" ])
+then
+    ${VERBOSE} && log $0 "Enabling panfrost forcepack"
+    export PAN_MESA_DEBUG=forcepack
+fi
+
 ### Offline all but the number of threads we need for this game if configured.
 NUMTHREADS=$(get_setting "threads" "${PLATFORM}" "${ROMNAME##*/}")
 if [ -n "${NUMTHREADS}" ] &&
