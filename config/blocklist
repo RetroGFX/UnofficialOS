@@ -7,7 +7,6 @@ drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
 duckstation-sa # Patches need to be reworked.
 flycast-sa # Manually update to release versions.
-freeintv-lr # Broken upstream
 gptokeyb # Newer versions break hotkeys
 gzdoom-sa # Stick to release versions.
 idtech-lr # Just a dummy package
