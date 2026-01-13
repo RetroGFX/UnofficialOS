@@ -3,11 +3,11 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="freej2me-lr"
-PKG_VERSION="1.52"
+PKG_VERSION="331ee719d6c76815498e1c288b97429cd18c9da6"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_SITE="https://github.com/TASEmulators/freej2me-plus"
-PKG_URL="${PKG_SITE}/archive/refs/tags/${PKG_VERSION}.tar.gz"
+PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
 PKG_DEPENDS_TARGET="toolchain apache-ant:host libXtst"
 PKG_PRIORITY="optional"
 PKG_SECTION="libretro"
