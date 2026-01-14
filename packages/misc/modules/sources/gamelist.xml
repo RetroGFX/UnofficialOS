@@ -206,4 +206,16 @@
         <players>1</players>
         <image>./images/xemu.svg</image>
     </game>
+    <game>
+        <path>./Scan id Tech Files.sh</path>
+        <name>Scan id Tech Files</name>
+        <desc>Creates launchers for id software games</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/idtech.svg</image>
+    </game>
 </gameList>

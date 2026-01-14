@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="retroarch"
-PKG_VERSION="54af661d95567a67d712cd976c111764423e0fc1" # v1.21.0
+PKG_VERSION="e5eff6db27cd37c3c318741ee8bb9a3b8b60ec62" # v1.22.2
 PKG_SITE="https://github.com/libretro/RetroArch"
 PKG_URL="${PKG_SITE}.git"
 PKG_LICENSE="GPLv3"
@@ -28,7 +28,7 @@ PKG_CONFIGURE_OPTS_TARGET="   --disable-qt \
                               --disable-vg \
                               --disable-sdl \
                               --enable-sdl2 \
-			                        --enable-kms \
+                              --enable-kms \
                               --enable-ffmpeg"
 
 case ${DEVICE} in

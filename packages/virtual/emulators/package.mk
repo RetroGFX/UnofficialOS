@@ -14,7 +14,7 @@ PKG_EMUS="amiberry flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight openbor
 PKG_RETROARCH="core-info libretro-database retroarch retroarch-assets retroarch-joypads retroarch-overlays     \
               slang-shaders"
 
-LIBRETRO_CORES="81-lr a5200-lr arduous-lr atari800-lr beetle-gba-lr beetle-lynx-lr beetle-ngp-lr beetle-pce-lr beetle-pce-fast-lr     \
+LIBRETRO_CORES="81-lr a5200-lr arduous-lr atari800-lr b2-lr beetle-gba-lr beetle-lynx-lr beetle-ngp-lr beetle-pce-lr beetle-pce-fast-lr     \
                 beetle-pcfx-lr bsnes-mercury-accuracy-lr bsnes-mercury-balanced-lr bsnes-mercury-performance-lr beetle-supafaust-lr     \
                 beetle-supergrafx-lr beetle-vb-lr beetle-wswan-lr bluemsx-lr cap32-lr crocods-lr daphne-lr doublecherrygb-lr     \
                 dosbox-svn-lr dosbox-pure-lr duckstation-lr duckstation-sa easyrpg-lr emuscv-lr fake08-lr fbalpha2012-lr     \
@@ -119,6 +119,10 @@ makeinstall_target() {
 
   ### Apply documentation header
   start_system_doc
+
+  ### Acorn BBC Micro
+  add_emu_core bbcmicro retroarch b2 true
+  add_es_system bbcmicro
 
   ### Panasonic 3DO
   add_emu_core 3do retroarch opera true
@@ -366,6 +370,7 @@ makeinstall_target() {
   ### iD Software game engines
   add_emu_core idtech retroarch idtech
   add_es_system idtech
+  install_script "Scan id Tech Files.sh"
 
   ### Apple Macintosh Plus
   add_emu_core macintosh retroarch minivmac true
@@ -435,6 +440,11 @@ makeinstall_target() {
   add_emu_core gbah retroarch vbam false
   add_emu_core gbah retroarch vba_next false
   add_emu_core gbah retroarch beetle_gba false
+  case ${DEVICE} in
+    RK3*)
+      add_emu_core gbah retroarch gpsp false
+    ;;
+  esac
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK3588*)
       add_emu_core gbah mednafen gba false

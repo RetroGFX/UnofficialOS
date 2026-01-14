@@ -3,16 +3,16 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="freej2me-lr"
-PKG_VERSION="8b9bc8a19baf26e3d92f88934a64a32f1cbc2795"
+PKG_VERSION="331ee719d6c76815498e1c288b97429cd18c9da6"
 PKG_REV="1"
 PKG_ARCH="any"
-PKG_SITE="https://github.com/hex007/freej2me"
+PKG_SITE="https://github.com/TASEmulators/freej2me-plus"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain apache-ant:host"
+PKG_DEPENDS_TARGET="toolchain apache-ant:host libXtst"
 PKG_PRIORITY="optional"
 PKG_SECTION="libretro"
 PKG_SHORTDESC="A free J2ME emulator with libretro, awt and sdl2 frontends."
-PKG_LONGDESC="A free J2ME emulator with libretro, awt and sdl2 frontends."
+PKG_LONGDESC="J2ME emulator with libretro and AWT frontends, it aims to run on basically anything that can run a Java VM."
 PKG_TOOLCHAIN="make"
 
 pre_configure_target() {

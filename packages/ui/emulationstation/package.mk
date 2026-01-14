@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="emulationstation"
-PKG_VERSION="48f267a199bf1fc26d2f1f2de59b7efaac45700e"
+PKG_VERSION="f439343ecfa5e85448fca96db9a3b64a8d685397"
 PKG_GIT_CLONE_BRANCH="main"
 PKG_REV="1"
 PKG_ARCH="any"
@@ -31,6 +31,10 @@ if [ ! "${ENABLE_UPDATES}" = "no" ]; then
   PKG_CMAKE_OPTS_TARGET+=" -DENABLE_UPDATES=1"
 else
   PKG_CMAKE_OPTS_TARGET+=" -DENABLE_UPDATES=0"
+fi
+
+if [ "${GRAPHIC_DRIVERS}" = "panfrost" ] && [ ! "${DEVICE}" = "RK3588" ]; then
+  PKG_CMAKE_OPTS_TARGET+=" -DPANFROST=1"
 fi
 
 PKG_CMAKE_OPTS_TARGET+=" -DENABLE_EMUELEC=1 \
