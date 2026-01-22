@@ -14,11 +14,11 @@ if [ "${TARGET_ARCH}" = "x86_64" ]
 then
   PKG_SITE+="qt"
   PKG_URL="${PKG_SITE}.git"
-  PKG_VERSION="bdfadb1cdcc4146d9879a156f9617e509989293e"
+  PKG_VERSION="66a30c66f3f2534f551f3b2e0f4c91c6751ab67a"
   PKG_DEPENDS_TARGET+=" qt5"
   PKG_TOOLCHAIN="manual"
   make_target() {
-    qmake "CONFIG+=embedded" moonlight-qt.pro
+    qmake "CONFIG+=embedded" "CONFIG+=c++17" moonlight-qt.pro
     make release
   }
   post_makeinstall_target() {
