@@ -40,35 +40,35 @@ case "${DEVICE}" in
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa melonds-sa mupen64plus-sa box64 scummvmsa   \
-               yabasanshiro-sa portmaster beetle-saturn-lr mednafen"
+               yabasanshiro-sa portmaster beetle-saturn-lr mednafen wine"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr geolith-lr gametank-lr ludicrousn64-xtreme-lr panda3ds-lr pcsx_rearmed-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3399)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa melonds-sa mupen64plus-sa box64 scummvmsa   \
-               yabasanshiro-sa portmaster nanoboyadvance-sa mednafen"
+               yabasanshiro-sa portmaster nanoboyadvance-sa mednafen wine"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr geolith-lr gametank-lr ludicrousn64-xtreme-lr pcsx_rearmed-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK356*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
-    PKG_EMUS+=" amiberry drastic-sa mupen64plus-sa scummvmsa box64 portmaster yabasanshiro-sa"
+    PKG_EMUS+=" amiberry drastic-sa mupen64plus-sa scummvmsa box64 portmaster yabasanshiro-sa wine"
     LIBRETRO_CORES+=" uae4arm geolith-lr gametank-lr ludicrousn64-xtreme-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa mupen64plus-sa yabasanshiro-sa   \
-                box64 portmaster scummvmsa"
+                box64 portmaster scummvmsa wine"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3326*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
-    PKG_EMUS+=" amiberry box64 drastic-sa mupen64plus-sa scummvmsa yabasanshiro-sa portmaster mednafen"
+    PKG_EMUS+=" amiberry box64 drastic-sa mupen64plus-sa scummvmsa yabasanshiro-sa portmaster mednafen wine"
     LIBRETRO_CORES+=" uae4arm geolith-lr gametank-lr ludicrousn64-xtreme-lr"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
@@ -1270,9 +1270,11 @@ makeinstall_target() {
   case ${TARGET_ARCH} in
     arm|aarch64)
       add_emu_core ports portmaster portmaster true
+      add_emu_core windows wine wine true
     ;;
   esac
   add_es_system ports
+  add_es_system windows
 
   ### Doom
   add_emu_core doom gzdoom gzdoom-sa true

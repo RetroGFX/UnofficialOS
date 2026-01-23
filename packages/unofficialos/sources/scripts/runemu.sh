@@ -287,6 +287,9 @@ case ${EMULATOR} in
         RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
 	sed -i "/^ACTIVE_GAME=/c\ACTIVE_GAME=\"${ROMNAME}\"" /storage/.config/PortMaster/mapper.txt
       ;;
+      "windows")
+        RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
+      ;;
       "shell")
         RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
       ;;
@@ -389,7 +392,7 @@ ${VERBOSE} && log $0 "Set emulation performance mode to (${PERFORMANCE_MODE})"
 ${PERFORMANCE_MODE}
 
 # If the rom is a shell script just execute it, useful for DOSBOX and ScummVM scan scripts
-if [[ "${ROMNAME}" == *".sh" ]]; then
+if [[ "${ROMNAME}" == *".sh" ]] && [ ! "${PLATFORM}" = "ports" ] && [ ! "${PLATFORM}" = "windows" ]; then
         ${VERBOSE} && log $0 "Executing shell script ${ROMNAME}"
         "${ROMNAME}" &>>${OUTPUT_LOG}
         ret_error=$?
