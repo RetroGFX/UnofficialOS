@@ -294,7 +294,7 @@ case ${EMULATOR} in
         RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
       ;;
       *)
-        RUNTHIS='${RUN_SHELL} "start_${CORE%-*}.sh" "${ROMNAME}"'
+        RUNTHIS='${RUN_SHELL} "start_${CORE%-*}.sh" "${ROMNAME}" "${PLATFORM}"'
       ;;
     esac
   ;;

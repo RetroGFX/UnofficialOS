@@ -27,15 +27,40 @@ if [ ! -f "/storage/.config/melonDS/melonDS.gptk" ]; then
 fi
 
 #Emulation Station Features
-  GAME=$(echo "${1}"| sed "s#^/.*/##")
-  GRENDERER=$(get_setting graphics_backend nds "${GAME}")
-  SORIENTATION=$(get_setting screen_orientation nds "${GAME}")
-  SLAYOUT=$(get_setting screen_layout nds "${GAME}")
-  SWAP=$(get_setting screen_swap nds "${GAME}")
-  SROTATION=$(get_setting screen_rotation nds "${GAME}")
-  SHOWFPS=$(get_setting show_fps nds "${GAME}")
-  SUI=$(get_setting start_ui nds "${GAME}")
-  VSYNC=$(get_setting vsync nds "${GAME}")
+  GAME=$(echo "${1}" | sed "s#^/.*/##")
+  PLATFORM=$(echo "${2}"| sed "s#^/.*/##")
+  CONTYPE=$(get_setting console_type "${PLATFORM}" "${GAME}")
+  DBOOT=$(get_setting direct_boot "${PLATFORM}" "${GAME}")
+  GRENDERER=$(get_setting graphics_backend "${PLATFORM}" "${GAME}")
+  SORIENTATION=$(get_setting screen_orientation "${PLATFORM}" "${GAME}")
+  SLAYOUT=$(get_setting screen_layout "${PLATFORM}" "${GAME}")
+  SWAP=$(get_setting screen_swap "${PLATFORM}" "${GAME}")
+  SROTATION=$(get_setting screen_rotation "${PLATFORM}" "${GAME}")
+  SHOWFPS=$(get_setting show_fps "${PLATFORM}" "${GAME}")
+  SUI=$(get_setting start_ui "${PLATFORM}" "${GAME}")
+  VSYNC=$(get_setting vsync "${PLATFORM}" "${GAME}")
+
+  #Console Type
+  if [ "$PLATFORM" = "ndsiware" ]; then
+      sed -i '/^ConsoleType=/c\ConsoleType=1' /storage/.config/melonDS/melonDS.ini
+  else
+      if [ "$CONTYPE" = "1" ]; then
+        sed -i '/^ConsoleType=/c\ConsoleType=1' /storage/.config/melonDS/melonDS.ini
+    else
+        sed -i '/^ConsoleType=/c\ConsoleType=0' /storage/.config/melonDS/melonDS.ini
+      fi
+  fi
+
+  #Direct Boot
+  if [ "$PLATFORM" = "ndsiware" ]; then
+      sed -i '/^DirectBoot=/c\DirectBoot=0' /storage/.config/melonDS/melonDS.ini
+  else
+      if [ "$DBOOT" = "0" ]; then
+        sed -i '/^DirectBoot=/c\DirectBoot=0' /storage/.config/melonDS/melonDS.ini
+      else
+        sed -i '/^DirectBoot=/c\DirectBoot=1' /storage/.config/melonDS/melonDS.ini
+      fi
+  fi
 
   #Graphics Backend
 	if [ "$GRENDERER" = "0" ]
@@ -53,7 +78,7 @@ fi
 		sed -i "/^ScreenLayout=/c\ScreenLayout=$SORIENTATION" /storage/.config/melonDS/melonDS.ini
 	else
 		sed -i '/^ScreenLayout=/c\ScreenLayout=2' /storage/.config/melonDS/melonDS.ini
-        fi
+    fi
 
   #Screen Layout
 	if [ "$SLAYOUT" > "0" ]
@@ -80,14 +105,14 @@ fi
 	fi
 
   #Vsync
-        if [ "$VSYNC" = "0" ]
-        then
-                sed -i '/^ScreenVSync=/c\ScreenVSync=0' /storage/.config/melonDS/melonDS.ini
-        fi
-        if [ "$VSYNC" = "1" ]
-        then
-                sed -i '/^ScreenVSync=/c\ScreenVSync=1' /storage/.config/melonDS/melonDS.ini
-        fi
+  if [ "$VSYNC" = "0" ]
+  then
+    sed -i '/^ScreenVSync=/c\ScreenVSync=0' /storage/.config/melonDS/melonDS.ini
+  fi
+  if [ "$VSYNC" = "1" ]
+  then
+    sed -i '/^ScreenVSync=/c\ScreenVSync=1' /storage/.config/melonDS/melonDS.ini
+  fi
 
   #Show FPS
 	if [ "$SHOWFPS" = "1" ]
@@ -108,3 +133,4 @@ fi
 		$GPTOKEYB "melonDS" -c "/storage/.config/melonDS/melonDS.gptk" &
 		/usr/bin/melonDS -f "${1}"
 	fi
+	kill -9 "$(pidof gptokeyb)"

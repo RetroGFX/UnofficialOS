@@ -60,7 +60,7 @@ case "${DEVICE}" in
   ;;
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
-    PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa mupen64plus-sa yabasanshiro-sa   \
+    PKG_EMUS+=" amiberry aethersx2-sa dolphin-sa drastic-sa melonds-sa mupen64plus-sa yabasanshiro-sa   \
                 box64 portmaster scummvmsa wine"
     LIBRETRO_CORES+=" uae4arm beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr"
     PKG_RETROARCH+=" retropie-shaders"
@@ -722,6 +722,7 @@ makeinstall_target() {
       add_emu_core nds retroarch melondsds false
       add_emu_core nds retroarch desmume false
       add_emu_core nds melonds melonds-sa false
+      install_script "Start MelonDS.sh"
     ;;
     RK3399)
       add_emu_core nds drastic drastic-sa true
@@ -729,6 +730,7 @@ makeinstall_target() {
       add_emu_core nds retroarch melondsds false
       add_emu_core nds melonds melonds-sa false
       add_emu_core nds retroarch desmume false
+      install_script "Start MelonDS.sh"
     ;;
     RK3588*)
       add_emu_core nds drastic drastic-sa false
@@ -736,12 +738,20 @@ makeinstall_target() {
       add_emu_core nds retroarch melondsds false
       add_emu_core nds melonds melonds-sa true
       add_emu_core nds retroarch desmume false
+      install_script "Start MelonDS.sh"
     ;;
     RK3*)
       add_emu_core nds drastic drastic-sa true
       add_emu_core nds retroarch melonds false
       add_emu_core nds retroarch melondsds false
       add_emu_core nds retroarch desmume false
+    ;;
+    S922X)
+      add_emu_core nds drastic drastic-sa true
+      add_emu_core nds retroarch melonds false
+      add_emu_core nds retroarch melondsds false
+      add_emu_core nds melonds melonds-sa false
+      install_script "Start MelonDS.sh"
     ;;
     *)
       add_emu_core nds drastic drastic-sa true
@@ -750,6 +760,18 @@ makeinstall_target() {
     ;;
   esac
   add_es_system nds
+
+  ### Nintendo DSiWare
+  case ${DEVICE} in
+    AMD64|RK3588*|RK3399|S922X)
+      add_emu_core ndsiware retroarch melondsds true
+      add_emu_core ndsiware melonds melonds-sa false
+    ;;
+    *)
+      add_emu_core ndsiware retroarch melondsds true
+    ;;
+  esac
+  add_es_system ndsiware
 
   ### Nintendo NES
   add_emu_core nes retroarch nestopia true
