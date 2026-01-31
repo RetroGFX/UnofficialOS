@@ -31,6 +31,7 @@ fi
   PLATFORM=$(echo "${2}"| sed "s#^/.*/##")
   CONTYPE=$(get_setting console_type "${PLATFORM}" "${GAME}")
   DBOOT=$(get_setting direct_boot "${PLATFORM}" "${GAME}")
+  EXTBIOS=$(get_setting external_bios "${PLATFORM}" "${GAME}")
   GRENDERER=$(get_setting graphics_backend "${PLATFORM}" "${GAME}")
   SORIENTATION=$(get_setting screen_orientation "${PLATFORM}" "${GAME}")
   SLAYOUT=$(get_setting screen_layout "${PLATFORM}" "${GAME}")
@@ -59,6 +60,17 @@ fi
         sed -i '/^DirectBoot=/c\DirectBoot=0' /storage/.config/melonDS/melonDS.ini
       else
         sed -i '/^DirectBoot=/c\DirectBoot=1' /storage/.config/melonDS/melonDS.ini
+      fi
+  fi
+
+  #External BIOS
+  if [ "$PLATFORM" = "ndsiware" ]; then
+      sed -i '/^ExternalBIOSEnable=/c\ExternalBIOSEnable=1' /storage/.config/melonDS/melonDS.ini
+  else
+      if [ "$EXTBIOS" = "1" ]; then
+        sed -i '/^ExternalBIOSEnable=/c\ExternalBIOSEnable=1' /storage/.config/melonDS/melonDS.ini
+      else
+        sed -i '/^ExternalBIOSEnable=/c\ExternalBIOSEnable=0' /storage/.config/melonDS/melonDS.ini
       fi
   fi
 

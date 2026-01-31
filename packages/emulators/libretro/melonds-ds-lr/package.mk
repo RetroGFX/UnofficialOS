@@ -2,6 +2,7 @@
 # Copyright (C) 2024-present ROCKNIX (https://github.com/ROCKNIX)
 
 PKG_NAME="melonds-ds-lr"
+PKG_VERSION="0d65bd473d2dfda180fab7444664d76a4159350a"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/JesseTG/melonds-ds"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
@@ -9,24 +10,20 @@ PKG_DEPENDS_TARGET="toolchain"
 PKG_SHORTDESC="An enhanced remake of the melonDS core for libretro that prioritizes standalone parity, reliability, and usability."
 PKG_TOOLCHAIN="cmake-make"
 
-case ${DEVICE} in
-  RK3566-BSP*)
-    PKG_VERSION="6e48901ab9e54ff048a1bf6ea322372d7ae3ed29"
-    PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-  ;;
-  *)
-    PKG_VERSION="0d65bd473d2dfda180fab7444664d76a4159350a"
-    PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
-  ;;
-esac
-
 if [ "${OPENGL_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGL}"
 elif [ "${OPENGLES_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"
 fi
 
-PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=ON"
+case ${DEVICE} in
+  RK3566-BSP*)
+    PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=OFF"
+  ;;
+  *)
+    PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=ON"
+  ;;
+esac
 
 case ${DEVICE} in
   AMD64)
