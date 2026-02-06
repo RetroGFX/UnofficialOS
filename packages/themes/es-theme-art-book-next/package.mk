@@ -4,7 +4,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="es-theme-art-book-next"
-PKG_VERSION="bd01a19c8b9991c2d446fd3c86d984c5ddcdbc45"
+PKG_VERSION="5201442d55d326635371c8ee7209666bfbecfaa9"
 PKG_ARCH="any"
 PKG_LICENSE="CUSTOM"
 PKG_SITE="https://github.com/RetroGFX/art-book-next"
