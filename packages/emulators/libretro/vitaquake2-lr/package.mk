@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="vitaquake2-lr"
-PKG_VERSION="6bb3ee592169694b055e7efd5fa2a4e57875bddd"
+PKG_VERSION="5e3add960dcf63b48e0dd839fac2617ec0160609"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/vitaquake2"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"

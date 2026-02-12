@@ -33,6 +33,36 @@ fi
 rm -rf /storage/.config/dolphin-emu/StateSaves
 ln -sf /storage/roms/savestates/wii /storage/.config/dolphin-emu/StateSaves
 
+# Copy bios, memory cards and other system stuff to roms
+if [ ! -d "/storage/roms/bios/GC/" ]; then
+    mkdir -p /storage/roms/bios/GC/{USA,JAP,EUR}
+    cp -r /storage/.config/dolphin-emu/GC /storage/roms/bios/
+fi
+
+# Link bios and memory cards to roms
+for REGION in EUR JAP USA
+do
+  # Link bios
+  rm -rf "/storage/.config/dolphin-emu/GC/${REGION}"
+  ln -sf "/storage/roms/bios/GC/${REGION}" "/storage/.config/dolphin-emu/GC/${REGION}"
+
+  # Link memory cards, copying to roms/bios first as needed
+  for SLOT in A B
+  do
+    MEM_CARD_FILE="MemoryCard${SLOT}.${REGION}.raw"
+    CONFIG_MEM_CARD="/storage/.config/dolphin-emu/GC/${MEM_CARD_FILE}"
+    ROMS_BIOS_MEM_CARD="/storage/roms/bios/GC/${MEM_CARD_FILE}"
+
+    if [ -f "${ROMS_BIOS_MEM_CARD}" ]; then
+      rm -f "${CONFIG_MEM_CARD}"
+      ln -sf "${ROMS_BIOS_MEM_CARD}" "${CONFIG_MEM_CARD}"
+    elif [ -f "${CONFIG_MEM_CARD}" ]; then
+      mv -f "${CONFIG_MEM_CARD}" "${ROMS_BIOS_MEM_CARD}"
+      ln -sf "${ROMS_BIOS_MEM_CARD}" "${CONFIG_MEM_CARD}"
+    fi
+  done
+done
+
 #Grab a clean settings file during boot
 cp -r /usr/config/dolphin-emu/GFX.ini /storage/.config/dolphin-emu.GFX.ini
 cp -r /usr/config/dolphin-emu/Dolphin.ini /storage/.config/dolphin-emu.Dolphin.ini
@@ -249,9 +279,16 @@ fi
                 sed -i '/VSync =/c\VSync = True' /storage/.config/dolphin-emu/GFX.ini
         fi
 
+# Skip bios always, it's untested for Wii
+sed -i '/SkipIPL/c\SkipIPL = True' /storage/.config/dolphin-emu/Dolphin.ini
+
 #Link  .config/dolphin-emu to .local
 rm -rf /storage/.local/share/dolphin-emu
 ln -sf /storage/.config/dolphin-emu /storage/.local/share/dolphin-emu
 
 #Run Dolphin emulator
-${EMUPERF} /usr/bin/dolphin-emu-nogui -p @DOLPHIN_PLATFORM@ -a HLE -e "${1}"
+if [ -f /usr/lib/dolphin/libmali-g2p0.so ]; then
+  LD_PRELOAD=/usr/lib/dolphin/libmali-g2p0.so ${EMUPERF} /usr/bin/dolphin-emu-nogui -p @DOLPHIN_PLATFORM@ -a HLE -e "${1}"
+else
+  ${EMUPERF} /usr/bin/dolphin-emu-nogui -p @DOLPHIN_PLATFORM@ -a HLE -e "${1}"
+fi

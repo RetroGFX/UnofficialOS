@@ -2,7 +2,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="ps2-lr"
-PKG_VERSION="14d19f8339e3646b645c1c33e612b1888e632145"
+PKG_VERSION="416291ad7dc3caf5df4501c9249cbbe30cbef811"
 PKG_GIT_CLONE_BRANCH="libretroization"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"

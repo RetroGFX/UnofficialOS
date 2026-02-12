@@ -1,0 +1,45 @@
+diff --git a/drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c b/drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c
+--- a/drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c
++++ b/drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.c
+@@ -12,6 +12,7 @@
+ #include <linux/component.h>
+ #include <linux/debugfs.h>
+ #include <linux/iopoll.h>
++#include <linux/of.h>
+ #include <linux/math64.h>
+ #include <linux/media-bus-format.h>
+ #include <linux/module.h>
+@@ -270,6 +271,7 @@
+ 
+ 	struct drm_display_mode mode;
+ 	const struct dw_mipi_dsi_plat_data *plat_data;
++	bool avoid_host_reset;	/* opt-in quirk via DT */
+ };
+ 
+ /*
+@@ -332,6 +334,11 @@
+ 	dsi->format = device->format;
+ 	dsi->mode_flags = device->mode_flags;
+ 
++	if (device->dev.of_node)
++		dsi->avoid_host_reset =
++			of_property_read_bool(device->dev.of_node,
++					      "snps,avoid-host-reset");
++
+ 	bridge = devm_drm_of_get_bridge(dsi->dev, dsi->dev->of_node, 1, 0);
+ 	if (IS_ERR(bridge))
+ 		return PTR_ERR(bridge);
+@@ -1009,8 +1016,11 @@
+ 
+ 	dw_mipi_dsi_wait_for_two_frames(adjusted_mode);
+ 
+-	/* Switch to cmd mode for panel-bridge pre_enable & panel prepare */
+-	dw_mipi_dsi_set_mode(dsi, 0);
++	if (dsi->avoid_host_reset)
++		dsi_write(dsi, DSI_PWR_UP, POWERUP);
++	else
++		/* Switch to cmd mode for panel-bridge pre_enable & panel prepare */
++		dw_mipi_dsi_set_mode(dsi, 0);
+ 
+ 	if (phy_ops->power_on)
+ 		phy_ops->power_on(dsi->plat_data->priv_data);

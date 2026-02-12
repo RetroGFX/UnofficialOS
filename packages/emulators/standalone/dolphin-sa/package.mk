@@ -25,20 +25,20 @@ esac
 
 if [ ! "${OPENGL}" = "no" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGL} glu libglvnd"
-  PKG_CMAKE_OPTS_TARGET+="		-DENABLE_EGL=ON"
+  PKG_CMAKE_OPTS_TARGET+=" -DENABLE_EGL=ON"
 fi
 
 if [ "${OPENGLES_SUPPORT}" = yes ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"
-  PKG_CMAKE_OPTS_TARGET+="		-DENABLE_EGL=ON"
+  PKG_CMAKE_OPTS_TARGET+=" -DENABLE_EGL=ON"
 fi
 
 if [ "${DISPLAYSERVER}" = "wl" ]; then
   PKG_DEPENDS_TARGET+=" wayland ${WINDOWMANAGER} xwayland xrandr libXi"
-  PKG_CMAKE_OPTS_TARGET+="     -DENABLE_WAYLAND=ON \
-                               -DENABLE_X11=ON"
+  PKG_CMAKE_OPTS_TARGET+=" -DENABLE_WAYLAND=ON \
+                           -DENABLE_X11=ON"
 else
-    PKG_CMAKE_OPTS_TARGET+="     -DENABLE_X11=OFF"
+  PKG_CMAKE_OPTS_TARGET+=" -DENABLE_X11=OFF"
 fi
 
 if [ "${VULKAN_SUPPORT}" = "yes" ]
@@ -51,22 +51,52 @@ fi
 
 pre_configure_target() {
   PKG_CMAKE_OPTS_TARGET+=" -DENABLE_HEADLESS=ON \
-                         -DENABLE_EVDEV=ON \
-                         -DUSE_DISCORD_PRESENCE=OFF \
-                         -DBUILD_SHARED_LIBS=OFF \
-                         -DLINUX_LOCAL_DEV=ON \
-                         -DENABLE_PULSEAUDIO=ON \
-                         -DENABLE_ALSA=ON \
-                         -DENABLE_TESTS=OFF \
-                         -DENABLE_LLVM=OFF \
-                         -DENABLE_ANALYTICS=OFF \
-                         -DENABLE_LTO=ON \
-                         -DENABLE_QT=OFF \
-                         -DENCODE_FRAMEDUMPS=OFF \
-                         -DENABLE_CLI_TOOL=OFF"
-  sed -i 's~#include <cstdlib>~#include <cstdlib>\n#include <cstdint>~g' ${PKG_BUILD}/Externals/VulkanMemoryAllocator/include/vk_mem_alloc.h
-  sed -i 's~#include <cstdint>~#include <cstdint>\n#include <string>~g' ${PKG_BUILD}/Externals/VulkanMemoryAllocator/include/vk_mem_alloc.h
-
+                           -DENABLE_EVDEV=ON \
+                           -DUSE_DISCORD_PRESENCE=OFF \
+                           -DBUILD_SHARED_LIBS=OFF \
+                           -DLINUX_LOCAL_DEV=ON \
+                           -DENABLE_PULSEAUDIO=ON \
+                           -DENABLE_ALSA=ON \
+                           -DENABLE_TESTS=OFF \
+                           -DENABLE_LLVM=OFF \
+                           -DENABLE_ANALYTICS=OFF \
+                           -DENABLE_LTO=ON \
+                           -DENABLE_QT=OFF \
+                           -DENCODE_FRAMEDUMPS=OFF \
+                           -DENABLE_CLI_TOOL=OFF"
+  case ${DEVICE} in
+    RK3588*|AMD64|S922X|RK3399)
+      sed -i 's~#include <cstdlib>~#include <cstdlib>\n#include <cstdint>~g' ${PKG_BUILD}/Externals/VulkanMemoryAllocator/include/vk_mem_alloc.h
+      sed -i 's~#include <cstdint>~#include <cstdint>\n#include <string>~g' ${PKG_BUILD}/Externals/VulkanMemoryAllocator/include/vk_mem_alloc.h
+    ;;
+  esac
+  
+# For RK3566-BSP devices, set up older g2p0 Mali driver for compatibility
+  case ${DEVICE} in
+    RK3566-BSP*)
+      mkdir -p ${PKG_BUILD}/dolphin_mali_lib
+      
+      LIBMALI_BUILD=$(get_build_dir libmali)
+      if [ -f ${LIBMALI_BUILD}/lib/aarch64-linux-gnu/libmali-bifrost-g52-g2p0-gbm.so ]; then
+        cp ${LIBMALI_BUILD}/lib/aarch64-linux-gnu/libmali-bifrost-g52-g2p0-gbm.so \
+           ${PKG_BUILD}/dolphin_mali_lib/libmali.so
+        
+        export CMAKE_PREFIX_PATH="${PKG_BUILD}/dolphin_mali_lib:${CMAKE_PREFIX_PATH}"
+        
+        MALI_LIB="${PKG_BUILD}/dolphin_mali_lib/libmali.so"
+        export LDFLAGS="${LDFLAGS} -L${PKG_BUILD}/dolphin_mali_lib"
+        
+        ln -sf libmali.so ${PKG_BUILD}/dolphin_mali_lib/libEGL.so
+        ln -sf libmali.so ${PKG_BUILD}/dolphin_mali_lib/libGLESv2.so
+        ln -sf libmali.so ${PKG_BUILD}/dolphin_mali_lib/libgbm.so
+        
+        PKG_CMAKE_OPTS_TARGET+=" -DEGL_LIBRARY=${MALI_LIB} \
+                                 -DOpenGL_GL_PREFERENCE=GLVND \
+                                 -DOPENGL_egl_LIBRARY=${MALI_LIB} \
+                                 -DOPENGL_gles2_LIBRARY=${MALI_LIB}"
+      fi
+    ;;
+  esac
 }
 
 makeinstall_target() {
@@ -80,6 +110,15 @@ makeinstall_target() {
   mkdir -p ${INSTALL}/usr/config/dolphin-emu
   cp -rf ${PKG_BUILD}/Data/Sys/* ${INSTALL}/usr/config/dolphin-emu
   cp -rf ${PKG_DIR}/config/${DEVICE}/* ${INSTALL}/usr/config/dolphin-emu
+  
+  case ${DEVICE} in
+    RK3566-BSP*)
+      if [ -f ${PKG_BUILD}/dolphin_mali_lib/libmali.so ]; then
+        mkdir -p ${INSTALL}/usr/lib/dolphin
+        cp ${PKG_BUILD}/dolphin_mali_lib/libmali.so ${INSTALL}/usr/lib/dolphin/libmali-g2p0.so
+      fi
+    ;;
+  esac
 }
 
 post_install() {

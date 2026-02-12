@@ -109,6 +109,18 @@
         <image>./images/hatari.svg</image>
     </game>
     <game>
+        <path>./Start MelonDS.sh</path>
+        <name>Start MelonDS</name>
+        <desc>Opens the MelonDS GUI (Nintendo DS) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2024</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/melonds.svg</image>
+    </game>
+    <game>
         <path>./Start Moonlight.sh</path>
         <name>Start Moonlight</name>
         <desc>Opens the Moonlight GUI to enable global configuration changes to be made directly. Moonlight (formerly Limelight) is an open source implementation of NVIDIA's GameStream protocol. We implemented the protocol used by the NVIDIA Shield and wrote a set of 3rd party clients. You can stream your collection of PC games from your GameStream-compatible PC to any supported device and play them remotely. Moonlight is perfect for gaming on the go without sacrificing the graphics and game selection available on PC.</desc>

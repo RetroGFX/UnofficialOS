@@ -2,7 +2,7 @@
 # Copyright (C) 2024-present ROCKNIX (https://github.com/ROCKNIX)
 
 PKG_NAME="vitaquake2-rogue-lr"
-PKG_VERSION="6bb3ee592169694b055e7efd5fa2a4e57875bddd"
+PKG_VERSION="$(get_pkg_version vitaquake2-lr)"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/vitaquake2"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"

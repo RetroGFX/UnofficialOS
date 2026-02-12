@@ -65,14 +65,16 @@ post_install() {
   esac
   sed -e "s/@PANFROST@/${PANFROST}/g" \
         -i ${INSTALL}/usr/bin/start_melonds.sh
+
   case ${DEVICE} in
-    RK3588)
+    RK3588|S922X)
       HOTKEY="export HOTKEY="guide""
       ;;
     *)
       HOTKEY=""
     ;;
   esac
+
   sed -e "s/@HOTKEY@/${HOTKEY}/g" \
         -i ${INSTALL}/usr/bin/start_melonds.sh
 }
