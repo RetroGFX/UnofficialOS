@@ -89,3 +89,11 @@ if echo ${HW_DEVICE} | grep RK33; then
     echo "Removing"
     rm -f /storage/.config/profile.d/041-panfrost
 fi
+
+# Remove old yabasanshiro savestates and move to new directory
+if [ "$(uname -m)" = "aarch64" ] && \
+   [ ! -d "/storage/roms/savestates/saturn/yabasanshiro" ]; then
+    mkdir "/storage/roms/savestates/saturn/yabasanshiro"
+    cp /storage/.config/yabasanshiro/*.yss /storage/roms/savestates/saturn/yabasanshiro/
+    cp /storage/.config/yabasanshiro/*.png /storage/roms/savestates/saturn/yabasanshiro/
+fi
