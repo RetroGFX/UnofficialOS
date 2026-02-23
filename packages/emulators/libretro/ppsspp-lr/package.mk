@@ -24,7 +24,7 @@ PKG_VERSION="56b3c8674265a0203cf3276a4b410a264abe6766"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/hrydgard/ppsspp"
 PKG_URL="https://github.com/hrydgard/ppsspp.git"
-PKG_DEPENDS_TARGET="toolchain SDL2 ffmpeg libzip zstd"
+PKG_DEPENDS_TARGET="toolchain SDL2 libzip zstd"
 PKG_LONGDESC="A PSP emulator for Android, Windows, Mac, Linux and Blackberry 10, written in C++."
 GET_HANDLER_SUPPORT="git"
 
@@ -92,6 +92,12 @@ pre_configure_target() {
 }
 
 pre_make_target() {
+    # This script should work on any board that has issues with system ffmpeg in ppsspp
+  if [ "${TARGET_ARCH}" = "aarch64" ]; then
+  sed -i "s|aarch64-linux-gnu-|${TARGET_PREFIX}|g" ${PKG_BUILD}/ffmpeg/linux_arm64.sh
+    (cd ${PKG_BUILD}/ffmpeg && ./linux_arm64.sh)
+  fi
+
   # fix cross compiling
   find ${PKG_BUILD} -name flags.make -exec sed -i "s:isystem :I:g" \{} \;
   find ${PKG_BUILD} -name build.ninja -exec sed -i "s:isystem :I:g" \{} \;
