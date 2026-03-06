@@ -85,16 +85,46 @@ if [ -n "${DT_ID}" ]; then
       echo "Setting boot FDT to GameForce Ace..."
       sed -i '/FDT/c\  FDT /rk3588s-gameforce-ace.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       ;;
+    *orangepi-5-plus)
+      echo "Setting boot FDT to Orange Pi 5 Plus..."
+      sed -i '/FDT/c\  FDT /rk3588-orangepi-5-plus.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
     *orangepi-5)
       echo "Setting boot FDT to Orange Pi 5..."
       sed -i '/FDT/c\  FDT /rk3588s-orangepi-5.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
       ;;
-    *rock-5)
+    *9tripod-linux)
+      echo "Setting boot FDT to 9Tripod Linux..."
+      sed -i '/FDT/c\  FDT /rk3588s-9tripod-linux.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *rock-5b-plus)
+        echo "Setting boot FDT to Rock 5B+..."
+        sed -i '/FDT/c\  FDT /rk3588-rock-5b-plus.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+        sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+        ;;
+    *rock-5b)
       echo "Setting boot FDT to Rock 5B..."
       sed -i '/FDT/c\  FDT /rk3588-rock-5b.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
-    ;;
+      ;;
+    *rock-5a)
+      echo "Setting boot FDT to Rock 5A..."
+      sed -i '/FDT/c\  FDT /rk3588s-rock-5a.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *nanopi-r6c)
+      echo "Setting boot FDT to NanoPi R6C..."
+      sed -i '/FDT/c\  FDT /rk3588s-nanopi-r6c.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *nanopi-r6s)
+      echo "Setting boot FDT to NanoPi R6S..."
+      sed -i '/FDT/c\  FDT /rk3588s-nanopi-r6s.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
   esac
 fi
 
