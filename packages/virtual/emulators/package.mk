@@ -31,7 +31,7 @@ case "${DEVICE}" in
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="lutris-wine"
     PKG_EMUS+=" amiberry cemu-sa dolphin-sa kronos-sa mednafen melonds-sa minivmacsa nanoboyadvance-sa pcsx2-sa   \
                rpcs3-sa scummvmsa vita3k-sa xemu-sa"
-    LIBRETRO_CORES+=" beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr kronos-lr lrps2-lr panda3ds-lr play-lr ps2-lr"                    
+    LIBRETRO_CORES+=" azahar-lr beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr kronos-lr lrps2-lr panda3ds-lr play-lr ps2-lr"                    
   ;;
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
@@ -55,7 +55,7 @@ case "${DEVICE}" in
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa box64 dolphin-sa drastic-sa melonds-sa portmaster scummvmsa wine yabasanshiro-sa"               
-    LIBRETRO_CORES+=" beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr uae4arm"
+    LIBRETRO_CORES+=" azahar-lr beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3326*)
@@ -123,11 +123,15 @@ makeinstall_target() {
 
   ### Nintendo 3DS
   case ${DEVICE} in
-    AMD64|RK3588*)
+    AMD64|S922X*)
+      add_emu_core 3ds retroarch azahar true
+      add_emu_core 3ds retroarch panda3ds false
+    ;;
+    RK3588*)
       add_emu_core 3ds retroarch panda3ds true
-      add_es_system 3ds
     ;;
   esac
+  add_es_system 3ds
 
   ### Commodore Amiga
   case ${DEVICE} in
