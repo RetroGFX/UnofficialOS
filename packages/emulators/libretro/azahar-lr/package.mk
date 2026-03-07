@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# Copyright (C) 2024-present UnofficialOS
+# Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
 
 PKG_NAME="azahar-lr"
 PKG_VERSION="93e831decbe545fbd40a6b310ec56b13a69f00f1"
