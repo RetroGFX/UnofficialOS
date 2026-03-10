@@ -126,12 +126,13 @@ makeinstall_target() {
     AMD64|S922X*)
       add_emu_core 3ds retroarch azahar true
       add_emu_core 3ds retroarch panda3ds false
+      add_es_system 3ds
     ;;
     RK3588*)
       add_emu_core 3ds retroarch panda3ds true
+      add_es_system 3ds
     ;;
   esac
-  add_es_system 3ds
 
   ### Commodore Amiga
   case ${DEVICE} in
