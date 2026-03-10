@@ -41,7 +41,7 @@ PKG_CMAKE_OPTS_TARGET=" -DUSE_SYSTEM_FFMPEG=OFF \
 if [[ "${OPENGL_SUPPORT}" = "yes" ]] && [[ ! "${DEVICE}" = "S922X" ]]; then
   PKG_DEPENDS_TARGET+=" ${OPENGL} glu libglvnd glew"
   PKG_CMAKE_OPTS_TARGET+=" -DUSING_FBDEV=OFF \
-			                     -DUSING_GLES2=OFF"
+                           -DUSING_GLES2=OFF"
 
 elif [ "${OPENGLES_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"
