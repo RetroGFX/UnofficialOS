@@ -97,3 +97,9 @@ if [ "$(uname -m)" = "aarch64" ] && \
     cp /storage/.config/yabasanshiro/*.yss /storage/roms/savestates/saturn/yabasanshiro/
     cp /storage/.config/yabasanshiro/*.png /storage/roms/savestates/saturn/yabasanshiro/
 fi
+
+# Sync PPSSPP assets folder
+if [ -d "/storage/.config/ppsspp" ] && [ ! -d "/storage/.config/ppsspp/assets/ui_images" ]; then
+  rm -rf /storage/.config/ppsspp/assets
+  cp -r /usr/config/ppsspp/assets /storage/.config/ppsspp/assets
+fi
