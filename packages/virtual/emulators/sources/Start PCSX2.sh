@@ -7,4 +7,4 @@ source /etc/profile
 
 set_kill set "pcsx2-sa"
 
-/usr/bin/pcsx2-sa >/dev/null 2>&1
+/usr/bin/pcsx2-sa -bigpicture -fullscreen >/dev/null 2>&1
