@@ -3,7 +3,9 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 . /etc/profile
+. /etc/os-release
 
+set -x
 set_kill set "-9 mednafen"
 
 export MEDNAFEN_HOME=/storage/.config/mednafen
@@ -28,12 +30,20 @@ SHADER=$(get_setting shader "${PLATFORM}" "${GAME}")
 
 #Set the cores to use
 CORES=$(get_setting "cores" "${PLATFORM}" "${GAME}")
+FEATURES_CMDLINE=""
 if [ "${CORES}" = "little" ]
 then
   EMUPERF="${SLOW_CORES}"
 elif [ "${CORES}" = "big" ]
 then
   EMUPERF="${FAST_CORES}"
+  if [ "${HW_DEVICE}" = "RK3588" ]; then
+    FEATURES_CMDLINE+=" -affinity.emu 0x30 "
+    FEATURES_CMDLINE+=" -ss.affinity.vdp2 0xc0 "
+  elif [ "${HW_DEVICE}" = "RK3399" ]; then
+    FEATURES_CMDLINE+=" -affinity.emu 0x10 "
+    FEATURES_CMDLINE+=" -ss.affinity.vdp2 0x20 "
+  fi
 else
   ### All..
   unset EMUPERF
@@ -45,7 +55,12 @@ sed -i "s/filesys.path_savbackup.*/filesys.path_savbackup \/storage\/roms\/${PLA
 sed -i "s/filesys.path_state.*/filesys.path_state \/storage\/roms\/savestates\/${PLATFORM}/g" $MEDNAFEN_HOME/mednafen.cfg
 
 # Get command line switches
-FEATURES_CMDLINE=""
+CORRECT_ASPECT=$(get_setting correct_aspect ${PLATFORM} "${GAME}")
+CR=""
+if [ ! -z "${CORRECT_ASPECT}" ] 
+then
+    CR=" -${CORE}.correct_aspect ${CORRECT_ASPECT}"
+fi
 if [[ "${CORE}" =~ pce[_fast] ]]
 then
     if [ "$(get_setting nospritelimit ${PLATFORM} "${GAME}")" = "1" ]
@@ -62,6 +77,7 @@ then
     fi
     if [ "${CORE}" = pce_fast ]
     then
+        FEATURES_CMDLINE+=$CR
         OCM=$(get_setting ocmultiplier ${PLATFORM} "${GAME}")
         if [ ${OCM} > 1 ]
         then
@@ -96,6 +112,7 @@ then
     fi
 elif [ "${CORE}" = "nes" ]
 then
+    FEATURES_CMDLINE+=$CR
     if [ $(get_setting clipsides "${PLATFORM}" "${GAME}") = "1" ]
     then
         FEATURES_CMDLINE+=" -${CORE}.clipsides 1"
@@ -110,6 +127,7 @@ then
     fi
 elif [ "${CORE}" = "snes_faust" ]
 then
+    FEATURES_CMDLINE+=$CR
     if [ $(get_setting spex "${PLATFORM}" "${GAME}") = "1" ]
     then
         FEATURES_CMDLINE+=" -${CORE}.spex 1"
@@ -129,7 +147,7 @@ then
     else
         FEATURES_CMDLINE+=" -${CORE}.superfx.clock_rate 100"
     fi
-    if [ $(get_setting superfx.icache "${PLATFORM}" "${GAME}") = "1" ]
+    if [[ "$(get_setting superfx.icache ${PLATFORM} "${GAME}")" == "1" ]]
     then
         FEATURES_CMDLINE+=" -${CORE}.superfx.icache 1"
     else
@@ -174,6 +192,7 @@ then
     fi
 elif [ "${CORE}" = "ss" ]
 then
+    FEATURES_CMDLINE+=$CR
     IP1=$(get_setting input.port1 "${PLATFORM}" "${GAME}")
     if [[ "${IP1}" =~ gamepad|3dpad|gun  ]]
     then
@@ -201,6 +220,19 @@ then
         FEATURES_CMDLINE+=" -${CORE}.cart.auto_default ${CARTAD}"
     else
         FEATURES_CMDLINE+=" -${CORE}.cart.auto_default none"
+    fi
+elif [ "${CORE}" = "md" ]
+then
+    FEATURES_CMDLINE+=$CR
+elif [ "${CORE}" = "psx" ]
+then
+    FEATURES_CMDLINE+=$CR
+    IP1=$(get_setting input.port1 "${PLATFORM}" "${GAME}")
+    if [[ "${IP1}" =~ gamepad|dualshock  ]]
+    then
+        FEATURES_CMDLINE+=" -${CORE}.input.port1 ${IP1}"
+    else
+        FEATURES_CMDLINE+=" -${CORE}.input.port1 gamepad"
     fi
 fi
 

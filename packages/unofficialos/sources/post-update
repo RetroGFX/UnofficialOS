@@ -98,8 +98,8 @@ if [ "$(uname -m)" = "aarch64" ] && \
     cp /storage/.config/yabasanshiro/*.png /storage/roms/savestates/saturn/yabasanshiro/
 fi
 
-# Sync PPSSPP assets folder
-if [ -d "/storage/.config/ppsspp" ] && [ ! -d "/storage/.config/ppsspp/assets/ui_images" ]; then
-  rm -rf /storage/.config/ppsspp/assets
-  cp -r /usr/config/ppsspp/assets /storage/.config/ppsspp/assets
-fi
+# Remove old mednafen, ppsspp, PCSX2 and xemu configs
+rm -rf /storage/.config/mednafen
+rm -rf /storage/.config/PCSX2
+rm -rf /storage/.config/xemu
+rm -rf /storage/.config/ppsspp

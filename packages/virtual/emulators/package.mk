@@ -29,14 +29,14 @@ LIBRETRO_CORES="81-lr a5200-lr arduous-lr atari800-lr b2-lr beetle-gba-lr beetle
 case "${DEVICE}" in
   AMD64)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="lutris-wine"
-    PKG_EMUS+=" amiberry cemu-sa dolphin-sa kronos-sa mednafen melonds-sa minivmacsa nanoboyadvance-sa pcsx2-sa   \
+    PKG_EMUS+=" amiberry cemu-sa dolphin-sa mednafen melonds-sa minivmacsa nanoboyadvance-sa pcsx2-sa   \
                rpcs3-sa scummvmsa vita3k-sa xemu-sa"
     LIBRETRO_CORES+=" azahar-lr beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr kronos-lr lrps2-lr panda3ds-lr play-lr ps2-lr"                    
   ;;
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
-    PKG_EMUS+=" amiberry aethersx2-sa beetle-saturn-lr box64 dolphin-sa drastic-sa mednafen melonds-sa portmaster scummvmsa wine yabasanshiro-sa"               
-    LIBRETRO_CORES+=" beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr pcsx_rearmed-lr uae4arm"
+    PKG_EMUS+=" amiberry aethersx2-sa box64 dolphin-sa drastic-sa mednafen melonds-sa portmaster scummvmsa wine yabasanshiro-sa"               
+    LIBRETRO_CORES+=" beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr pcsx_rearmed-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3399)
@@ -55,7 +55,7 @@ case "${DEVICE}" in
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
     PKG_EMUS+=" amiberry aethersx2-sa box64 dolphin-sa drastic-sa melonds-sa portmaster scummvmsa wine yabasanshiro-sa"               
-    LIBRETRO_CORES+=" azahar-lr beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr uae4arm"
+    LIBRETRO_CORES+=" azahar-lr beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3326*)
@@ -875,16 +875,11 @@ makeinstall_target() {
       add_emu_core psx retroarch pcsx_rearmed true
       add_emu_core psx retroarch beetle_psx false
     ;;
-    RK3588*)
+    RK3588*|RK3399)
       add_emu_core psx retroarch pcsx_rearmed32 true
       add_emu_core psx retroarch pcsx_rearmed false
       add_emu_core psx retroarch beetle_psx false
       add_emu_core psx mednafen psx false
-    ;;
-    RK3399)
-      add_emu_core psx retroarch pcsx_rearmed32 true
-      add_emu_core psx retroarch pcsx_rearmed false
-      add_emu_core psx retroarch beetle_psx false
     ;;
     RK3566*)
       add_emu_core psx retroarch pcsx_rearmed32 true
@@ -1040,17 +1035,16 @@ makeinstall_target() {
       add_emu_core saturn retroarch yabasanshiro false
     ;;
     x86_64)
-      add_emu_core saturn kronos kronos-sa false
       add_emu_core saturn retroarch yabasanshiro true
       add_emu_core saturn retroarch kronos false
     ;;
   esac
   case ${DEVICE} in
-    AMD64)
+    AMD64|RK358*)
       add_emu_core saturn retroarch beetle_saturn false
       add_emu_core saturn mednafen ss false
   ;;
-    RK358*)
+  S922X)
       add_emu_core saturn retroarch beetle_saturn false
   ;;
   esac
@@ -1063,8 +1057,7 @@ makeinstall_target() {
       add_emu_core st-v mednafen ss false
     ;;
     AMD64)
-      add_emu_core saturn kronos kronos-sa true
-      add_emu_core st-v retroarch beetle_saturn false
+      add_emu_core st-v retroarch beetle_saturn true
       add_emu_core st-v retroarch kronos false
       add_emu_core st-v mednafen ss false
     ;;
