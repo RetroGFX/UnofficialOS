@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="vbam-lr"
-PKG_VERSION="379dd97301458a51fb69dd93ba21b64f81e01ef2"
+PKG_VERSION="60b48a3a4a46562f29120c1868a54778b40b60a2"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"

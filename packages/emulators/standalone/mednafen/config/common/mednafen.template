@@ -7411,13 +7411,13 @@ psx.input.port1.analogjoy.l2 joystick @GUID1@ @DEVICE_BTN_TL2@
 
 psx.input.port1.analogjoy.left joystick @GUID1@ @DEVICE_BTN_DPAD_LEFT@
 
-psx.input.port1.analogjoy.lstick_down 
+psx.input.port1.analogjoy.lstick_down joystick @GUID1@ @DEVICE_BTN_AL_DOWN@
 
-psx.input.port1.analogjoy.lstick_left 
+psx.input.port1.analogjoy.lstick_left joystick @GUID1@ @DEVICE_BTN_AL_LEFT@
 
-psx.input.port1.analogjoy.lstick_right 
+psx.input.port1.analogjoy.lstick_right joystick @GUID1@ @DEVICE_BTN_AL_RIGHT@
 
-psx.input.port1.analogjoy.lstick_up 
+psx.input.port1.analogjoy.lstick_up joystick @GUID1@ @DEVICE_BTN_AL_UP@
 
 psx.input.port1.analogjoy.r1 joystick @GUID1@ @DEVICE_BTN_TR@
 
@@ -7425,13 +7425,13 @@ psx.input.port1.analogjoy.r2 joystick @GUID1@ @DEVICE_BTN_TR2@
 
 psx.input.port1.analogjoy.right joystick @GUID1@ @DEVICE_BTN_DPAD_RIGHT@
 
-psx.input.port1.analogjoy.rstick_down 
+psx.input.port1.analogjoy.rstick_down joystick @GUID1@ @DEVICE_BTN_AR_DOWN@
 
-psx.input.port1.analogjoy.rstick_left 
+psx.input.port1.analogjoy.rstick_left joystick @GUID1@ @DEVICE_BTN_AR_LEFT@
 
-psx.input.port1.analogjoy.rstick_right 
+psx.input.port1.analogjoy.rstick_right joystick @GUID1@ @DEVICE_BTN_AR_RIGHT@
 
-psx.input.port1.analogjoy.rstick_up 
+psx.input.port1.analogjoy.rstick_up joystick @GUID1@ @DEVICE_BTN_AR_UP@
 
 psx.input.port1.analogjoy.select joystick @GUID1@ @DEVICE_BTN_SELECT@
 
@@ -7525,33 +7525,33 @@ psx.input.port1.dualshock.analog
 
 psx.input.port1.dualshock.axis_scale 1.00
 
-psx.input.port1.dualshock.circle 
+psx.input.port1.dualshock.circle  joystick @GUID1@ @DEVICE_BTN_EAST@
+                                                                     
+psx.input.port1.dualshock.cross  joystick @GUID1@ @DEVICE_BTN_SOUTH@
 
-psx.input.port1.dualshock.cross 
+psx.input.port1.dualshock.down  joystick @GUID1@ @DEVICE_BTN_DPAD_DOWN@
+                                                                        
+psx.input.port1.dualshock.l1   joystick @GUID1@ @DEVICE_BTN_TL@
+                                                                        
+psx.input.port1.dualshock.l2   joystick @GUID1@ @DEVICE_BTN_TL2@
+                                                                        
+psx.input.port1.dualshock.l3    joystick @GUID1@ @DEVICE_BTN_THUMBL@
 
-psx.input.port1.dualshock.down 
+psx.input.port1.dualshock.left  joystick @GUID1@ @DEVICE_BTN_DPAD_LEFT@
 
-psx.input.port1.dualshock.l1 
+psx.input.port1.dualshock.lstick_down joystick @GUID1@ @DEVICE_BTN_AL_DOWN@
+                                                                              
+psx.input.port1.dualshock.lstick_left joystick @GUID1@ @DEVICE_BTN_AL_LEFT@
+                                                                              
+psx.input.port1.dualshock.lstick_right joystick @GUID1@ @DEVICE_BTN_AL_RIGHT@  
 
-psx.input.port1.dualshock.l2 
+psx.input.port1.dualshock.lstick_up joystick @GUID1@ @DEVICE_BTN_AL_UP@
 
-psx.input.port1.dualshock.l3 
+psx.input.port1.dualshock.r1  joystick @GUID1@ @DEVICE_BTN_TR@
+                                                                
+psx.input.port1.dualshock.r2  joystick @GUID1@ @DEVICE_BTN_TR2@
 
-psx.input.port1.dualshock.left 
-
-psx.input.port1.dualshock.lstick_down 
-
-psx.input.port1.dualshock.lstick_left 
-
-psx.input.port1.dualshock.lstick_right 
-
-psx.input.port1.dualshock.lstick_up 
-
-psx.input.port1.dualshock.r1 
-
-psx.input.port1.dualshock.r2 
-
-psx.input.port1.dualshock.r3 
+psx.input.port1.dualshock.r3  joystick @GUID1@ @DEVICE_BTN_THUMBR@
 
 psx.input.port1.dualshock.rapid_circle 
 
@@ -7561,25 +7561,25 @@ psx.input.port1.dualshock.rapid_square
 
 psx.input.port1.dualshock.rapid_triangle 
 
-psx.input.port1.dualshock.right 
+psx.input.port1.dualshock.right  joystick @GUID1@ @DEVICE_BTN_DPAD_RIGHT@
 
-psx.input.port1.dualshock.rstick_down 
+psx.input.port1.dualshock.rstick_down joystick @GUID1@ @DEVICE_BTN_AR_DOWN@
+                                                                              
+psx.input.port1.dualshock.rstick_left joystick @GUID1@ @DEVICE_BTN_AR_LEFT@
+                                                                              
+psx.input.port1.dualshock.rstick_right joystick @GUID1@ @DEVICE_BTN_AR_RIGHT@  
 
-psx.input.port1.dualshock.rstick_left 
+psx.input.port1.dualshock.rstick_up  joystick @GUID1@ @DEVICE_BTN_AR_UP@
 
-psx.input.port1.dualshock.rstick_right 
+psx.input.port1.dualshock.select  joystick @GUID1@ @DEVICE_BTN_SELECT@
+                                                                     
+psx.input.port1.dualshock.square  joystick @GUID1@ @DEVICE_BTN_WEST@
+                                                                     
+psx.input.port1.dualshock.start  joystick @GUID1@ @DEVICE_BTN_START@
 
-psx.input.port1.dualshock.rstick_up 
+psx.input.port1.dualshock.triangle  joystick @GUID1@ @DEVICE_BTN_NORTH@
 
-psx.input.port1.dualshock.select 
-
-psx.input.port1.dualshock.square 
-
-psx.input.port1.dualshock.start 
-
-psx.input.port1.dualshock.triangle 
-
-psx.input.port1.dualshock.up 
+psx.input.port1.dualshock.up  joystick @GUID1@ @DEVICE_BTN_DPAD_UP@
 
 psx.input.port1.gamepad.circle joystick @GUID1@ @DEVICE_BTN_EAST@
 
@@ -9897,7 +9897,7 @@ ss.input.port1.3dpad.start joystick @GUID1@ @DEVICE_BTN_START@
 
 ss.input.port1.3dpad.up joystick @GUID1@ @DEVICE_BTN_DPAD_UP@
 
-ss.input.port1.3dpad.x joystick @GUID1@ @DEVICE_BTN_WEST@
+ss.input.port1.3dpad.x joystick @GUID1@ @DEVICE_BTN_EAST@
 
 ss.input.port1.3dpad.y joystick @GUID1@ @DEVICE_BTN_NORTH@
 
@@ -10001,15 +10001,15 @@ ss.input.port1.gamepad.start joystick @GUID1@ @DEVICE_BTN_START@
 
 ss.input.port1.gamepad.up joystick @GUID1@ @DEVICE_BTN_DPAD_UP@
 
-ss.input.port1.gamepad.x joystick @GUID1@ @DEVICE_BTN_WEST@
+ss.input.port1.gamepad.x joystick @GUID1@ @DEVICE_BTN_EAST@
 
 ss.input.port1.gamepad.y joystick @GUID1@ @DEVICE_BTN_NORTH@
 
 ss.input.port1.gamepad.z joystick @GUID1@ @DEVICE_BTN_TL@
 
-ss.input.port1.gun.offscreen_shot mouse 0x0 button_right
+ss.input.port1.gun.offscreen_shot joystick @GUID1@ @DEVICE_BTN_SOUTH@
 
-ss.input.port1.gun.start mouse 0x0 button_middle
+ss.input.port1.gun.start joystick @GUID1@ @DEVICE_BTN_EAST@
 
 ss.input.port1.gun.trigger mouse 0x0 button_left
 

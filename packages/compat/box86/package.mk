@@ -16,7 +16,7 @@ if [ "${OPENGL}" = "no" ]; then
 fi
 
 PKG_CMAKE_OPTS_TARGET+=" -DCMAKE_BUILD_TYPE=Release \
-				                 -DARM_DYNAREC=On"
+                         -DARM_DYNAREC=On"
 
 case ${TARGET_ARCH} in
   aarch64)

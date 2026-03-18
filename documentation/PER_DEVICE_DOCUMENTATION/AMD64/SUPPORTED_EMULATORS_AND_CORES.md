@@ -76,7 +76,7 @@ This document describes all available systems emulators and cores available for 
 |Nintendo|Game Boy Color (Hacks) (gbch)|1998|`gbch`|.gb .gbc .zip .7z|**retroarch:** gambatte (default)<br>**retroarch:** sameboy<br>**retroarch:** gearboy<br>**retroarch:** tgbdual<br>**retroarch:** mgba<br>**retroarch:** vbam<br>**retroarch:** DoubleCherryGB<br>**mednafen:** gb<br>|
 |Nintendo|GameCube (gamecube)|2001|`gamecube`|.gcm .iso .gcz .ciso .wbfs .rvz .dol .m3u|**dolphin:** dolphin-sa-gc (default)<br>**retroarch:** dolphin<br>|
 |Nintendo|NES (Hacks) (nesh)|1985|`nesh`|.nes .unif .unf .zip .7z|**retroarch:** nestopia (default)<br>**retroarch:** fceumm<br>**retroarch:** quicknes<br>**retroarch:** mesen<br>**mednafen:** nesh<br>|
-|Nintendo|Nintendo 3DS (3ds)|2010|`3ds`|.3ds .3dsx .elf .axf .cci .cxi .app|**retroarch:** panda3ds (default)<br>|
+|Nintendo|Nintendo 3DS (3ds)|2010|`3ds`|.3ds .3dsx .elf .axf .cci .cxi .app|**retroarch:** azahar (default)<br>**retroarch:** panda3ds<br>|
 |Nintendo|Nintendo 64 (n64)|1996|`n64`|.z64 .n64 .v64 .zip .7z|**retroarch:** mupen64plus_next (default)<br>**retroarch:** mupen64plus<br>**retroarch:** parallel_n64<br>**mupen64plus:** mupen64plus-sa<br>|
 |Nintendo|Nintendo DS (nds)|2005|`nds`|.nds .zip .7z|**retroarch:** melonds (default)<br>**retroarch:** melondsds<br>**retroarch:** desmume<br>**melonds:** melonds-sa<br>|
 |Nintendo|Nintendo DSiWare (ndsiware)|2008|`ndsiware`|.nds .zip .7z|**retroarch:** melondsds (default)<br>**melonds:** melonds-sa<br>|
@@ -107,11 +107,11 @@ This document describes all available systems emulators and cores available for 
 |Sega|Mega Drive (megadrive)|1990|`megadrive`|.bin .gen .md .sg .smd .zip .7z|**retroarch:** genesis_plus_gx (default)<br>**retroarch:** genesis_plus_gx_wide<br>**retroarch:** picodrive<br>**mednafen:** md<br>|
 |Sega|Mega Drive (megadrive-japan)|1988|`megadrive-japan`|.bin .gen .md .sg .smd .zip .7z|**retroarch:** genesis_plus_gx (default)<br>**retroarch:** genesis_plus_gx_wide<br>**retroarch:** picodrive<br>**mednafen:** md<br>|
 |Sega|Naomi (naomi)|1998|`naomi`|.lst .bin .dat .zip .7z|**retroarch:** flycast (default)<br>**retroarch:** flycast2021<br>**flycast:** flycast-sa<br>|
-|Sega|Saturn (saturn)|1994|`saturn`|.cue .chd .iso|**kronos:** kronos-sa<br>**retroarch:** yabasanshiro (default)<br>**retroarch:** kronos<br>**retroarch:** beetle_saturn<br>**mednafen:** ss<br>**kronos:** kronos-sa (default)<br>|
+|Sega|Saturn (saturn)|1994|`saturn`|.cue .chd .iso|**retroarch:** yabasanshiro (default)<br>**retroarch:** kronos<br>**retroarch:** beetle_saturn<br>**mednafen:** ss<br>|
 |Sega|Sega 32X (sega32x)|1994|`sega32x`|.32x .smd .bin .md .zip .7z|**retroarch:** picodrive (default)<br>|
 |Sega|Sega CD (segacd)|1991|`segacd`|.chd .cue .iso .m3u|**retroarch:** genesis_plus_gx (default)<br>**retroarch:** picodrive<br>|
 |Sega|SG-1000 (sg-1000)|1983|`sg-1000`|.bin .sg .zip .7z|**retroarch:** gearsystem (default)<br>**retroarch:** genesis_plus_gx<br>**retroarch:** picodrive<br>|
-|Sega|ST-V (st-v)|1995|`st-v`|.zip .ZIP|**retroarch:** beetle_saturn<br>**retroarch:** kronos<br>**mednafen:** ss<br>|
+|Sega|ST-V (st-v)|1995|`st-v`|.zip .ZIP|**retroarch:** beetle_saturn (default)<br>**retroarch:** kronos<br>**mednafen:** ss<br>|
 |Sharp|X1 (x1)|1982|`x1`|.dx1 .2d .2hd .tfd .d88 .88d .hdm .xdf .dup .tap .cmd .zip .7z|**retroarch:** x1 (default)<br>|
 |Sharp|x68000 (x68000)|1987|`x68000`|.dim .img .d88 .hdm .dup .2hd .xdf .hdf .cmd .m3u .zip .7z|**retroarch:** px68k (default)<br>|
 |Sinclair|ZX Spectrum (zxspectrum)|1982|`zxspectrum`|.tzx .tap .z80 .rzx .scl .trd .dsk .zip .7z|**retroarch:** fuse<br>|
