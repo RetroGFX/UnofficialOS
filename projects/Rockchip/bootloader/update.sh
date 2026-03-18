@@ -95,7 +95,7 @@ if [ -n "${DT_ID}" ]; then
       sed -i '/FDT/c\  FDT /rk3588s-orangepi-5.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
       ;;
-    *9tripod-linux)
+    *9tripod)
       echo "Setting boot FDT to 9Tripod Linux..."
       sed -i '/FDT/c\  FDT /rk3588s-9tripod-linux.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
