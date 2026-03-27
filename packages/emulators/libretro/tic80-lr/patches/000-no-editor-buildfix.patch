@@ -1,0 +1,16 @@
+diff --git a/src/studio/studio.c b/src/studio/studio.c
+index df4a943..329da75 100644
+--- a/src/studio/studio.c
++++ b/src/studio/studio.c
+@@ -1259,7 +1259,11 @@ void gotoSurf(Studio* studio)
+ 
+ bool studio_is_cart_loaded(Studio* studio)
+ {
++#if defined(BUILD_EDITORS) || defined(BUILD_SURF)
+     return strlen(studio->console->rom.name) > 0 || (studio->start && studio->start->embed);
++#else
++    return studio->start && studio->start->embed;
++#endif
+ }
+ 
+ void setStudioMode(Studio* studio, EditorMode mode)
