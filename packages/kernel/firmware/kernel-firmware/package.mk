@@ -85,5 +85,32 @@ makeinstall_target() {
 
   # Cleanup - which may be project or device specific
   find_file_path scripts/cleanup.sh && ${FOUND_PATH} ${FW_TARGET_DIR} || true
+
+  # Remove server/datacenter firmware not needed for AMD64
+  if [ "${TARGET_ARCH}" = "x86_64" ]; then
+    rm -rf \
+      ${FW_TARGET_DIR}/netronome \
+      ${FW_TARGET_DIR}/mellanox \
+      ${FW_TARGET_DIR}/myricom \
+      ${FW_TARGET_DIR}/liquidio \
+      ${FW_TARGET_DIR}/cxgb3 \
+      ${FW_TARGET_DIR}/cxgb4 \
+      ${FW_TARGET_DIR}/dpaa2 \
+      ${FW_TARGET_DIR}/inside-secure \
+      ${FW_TARGET_DIR}/isci \
+      ${FW_TARGET_DIR}/qed \
+      ${FW_TARGET_DIR}/qlogic \
+      ${FW_TARGET_DIR}/tigon \
+      ${FW_TARGET_DIR}/slicoss \
+      ${FW_TARGET_DIR}/sxg \
+      ${FW_TARGET_DIR}/vxge \
+      ${FW_TARGET_DIR}/tehuti \
+      ${FW_TARGET_DIR}/3com \
+      ${FW_TARGET_DIR}/acenic \
+      ${FW_TARGET_DIR}/adaptec \
+      ${FW_TARGET_DIR}/cavium \
+      ${FW_TARGET_DIR}/ti-keystone 2>/dev/null || true
+    rm -rf ${FW_TARGET_DIR}/myri10ge* ${FW_TARGET_DIR}/hfi1_* ${FW_TARGET_DIR}/qat_* ${FW_TARGET_DIR}/ql2*.bin 2>/dev/null || true
+  fi
 }
 
