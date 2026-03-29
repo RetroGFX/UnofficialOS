@@ -4,7 +4,7 @@
 # Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
 # Copyright (C) 2016-present Team LibreELEC (https://libreelec.tv)
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
-# Copyright (C) 2022-present UnofficialOS
+# Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
 
 ################################################################################
 # variables such as ${ROOT} ${PATH} etc... that are required for this
