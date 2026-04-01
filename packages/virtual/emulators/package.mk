@@ -8,7 +8,7 @@ PKG_SECTION="emulation" # Do not change to virtual or makeinstall_target will no
 PKG_LONGDESC="Emulation metapackage."
 PKG_TOOLCHAIN="manual"
 
-PKG_EMUS="amiberry duckstation-sa flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight mupen64plus-sa openbor pico-8 ppsspp-sa scummvmsa vice-sa"         
+PKG_EMUS="amiberry flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight mupen64plus-sa openbor pico-8 ppsspp-sa scummvmsa vice-sa"         
 
 PKG_RETROARCH="core-info libretro-database retroarch retroarch-assets retroarch-joypads retroarch-overlays slang-shaders"              
 
@@ -29,38 +29,38 @@ LIBRETRO_CORES="81-lr a5200-lr arduous-lr atari800-lr b2-lr beetle-gba-lr beetle
 case "${DEVICE}" in
   AMD64)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="lutris-wine"
-    PKG_EMUS+=" cemu-sa dolphin-sa mednafen melonds-sa minivmacsa nanoboyadvance-sa pcsx2-sa rpcs3-sa vita3k-sa xemu-sa"
+    PKG_EMUS+=" cemu-sa dolphin-sa duckstation-sa mednafen melonds-sa minivmacsa nanoboyadvance-sa pcsx2-sa rpcs3-sa vita3k-sa xemu-sa"
     LIBRETRO_CORES+=" azahar-lr beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr desmume-lr dolphin-lr kronos-lr lrps2-lr panda3ds-lr play-lr ps2-lr"                    
   ;;
   RK3588*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
-    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa mednafen melonds-sa portmaster wine yabasanshiro-sa"               
+    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa duckstation-sa mednafen melonds-sa portmaster wine yabasanshiro-sa"               
     LIBRETRO_CORES+=" beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr pcsx_rearmed-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3399)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
-    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa mednafen melonds-sa nanoboyadvance-sa portmaster wine yabasanshiro-sa"              
+    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa duckstation-sa mednafen melonds-sa nanoboyadvance-sa portmaster wine yabasanshiro-sa"              
     LIBRETRO_CORES+=" beetle-psx-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr pcsx_rearmed-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK356*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
-    PKG_EMUS+=" box64 dolphin-sa drastic-sa mednafen portmaster wine yabasanshiro-sa"
+    PKG_EMUS+=" box64 dolphin-sa drastic-sa duckstation-legacy-sa mednafen portmaster wine yabasanshiro-sa"
     LIBRETRO_CORES+=" gametank-lr geolith-lr ludicrousn64-xtreme-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   S922X*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 pcsx_rearmed-lr"
-    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa melonds-sa portmaster wine yabasanshiro-sa"               
+    PKG_EMUS+=" aethersx2-sa box64 dolphin-sa drastic-sa duckstation-sa melonds-sa portmaster wine yabasanshiro-sa"               
     LIBRETRO_CORES+=" azahar-lr beetle-psx-lr beetle-saturn-lr bsnes-lr bsnes-hd-lr dolphin-lr gametank-lr geolith-lr ludicrousn64-xtreme-lr panda3ds-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;
   RK3326*)
     [ "${ENABLE_32BIT}" == "true" ] && EMUS_32BIT="box86 desmume-lr gametank32-lr gpsp-lr ludicrousn64-xtreme32-lr morpheuscast-xtreme32-lr pcsx_rearmed-lr"
     PKG_DEPENDS_TARGET+=" common-shaders glsl-shaders"
-    PKG_EMUS+=" box64 drastic-sa mednafen portmaster wine yabasanshiro-sa"
+    PKG_EMUS+=" box64 drastic-sa duckstation-sa mednafen portmaster wine yabasanshiro-sa"
     LIBRETRO_CORES+=" gametank-lr geolith-lr ludicrousn64-xtreme-lr uae4arm"
     PKG_RETROARCH+=" retropie-shaders"
   ;;

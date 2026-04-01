@@ -103,3 +103,4 @@ rm -rf /storage/.config/mednafen
 rm -rf /storage/.config/PCSX2
 rm -rf /storage/.config/xemu
 rm -rf /storage/.config/ppsspp
+rm -rf /storage/.config/duckstation
