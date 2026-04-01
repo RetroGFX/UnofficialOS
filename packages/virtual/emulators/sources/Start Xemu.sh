@@ -7,4 +7,4 @@ source /etc/profile
 
 set_kill set "xemu-sa"
 
-/usr/bin/xemu-sa >/dev/null 2>&1
+/storage/xemu/usr/bin/xemu -full-screen >/dev/null 2>&1

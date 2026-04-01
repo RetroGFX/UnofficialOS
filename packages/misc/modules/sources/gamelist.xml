@@ -85,6 +85,18 @@
         <image>./images/remove-mac-files.svg</image>
     </game>
     <game>
+        <path>./Start AetherSX2.sh</path>
+        <name>Start AetherSX2</name>
+        <desc>Opens the AetherSX2 GUI (PS2) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2021</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/aethersx2.svg</image>
+    </game>
+    <game>
         <path>./Start CEMU.sh</path>
         <name>Start Cemu</name>
         <desc>Opens the Cemu GUI (WiiU) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. Software to emulate Wii U games and applications.</desc>
@@ -95,6 +107,18 @@
         <genre>Emulator</genre>
         <players>1</players>
         <image>./images/cemu.svg</image>
+    </game>
+    <game>
+        <path>./Start Duckstation.sh</path>
+        <name>Start Duckstation</name>
+        <desc>Opens the Duckstation GUI (PS1) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2024</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/duckstation.svg</image>
     </game>
     <game>
         <path>./Start HATARISA.sh</path>
