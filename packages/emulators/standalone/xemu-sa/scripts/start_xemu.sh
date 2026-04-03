@@ -60,14 +60,14 @@ VSYNC=$(get_setting vsync "${PLATFORM}" "${GAME}")
 
   #Fit
 	if [ "$FIT" = "center" ]; then
-        sed -i "/fit =/c\fit = 'center'" /storage/.config/xemu/xemu.toml
-    elif [ "$FIT" = "stretch" ]; then
-        sed -i "/fit =/c\fit = 'stretch'" /storage/.config/xemu/xemu.toml
-    elif [ "$FIT" = "scale" ]; then
-        sed -i "/fit =/c\fit = 'scale'" /storage/.config/xemu/xemu.toml
-    else
-        sed -i "/fit =/c\fit = 'integer'" /storage/.config/xemu/xemu.toml
-    fi
+                sed -i "/fit =/c\fit = 'center'" /storage/.config/xemu/xemu.toml
+        elif [ "$FIT" = "stretch" ]; then
+                sed -i "/fit =/c\fit = 'stretch'" /storage/.config/xemu/xemu.toml
+        elif [ "$FIT" = "scale" ]; then
+                sed -i "/fit =/c\fit = 'scale'" /storage/.config/xemu/xemu.toml
+        else
+                sed -i "/fit =/c\fit = 'integer'" /storage/.config/xemu/xemu.toml
+        fi
 
   #Cache shaders to disk
         if [ "$CSHADERS" = "false" ]; then
