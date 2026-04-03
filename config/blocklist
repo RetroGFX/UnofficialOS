@@ -5,7 +5,7 @@ cemu-sa # patches need rebasing
 dolphin-sa # Wayland patch is now broken upstream
 drastic-sa # Package is closed source bin
 duckstation-lr # Libretro support removed from upstream.
-duckstation-sa # Patches need to be reworked.
+duckstation-sa # Manually update Appimage.
 flycast-sa # Manually update to release versions.
 gptokeyb # Newer versions break hotkeys
 gzdoom-sa # Stick to release versions.
@@ -22,7 +22,8 @@ pico-8 # Metapackage, doesn't need to update
 portmaster # Manually update to release versions.
 ppsspp-sa # Manually update to release versions.
 retroarch # Manually update to release versions.
-rpcs3-sa # Need to update to llvm 16
+rpcs3-sa # Manually update Appimage.
 scummvmsa # Manually update to release versions.
 vice-sa # Doesn't support updating with the script.
 vita3k-sa # Should be manually updated.
+xemu-sa # Manually update Appimage.
