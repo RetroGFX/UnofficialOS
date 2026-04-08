@@ -967,10 +967,14 @@ makeinstall_target() {
   add_es_system pspminis
 
   ### Sony Playstation Vita
-  case ${TARGET_ARCH} in
-    x86_64)
+  case ${DEVICE} in
+    AMD64)
       add_emu_core psvita vita3k vita3k-sa true
       add_es_system psvita
+      install_script "Start Vita3K.sh"
+      install_script "Scan Vita3K Games.sh"
+      install_script "Install Vita3K FW.sh"
+      install_script "Install Vita3K Content.sh"
     ;;
   esac
 
