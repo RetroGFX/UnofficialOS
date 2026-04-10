@@ -19,6 +19,6 @@ makeinstall_target() {
   cp ${PKG_BUILD}/${PKG_NAME}-${PKG_VERSION}.AppImage ${INSTALL}/usr/bin/${PKG_NAME}
   cp -rf ${PKG_DIR}/scripts/* ${INSTALL}/usr/bin/
   chmod 755 ${INSTALL}/usr/bin/*
-  cp -rf ${PKG_DIR}/config/* ${INSTALL}/usr/config/vita3k/
+  cp -rf ${PKG_DIR}/config/${DEVICE}/* ${INSTALL}/usr/config/vita3k/
   cp ${PKG_DIR}/sources/vita-gamelist.txt ${INSTALL}/usr/config/vita3k/sources/vita-gamelist.txt
 }
