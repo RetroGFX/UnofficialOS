@@ -641,7 +641,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r36s.dts l
 diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi linux/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi
 --- linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi	1970-01-01 00:00:00.000000000 +0000
 +++ linux/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi	2024-02-17 06:32:20.483322663 +0000
-@@ -0,0 +1,545 @@
+@@ -0,0 +1,560 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * # Copyright (C) 2024-present JELOS (https://github.com/JustEnoughLinuxOS)
@@ -1025,8 +1025,16 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi 
 +				};
 +			};
 +
-+			LDO_REG9 {
-+				/* unused */
++			vcc_wifi: LDO_REG9 {
++				regulator-name = "vcc_wifi";
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++
++				regulator-state-mem {
++					regulator-off-in-suspend;
++					regulator-suspend-microvolt = <3300000>;
++				};
 +			};
 +
 +			usb_midu: BOOST {
@@ -1035,6 +1043,12 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi 
 +				regulator-max-microvolt = <5400000>;
 +				regulator-always-on;
 +				regulator-boot-on;
++			};
++
++			otg_switch: OTG_SWITCH {
++				regulator-name = "otg_switch";
++				regulator-boot-on;
++				regulator-always-on;
 +			};
 +		};
 +
@@ -1130,6 +1144,7 @@ diff -rupN linux.orig/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r3xs.dtsi 
 +};
 +
 +&usb20_otg {
++	vbus-supply = <&otg_switch>;
 +	status = "okay";
 +};
 +
