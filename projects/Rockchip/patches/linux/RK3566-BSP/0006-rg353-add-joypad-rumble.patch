@@ -1,0 +1,125 @@
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-rg353m-linux.dts b/arch/arm64/boot/dts/rockchip/rk3566-rg353m-linux.dts
+index d98cb34599ed..6e5c3d91203d 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-rg353m-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-rg353m-linux.dts
+@@ -347,6 +347,9 @@ joypad: singleadc-joypad {
+ 
+ 		status = "okay";
+ 
++		/* rumble */
++		pwms = <&pwm5 0 10000 0>;
++
+ 		/* gpio pincontrol setup */
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&btn_pins>;
+diff --git a/arch/arm64/boot/dts/rockchip/rk3566-rg353v-linux.dts b/arch/arm64/boot/dts/rockchip/rk3566-rg353v-linux.dts
+index ecf939b525c8..c2f07a9157cc 100644
+--- a/arch/arm64/boot/dts/rockchip/rk3566-rg353v-linux.dts
++++ b/arch/arm64/boot/dts/rockchip/rk3566-rg353v-linux.dts
+@@ -347,6 +347,9 @@ joypad: singleadc-joypad {
+ 
+ 		status = "okay";
+ 
++		/* rumble */
++		pwms = <&pwm5 0 10000 0>;
++
+ 		/* gpio pincontrol setup */
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&btn_pins>;
+diff --git a/drivers/input/joystick/singleadcjoy.c b/drivers/input/joystick/singleadcjoy.c
+index 9d4c9bc7f78d..d88226a477bd 100644
+--- a/drivers/input/joystick/singleadcjoy.c
++++ b/drivers/input/joystick/singleadcjoy.c
+@@ -24,6 +24,7 @@
+ #include <linux/property.h>
+ #include <linux/of_gpio.h>
+ #include <linux/delay.h>
++#include <linux/pwm.h>
+ 
+ /*----------------------------------------------------------------------------*/
+ #define DRV_NAME "retrogame_joypad"
+@@ -79,6 +80,9 @@ struct bt_gpio {
+ };
+ 
+ struct joypad {
++	/* PWM device for force-feedback rumble */
++	struct pwm_device *pwm;
++
+ 	struct device *dev;
+ 	int poll_interval;
+ 
+@@ -964,6 +964,63 @@ void rk_send_key_f_key_down(void)
+ }
+ EXPORT_SYMBOL(rk_send_key_f_key_down);
+ 
++static int joypad_play_effect(struct input_dev *dev, void *data,
++			      struct ff_effect *effect)
++{
++	struct joypad *joypad = data;
++	u16 magnitude;
++	int duty, period;
++	struct pwm_args pargs;
++
++	if (effect->type != FF_RUMBLE || !joypad->pwm)
++		return 0;
++
++	magnitude = max(effect->u.rumble.strong_magnitude,
++			effect->u.rumble.weak_magnitude);
++
++	pwm_get_args(joypad->pwm, &pargs);
++	period = pargs.period;
++	if (!period)
++		return 0;
++
++	duty = period - (magnitude * period / 0xffff);
++
++	pwm_config(joypad->pwm, duty, period);
++	pwm_enable(joypad->pwm);
++
++	return 0;
++}
++
++static int joypad_rumble_setup(struct device *dev, struct joypad *joypad,
++			       struct input_dev *input)
++{
++	int error;
++
++	joypad->pwm = devm_pwm_get(dev, NULL);
++	if (IS_ERR(joypad->pwm)) {
++		error = PTR_ERR(joypad->pwm);
++		joypad->pwm = NULL;
++
++		if (error == -EPROBE_DEFER)
++			return error;
++
++		if (error != -ENOENT)
++			dev_warn(dev, "unable to request PWM for rumble: %d\n",
++				 error);
++
++		return 0;
++	}
++
++	input_set_capability(input, EV_FF, FF_RUMBLE);
++
++	error = input_ff_create_memless(input, joypad, joypad_play_effect);
++	if (error) {
++		dev_err(dev, "unable to register rumble, err=%d\n", error);
++		return error;
++	}
++
++	return 0;
++}
+ 
+ static int joypad_input_setup(struct device *dev, struct joypad *joypad)
+ {
+@@ -1015,6 +1072,10 @@ static int joypad_input_setup(struct device *dev, struct joypad *joypad)
+ 			__func__, adc->tuning_p, adc->tuning_n);
+ 	}
+ 
++	error = joypad_rumble_setup(dev, joypad, input);
++	if (error)
++		return error;
++
+ 	/* GPIO key setup */
+ 	__set_bit(EV_KEY, input->evbit);
+ 	for(nbtn = 0; nbtn < joypad->bt_gpio_count; nbtn++) {
