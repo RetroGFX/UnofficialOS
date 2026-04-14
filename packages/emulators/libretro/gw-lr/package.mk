@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="gw-lr"
-PKG_VERSION="435e5cfd4bf6aea03a84259e9b8dba3daf3ff5bd"
+PKG_VERSION="f8750d0f37db5f1f779437710f2653e8b1651ded"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"

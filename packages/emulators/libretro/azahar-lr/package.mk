@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
 
 PKG_NAME="azahar-lr"
-PKG_VERSION="d97da17263094b474e046c0b5f55b42131937ddf"
+PKG_VERSION="b2faa299d5890a65ff979fcb379d2b20d0ca36fc"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/azahar-emu/azahar"
 PKG_URL="${PKG_SITE}.git"
