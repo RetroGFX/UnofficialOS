@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="hatari-lr"
-PKG_VERSION="7008194d3f951a157997f67a820578f56f7feee0"
+PKG_VERSION="00af13a379e7839399ff2939807f050b7fc49a0e"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"

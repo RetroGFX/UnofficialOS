@@ -98,8 +98,10 @@ if [ "$(uname -m)" = "aarch64" ] && \
     cp /storage/.config/yabasanshiro/*.png /storage/roms/savestates/saturn/yabasanshiro/
 fi
 
-# Remove old mednafen, ppsspp, PCSX2 and xemu configs
+# Remove old stand alone configs for updates
 rm -rf /storage/.config/mednafen
 rm -rf /storage/.config/PCSX2
 rm -rf /storage/.config/xemu
 rm -rf /storage/.config/ppsspp
+rm -rf /storage/.config/duckstation
+rm -rf /storage/.config/rpcs3

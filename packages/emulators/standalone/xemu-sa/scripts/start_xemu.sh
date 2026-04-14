@@ -35,14 +35,6 @@ if [ ! -f "/storage/roms/bios/xemu/hdd/xbox_hdd.qcow2" ]; then
     unzip -o /usr/config/xemu/hdd.zip -d /storage/roms/bios/xemu/hdd/
 fi
 
-# Extract AppImage on first run
-if [ ! -f "/storage/xemu/usr/bin/xemu" ]; then
-    mkdir -p /storage/xemu
-    cd /storage/xemu && /usr/bin/xemu-sa --appimage-extract
-    mv /storage/xemu/squashfs-root/* /storage/xemu/
-    rm -rf /storage/xemu/squashfs-root
-fi
-
 #Emulation Station Features
 GAME=$(echo "${1}"| sed "s#^/.*/##")
 PLATFORM=$(echo "${2}"| sed "s#^/.*/##")
@@ -68,14 +60,14 @@ VSYNC=$(get_setting vsync "${PLATFORM}" "${GAME}")
 
   #Fit
 	if [ "$FIT" = "center" ]; then
-        sed -i "/fit =/c\fit = 'center'" /storage/.config/xemu/xemu.toml
-    elif [ "$FIT" = "stretch" ]; then
-        sed -i "/fit =/c\fit = 'stretch'" /storage/.config/xemu/xemu.toml
-    elif [ "$FIT" = "scale" ]; then
-        sed -i "/fit =/c\fit = 'scale'" /storage/.config/xemu/xemu.toml
-    else
-        sed -i "/fit =/c\fit = 'integer'" /storage/.config/xemu/xemu.toml
-    fi
+                sed -i "/fit =/c\fit = 'center'" /storage/.config/xemu/xemu.toml
+        elif [ "$FIT" = "stretch" ]; then
+                sed -i "/fit =/c\fit = 'stretch'" /storage/.config/xemu/xemu.toml
+        elif [ "$FIT" = "scale" ]; then
+                sed -i "/fit =/c\fit = 'scale'" /storage/.config/xemu/xemu.toml
+        else
+                sed -i "/fit =/c\fit = 'integer'" /storage/.config/xemu/xemu.toml
+        fi
 
   #Cache shaders to disk
         if [ "$CSHADERS" = "false" ]; then
@@ -164,10 +156,6 @@ VSYNC=$(get_setting vsync "${PLATFORM}" "${GAME}")
                 sed -i "/vsync =/c\vsync = true" /storage/.config/xemu/xemu.toml
         fi
 
-
-# Library path for bundled libs
-export LD_LIBRARY_PATH=/storage/xemu/usr/lib:$LD_LIBRARY_PATH
-
 # Audio and display environment
 export SDL_AUDIODRIVER=pipewire
 export PIPEWIRE_RUNTIME_DIR=/run/pipewire
@@ -176,7 +164,7 @@ export XDG_RUNTIME_DIR=/var/run/0-runtime-dir
 
 CONFIG="/storage/.config/xemu/xemu.toml"
 
-/storage/xemu/usr/bin/xemu -full-screen -config_path "$CONFIG" -dvd_path "${1}"
+/usr/bin/xemu-sa -full-screen -config_path "$CONFIG" -dvd_path "${1}"
 
 # Workaround until we can learn why it doesn't exit cleanly when asked.
-killall -9 xemu
+killall -9 xemu-sa

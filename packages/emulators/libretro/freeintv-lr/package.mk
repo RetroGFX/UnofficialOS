@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="freeintv-lr"
-PKG_VERSION="0e0e58503386304c5e7ac860c135583bc52e2e49"
+PKG_VERSION="9b66d2b3c3406659b2fdfaade7a80f3e62772815"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"

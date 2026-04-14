@@ -85,6 +85,18 @@
         <image>./images/remove-mac-files.svg</image>
     </game>
     <game>
+        <path>./Start AetherSX2.sh</path>
+        <name>Start AetherSX2</name>
+        <desc>Opens the AetherSX2 GUI (PS2) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2021</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/aethersx2.svg</image>
+    </game>
+    <game>
         <path>./Start CEMU.sh</path>
         <name>Start Cemu</name>
         <desc>Opens the Cemu GUI (WiiU) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. Software to emulate Wii U games and applications.</desc>
@@ -95,6 +107,18 @@
         <genre>Emulator</genre>
         <players>1</players>
         <image>./images/cemu.svg</image>
+    </game>
+    <game>
+        <path>./Start Duckstation.sh</path>
+        <name>Start Duckstation</name>
+        <desc>Opens the Duckstation GUI (PS1) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2024</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/duckstation.svg</image>
     </game>
     <game>
         <path>./Start HATARISA.sh</path>
@@ -183,9 +207,7 @@
     <game>
         <path>./Start RPCS3.sh</path>
         <name>Start RPCS3</name>
-        <desc>Opens the RPCS3 GUI (PS3) to enable configuration changes to be made directly to the emulator. You can use this to set up firmware, update controls and install packages. It's recommended to have a mouse and keyboard available to modify settings. RPCS3 is a multi-platform open-source Sony PlayStation 3 emulator and debugger written in C++ for Windows, Linux, macOS and FreeBSD.
-
-</desc>
+        <desc>Opens the RPCS3 GUI (PS3) to enable configuration changes to be made directly to the emulator. You can use this to set up firmware, update controls and install packages. It's recommended to have a mouse and keyboard available to modify settings. RPCS3 is a multi-platform open-source Sony PlayStation 3 emulator and debugger written in C++ for Windows, Linux, macOS and FreeBSD.</desc>
         <developer>UnofficialOS</developer>
         <publisher>UnofficialOS</publisher>
         <rating>5.0</rating>
@@ -207,6 +229,54 @@
         <image>./images/scummvm.svg</image>
     </game>
     <game>
+        <path>./Start Vita3K.sh</path>
+        <name>Start Vita3K</name>
+        <desc>Opens the Vita3K GUI (PS Vita) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. Vita3K is a free and open-source PlayStation Vita emulator for Windows, macOS, and Linux systems.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Scan Vita3K Games.sh</path>
+        <name>Scan Vita3K Games</name>
+        <desc>Creates EmulationStation launchers for installed PS Vita games.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Install Vita3K Content.sh</path>
+        <name>Install Vita3K Content</name>
+        <desc>Installs games and content into the Vita3K emulator.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Install Vita3K FW.sh</path>
+        <name>Install Vita3K FW</name>
+        <desc>Installs the Vita3K Firmware.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
         <path>./Start Xemu.sh</path>
         <name>Start Xemu</name>
         <desc>Opens the Xemu GUI (Xbox) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. A free and open-source application that emulates the original Microsoft Xbox game console, enabling people to play their original Xbox games on Windows, macOS, and Linux systems.</desc>
@@ -221,7 +291,7 @@
     <game>
         <path>./Scan id Tech Files.sh</path>
         <name>Scan id Tech Files</name>
-        <desc>Creates launchers for id software games</desc>
+        <desc>Creates launchers for id Software games.</desc>
         <developer>UnofficialOS</developer>
         <publisher>UnofficialOS</publisher>
         <rating>5.0</rating>

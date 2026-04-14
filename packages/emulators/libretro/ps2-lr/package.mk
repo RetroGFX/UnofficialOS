@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
-# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
+# Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
 
 PKG_NAME="ps2-lr"
 PKG_VERSION="416291ad7dc3caf5df4501c9249cbbe30cbef811"

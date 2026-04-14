@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="fuse-lr"
-PKG_VERSION="cad85b7b1b864c65734f71aa4a510b6f6536881c"
+PKG_VERSION="b5f44e3a20a0f189e8fb999cd5cde223a0f588a6"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"
