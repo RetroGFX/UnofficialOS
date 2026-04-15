@@ -85,16 +85,46 @@ if [ -n "${DT_ID}" ]; then
       echo "Setting boot FDT to GameForce Ace..."
       sed -i '/FDT/c\  FDT /rk3588s-gameforce-ace.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       ;;
+    *orangepi-5-plus)
+      echo "Setting boot FDT to Orange Pi 5 Plus..."
+      sed -i '/FDT/c\  FDT /rk3588-orangepi-5-plus.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
     *orangepi-5)
       echo "Setting boot FDT to Orange Pi 5..."
       sed -i '/FDT/c\  FDT /rk3588s-orangepi-5.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
       ;;
-    *rock-5)
+    *9tripod,rk3588s)
+      echo "Setting boot FDT to Indiedroid Nova..."
+      sed -i '/FDT/c\  FDT /rk3588s-9tripod-linux.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *rock-5b-plus)
+        echo "Setting boot FDT to Rock 5B+..."
+        sed -i '/FDT/c\  FDT /rk3588-rock-5b-plus.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+        sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+        ;;
+    *rock-5b)
       echo "Setting boot FDT to Rock 5B..."
       sed -i '/FDT/c\  FDT /rk3588-rock-5b.dtb' $BOOT_ROOT/extlinux/extlinux.conf
       sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
-    ;;
+      ;;
+    *rock-5a)
+      echo "Setting boot FDT to Rock 5A..."
+      sed -i '/FDT/c\  FDT /rk3588s-rock-5a.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *nanopi-r6c)
+      echo "Setting boot FDT to NanoPi R6C..."
+      sed -i '/FDT/c\  FDT /rk3588s-nanopi-r6c.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
+    *nanopi-r6s)
+      echo "Setting boot FDT to NanoPi R6S..."
+      sed -i '/FDT/c\  FDT /rk3588s-nanopi-r6s.dtb' $BOOT_ROOT/extlinux/extlinux.conf
+      sed -i 's/ fbcon=rotate:1//' $BOOT_ROOT/extlinux/extlinux.conf
+      ;;
   esac
 fi
 
@@ -105,14 +135,38 @@ if [ -f $SYSTEM_ROOT/usr/share/bootloader/boot.ini ]; then
       -e "s/@UUID_STORAGE@/${UUID_STORAGE}/" \
       -i $BOOT_ROOT/boot.ini
 
-  # Set correct R3xS dtb in boot.ini
+  # Set correct R3xS/K36/CLONE dtb in boot.ini
   DTB_NAME=$(cat $BOOT_ROOT/device.name)
-  if [ $DTB_NAME = 'R33S' ]; then
+  if [ "$DTB_NAME" = 'R33S' ]; then
     echo "Setting R33S dtb in boot.ini..."
     sed -i '/rk3326-gameconsole-r3/c\  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r33s.dtb' $BOOT_ROOT/boot.ini
-  elif [ $DTB_NAME = 'R36S' ]; then
+  elif [ "$DTB_NAME" = 'R36S' ]; then
     echo "Setting R36S/R35S dtb in boot.ini..."
     sed -i '/rk3326-gameconsole-r3/c\  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r36s.dtb' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'CLONE' ]; then
+    echo "Setting Clone dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-clone.*\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-clone.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'CLONE_V2' ]; then
+    echo "Setting Clone V2 dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-clone.*\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-clone-v2.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'R36_ULTRA' ]; then
+    echo "Setting Game Console R36 Ultra dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-gameconsole-r36-ultra\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r36-ultra.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'KINHANK_K36' ]; then
+    echo "Setting Kinhank K36 dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-kinhank-k36\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-kinhank-k36.dtb|' $BOOT_ROOT/boot.ini  
+  elif [ "$DTB_NAME" = 'XIFAN_MYMINI' ]; then
+    echo "Setting XiFan MyMini dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-mymini\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-mymini.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'XIFAN_XF35_40H' ]; then
+    echo "Setting XiFan XF35-40H dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' $BOOT_ROOT/boot.ini
   fi
 fi
 

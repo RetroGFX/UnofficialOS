@@ -20,11 +20,11 @@
 ################################################################################
 
 PKG_NAME="ppsspp-lr"
-PKG_VERSION="36207e42ad4e39fae1c6fbe71a10738e863929bc"
+PKG_VERSION="67b708f40e0e614a2757318a6eeba6eb8126d5d4"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/hrydgard/ppsspp"
 PKG_URL="https://github.com/hrydgard/ppsspp.git"
-PKG_DEPENDS_TARGET="toolchain SDL2 ffmpeg libzip zstd"
+PKG_DEPENDS_TARGET="toolchain SDL2 libzip zstd"
 PKG_LONGDESC="A PSP emulator for Android, Windows, Mac, Linux and Blackberry 10, written in C++."
 GET_HANDLER_SUPPORT="git"
 
@@ -55,7 +55,7 @@ pre_configure_target() {
     PKG_DEPENDS_TARGET+=" vulkan-loader vulkan-headers"
     PKG_CMAKE_OPTS_TARGET+=" -DUSE_VULKAN_DISPLAY_KHR=ON \
                              -DVULKAN=ON \
-                             -DEGL_NO_X11=1
+                             -DEGL_NO_X11=1 \
                              -DMESA_EGL_NO_X11_HEADERS=1"
   else
     PKG_CMAKE_OPTS_TARGET+=" -DVULKAN=OFF"
@@ -74,24 +74,29 @@ pre_configure_target() {
     ;;
   esac
 
-  PKG_CMAKE_OPTS_TARGET+="${PKG_CMAKE_OPTS_TARGET} \
-                          -DUSE_SYSTEM_FFMPEG=OFF \
-                          -DCMAKE_BUILD_TYPE=Release \
-                          -DCMAKE_SYSTEM_NAME=Linux \
-                          -DBUILD_SHARED_LIBS=OFF \
-                          -DANDROID=OFF \
-                          -DWIN32=OFF \
-                          -DAPPLE=OFF \
-                          -DLIBRETRO=ON \
-                          -DCMAKE_CROSSCOMPILING=ON \
-                          -DUSING_QT_UI=OFF \
-                          -DUNITTEST=OFF \
-                          -DSIMULATOR=OFF \
-                          -DHEADLESS=OFF \
-                          -DUSE_DISCORD=OFF"
+  PKG_CMAKE_OPTS_TARGET+=" -DUSE_SYSTEM_FFMPEG=OFF \
+                           -DCMAKE_BUILD_TYPE=Release \
+                           -DCMAKE_SYSTEM_NAME=Linux \
+                           -DBUILD_SHARED_LIBS=OFF \
+                           -DANDROID=OFF \
+                           -DWIN32=OFF \
+                           -DAPPLE=OFF \
+                           -DLIBRETRO=ON \
+                           -DCMAKE_CROSSCOMPILING=ON \
+                           -DUSING_QT_UI=OFF \
+                           -DUNITTEST=OFF \
+                           -DSIMULATOR=OFF \
+                           -DHEADLESS=OFF \
+                           -DUSE_DISCORD=OFF"
 }
 
 pre_make_target() {
+    # This script should work on any board that has issues with system ffmpeg in ppsspp
+  if [ "${TARGET_ARCH}" = "aarch64" ]; then
+  sed -i "s|aarch64-linux-gnu-|${TARGET_PREFIX}|g" ${PKG_BUILD}/ffmpeg/linux_arm64.sh
+    (cd ${PKG_BUILD}/ffmpeg && ./linux_arm64.sh)
+  fi
+
   # fix cross compiling
   find ${PKG_BUILD} -name flags.make -exec sed -i "s:isystem :I:g" \{} \;
   find ${PKG_BUILD} -name build.ninja -exec sed -i "s:isystem :I:g" \{} \;

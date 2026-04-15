@@ -1,8 +1,8 @@
-diff --git a/Core/System.cpp b/Core/System.cpp
+diff --git a/Core/Util/PathUtil.cpp b/Core/Util/PathUtil.cpp
 index cb6fc34fa..829a5795a 100644
---- a/Core/System.cpp
-+++ b/Core/System.cpp
-@@ -619,12 +619,7 @@ std::string PSP_GetLoading() {
+--- a/Core/Util/PathUtil.cpp
++++ b/Core/Util/PathUtil.cpp
+@@ -44,12 +44,7 @@ std::string PSP_GetLoading() {
  Path GetSysDirectory(PSPDirectories directoryType) {
  	const Path &memStickDirectory = g_Config.memStickDirectory;
  	Path pspDirectory;

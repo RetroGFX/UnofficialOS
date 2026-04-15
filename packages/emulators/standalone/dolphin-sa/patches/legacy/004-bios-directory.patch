@@ -1,0 +1,35 @@
+diff --git a/Source/Core/Core/Boot/Boot.cpp b/Source/Core/Core/Boot/Boot.cpp
+index c518601b4..91de7c057 100644
+--- a/Source/Core/Core/Boot/Boot.cpp
++++ b/Source/Core/Core/Boot/Boot.cpp
+@@ -337,7 +337,7 @@ bool CBoot::Load_BS2(const std::string& boot_rom_filename)
+     known_ipl = true;
+     break;
+   default:
+-    PanicAlertT("The IPL file is not a known good dump. (CRC32: %x)", ipl_hash);
++    known_ipl = true;
+     break;
+   }
+ 
+@@ -500,7 +500,7 @@ bool CBoot::BootUp(std::unique_ptr<BootParameters> boot)
+       if (!File::Exists(ipl.path))
+       {
+         if (ipl.disc)
+-          PanicAlertT("Cannot start the game, because the GC IPL could not be found.");
++          PanicAlertT("Gamecube bios not found, please add your IPL.bin to /storage/roms/bios/GC/(USA/JAP/EUR)/.");
+         else
+           PanicAlertT("Cannot find the GC IPL.");
+         return false;
+diff --git a/Source/Core/Core/ConfigManager.cpp b/Source/Core/Core/ConfigManager.cpp
+index c85d8a296..0fe0657eb 100644
+--- a/Source/Core/Core/ConfigManager.cpp
++++ b/Source/Core/Core/ConfigManager.cpp
+@@ -840,7 +840,7 @@ const char* SConfig::GetDirectoryForRegion(DiscIO::Region region)
+ std::string SConfig::GetBootROMPath(const std::string& region_directory) const
+ {
+   const std::string path =
+-      File::GetUserPath(D_GCUSER_IDX) + DIR_SEP + region_directory + DIR_SEP GC_IPL;
++      std::string("/storage/roms/bios/GC/") + DIR_SEP + region_directory + DIR_SEP + GC_IPL;
+   if (!File::Exists(path))
+     return File::GetSysDirectory() + GC_SYS_DIR + DIR_SEP + region_directory + DIR_SEP GC_IPL;
+   return path;

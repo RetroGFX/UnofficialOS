@@ -2,7 +2,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="minivmac-lr"
-PKG_VERSION="2eb65cd5ca80174435867d2453d702390e5aab45"
+PKG_VERSION="ac7fdac318261e1e3464081bf300cc3db30c74af"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/libretro/libretro-minivmac"

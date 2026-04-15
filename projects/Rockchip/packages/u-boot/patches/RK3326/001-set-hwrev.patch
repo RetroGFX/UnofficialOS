@@ -10,10 +10,10 @@ diff -rupN u-boot.orig/cmd/hwrev.c u-boot/cmd/hwrev.c
 +                env_set("hwrev", "rg351v");
 +                env_set("dtb_name", "rk3326-anbernic-rg351v.dtb");
 +        }
-+        /* R33S */
++        /* RGB20S */
 +        else if (check_range(140, 190, hwrev_adc)) {
-+                env_set("hwrev", "r33s");
-+                env_set("dtb_name", "rk3326-gameconsole-r33s.dtb");
++                env_set("hwrev", "rgb20s");
++                env_set("dtb_name", "rk3326-powkiddy-rgb20s.dtb");
 +        }
 +        /* XU10 */
 +        else if (check_range(1000, 1050, hwrev_adc)) {

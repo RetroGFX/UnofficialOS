@@ -1,0 +1,14 @@
+#!/bin/bash
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
+
+cat <<EOF >/storage/.config/profile.d/001-device_config
+# Device Features
+DEVICE_PLAYBACK_PATH_SPK="HP"
+DEVICE_PLAYBACK_PATH_HP="SPK"
+DEVICE_BATTERY_LED_STATUS="false"
+DEVICE_DTB_SWITCH_K36="true"
+DEVICE_LED_CONTROL="true"
+DEVICE_PWR_LED_GPIO="17"
+DEVICE_TEMP_SENSOR="/sys/devices/virtual/thermal/thermal_zone0/temp"
+EOF

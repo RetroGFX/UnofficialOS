@@ -2,7 +2,7 @@
 # Copyright (C) 2024 ROCKNIX (https://github.com/ROCKNIX)
 
 PKG_NAME="generic-dsi"
-PKG_VERSION="0.1.0"
+PKG_VERSION="0.1.1"
 PKG_LICENSE="GPL"
 PKG_LONGDESC="generic DSI panel driver"
 PKG_DEPENDS_TARGET="pyFDT"

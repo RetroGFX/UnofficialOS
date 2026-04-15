@@ -7,10 +7,10 @@ PKG_REV="1"
 PKG_ARCH="any"
 PKG_SITE="https://github.com/hrydgard/ppsspp"
 PKG_URL="${PKG_SITE}.git"
-PKG_VERSION="e49c0bd8836a8a8f678565357773386f1174d3f5" # v1.19.3
-CHEAT_DB_VERSION="9475ff7b4be805f818f5f40cc3e5116a4a68deac" # Update cheat.db (20/01/2025)
+PKG_VERSION="d357e6a32934800d3d80b49f910a603e1b069751" # v1.20.3
+CHEAT_DB_VERSION="a804a7bfce60768b0b536498a839c8c9ccdf17df" # Update cheat.db (18/03/2026)
 PKG_LICENSE="GPLv2"
-PKG_DEPENDS_TARGET="toolchain ffmpeg libzip SDL2 zlib zip"
+PKG_DEPENDS_TARGET="toolchain libzip SDL2 zlib zip"
 PKG_SHORTDESC="PPSSPPDL"
 PKG_LONGDESC="PPSSPP Standalone"
 GET_HANDLER_SUPPORT="git"
@@ -41,7 +41,7 @@ PKG_CMAKE_OPTS_TARGET=" -DUSE_SYSTEM_FFMPEG=OFF \
 if [[ "${OPENGL_SUPPORT}" = "yes" ]] && [[ ! "${DEVICE}" = "S922X" ]]; then
   PKG_DEPENDS_TARGET+=" ${OPENGL} glu libglvnd glew"
   PKG_CMAKE_OPTS_TARGET+=" -DUSING_FBDEV=OFF \
-			   -DUSING_GLES2=OFF"
+                           -DUSING_GLES2=OFF"
 
 elif [ "${OPENGLES_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"

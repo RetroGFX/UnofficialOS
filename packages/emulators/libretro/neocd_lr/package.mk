@@ -2,7 +2,7 @@
 # Copyright (C) 2019-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="neocd_lr"
-PKG_VERSION="5eca2c8fd567b5261251c65ecafa8cf5b179d1d2"
+PKG_VERSION="9216ca226f24e01e77fc2670035e97da154f3de4"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="LGPLv3.0"

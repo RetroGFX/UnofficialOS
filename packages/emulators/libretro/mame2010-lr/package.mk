@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="mame2010-lr"
-PKG_VERSION="c5b413b71e0a290c57fc351562cd47ba75bac105"
+PKG_VERSION="29095383c0281100fee2ee09f1438d8ae990c510"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="MAME"

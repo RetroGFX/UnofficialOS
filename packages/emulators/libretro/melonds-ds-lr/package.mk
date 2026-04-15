@@ -2,7 +2,7 @@
 # Copyright (C) 2024-present ROCKNIX (https://github.com/ROCKNIX)
 
 PKG_NAME="melonds-ds-lr"
-PKG_VERSION="6e48901ab9e54ff048a1bf6ea322372d7ae3ed29"
+PKG_VERSION="bac0256dc6a8736c5a228f57c562257e45fd49f3"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/JesseTG/melonds-ds"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"
@@ -16,7 +16,14 @@ elif [ "${OPENGLES_SUPPORT}" = "yes" ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"
 fi
 
-PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=ON"
+case ${DEVICE} in
+  RK3566-BSP*)
+    PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=OFF"
+  ;;
+  *)
+    PKG_CMAKE_OPTS_TARGET=" -DENABLE_OPENGL=ON"
+  ;;
+esac
 
 case ${DEVICE} in
   AMD64)

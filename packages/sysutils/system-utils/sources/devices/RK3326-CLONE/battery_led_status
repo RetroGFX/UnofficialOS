@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# SPDX-License-Identifier: GPL-2.0-or-later
+# Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
+
+# Simple script to watch the battery capacity and
+# turn the power LED orange when it reaches 30%, red at 20%, and blinking red & orange at 10%
+
+. /etc/profile
+
+function set_led() {
+  case $1 in
+    red|off)
+      echo out >/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}/direction
+      echo 1 >/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}/value
+    ;;
+    green)
+      echo out >/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}/direction
+      echo 0 >/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}/value
+    ;;
+    orange)
+      echo in >/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}/direction
+    ;;
+  esac
+}
+
+#Redirect to the device quirks version if it is there
+if [ -f "/usr/lib/autostart/quirks/devices/${QUIRK_DEVICE}/bin/battery_led_status" ]
+then
+  "/usr/lib/autostart/quirks/devices/${QUIRK_DEVICE}/bin/battery_led_status" $*
+else
+  # Set export GPIO for Power LED
+  if [ ! -d "/sys/class/gpio/gpio${DEVICE_PWR_LED_GPIO}" ]; then
+    echo ${DEVICE_PWR_LED_GPIO} > /sys/class/gpio/export
+  fi
+
+  while true
+  do
+    CAP=$(cat /sys/class/power_supply/battery/capacity)
+    STAT=$(cat /sys/class/power_supply/battery/status)
+    ISDISABLED=$(get_setting powerled.disabled)
+    if [ "${ISDISABLED}" == "1" ]
+    then
+      set_led off
+    else
+      if [[ ${STAT} == "Discharging" ]]
+      then
+        #if (( ${CAP} <= 50 ))
+        #then
+         # for ctr in $(seq 1 1 5)
+         # do
+         #   set_led orange
+         #   sleep .5
+         #   set_led red
+         #   sleep .5
+         # done
+         # continue
+        #elif (( ${CAP} <= 20 ))
+        if (( ${CAP} <= 20 ))
+        then
+          set_led red
+        elif (( ${CAP} <= 30 ))
+        then
+          set_led orange
+        else
+          set_led green
+        fi
+      elif (( ${CAP} >= 95 ))
+      then
+        set_led green
+      fi
+      sleep 15
+    fi
+  done
+fi

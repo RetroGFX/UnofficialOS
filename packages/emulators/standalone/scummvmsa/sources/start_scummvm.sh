@@ -25,16 +25,15 @@ then
 fi
 
 create_svm(){
-  /usr/bin/scummvm --list-targets | tail -n +4 | cut -d " " -f 1 | \
+  /usr/bin/scummvm --list-targets | tail -n +3 | cut -d " " -f 1 | \
   while read line
   do
     id=($line);
-    filename=$(grep -A7 "\[$id\]" ${CONFIG_DIR}/scummvm.ini | \
-      awk 'BEGIN {FS="="}; /description/ {printf $2}' | \
+    filename=$(sed -n "/^\[$id\]/,/^\[/{s/^description=//p}" ${CONFIG_DIR}/scummvm.ini | \
       sed -e 's# (.*)# ('${id}')#g' -e "s#'##g" -e "s#: # - #g" \
     )
 
-    SVMPATH="$(grep -A7 "\[$id\]" ${CONFIG_DIR}/scummvm.ini | awk 'BEGIN {FS="="}; /path/ {print $2}')"
+    SVMPATH="$(sed -n "/^\[$id\]/,/^\[/{s/^path=//p}" ${CONFIG_DIR}/scummvm.ini)"
     echo '--path="'${SVMPATH}'" '${id} >"${CONFIG_DIR}/games/${filename}.scummvm"
   done
 }
@@ -52,6 +51,9 @@ case $1 in
   ;;
 
   "add")
+    if [ ! -d "${ROMSPATH}/scummvm" ]; then
+      mkdir "${ROMSPATH}/scummvm"
+    fi
     /usr/bin/scummvm --add --path="${ROMSPATH}/scummvm" --recursive
     mkdir -p ${BIOSPATH}
     cp ${CONFIG_DIR}/scummvm.ini ${BIOSPATH}/scummvm.ini
@@ -62,6 +64,7 @@ case $1 in
   ;;
 
   *)
+    set_kill set "-9 scummvm"
     GAME=$(cat "${GAME}")
     systemctl start fluidsynth
     eval /usr/bin/scummvm --fullscreen --joystick=0 --themepath=/usr/config/scummvm/themes "${GAME}"

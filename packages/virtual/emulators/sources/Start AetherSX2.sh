@@ -7,4 +7,4 @@ source /etc/profile
 
 set_kill set "aethersx2-sa"
 
-/usr/bin/aethersx2-sa >/dev/null 2>&1
+/usr/bin/aethersx2-sa -bigpicture -fullscreen >/dev/null 2>&1

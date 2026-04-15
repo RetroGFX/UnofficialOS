@@ -1,8 +1,126 @@
-diff --git a/backends/events/sdl/sdl-events.cpp b/backends/events/sdl/sdl-events.cpp
-index 3cd124e6dfa..b7d719a56ca 100644
---- a/backends/events/sdl/sdl-events.cpp
-+++ b/backends/events/sdl/sdl-events.cpp
-@@ -71,6 +71,9 @@ void SdlEventSource::loadGameControllerMappingFile() {
+diff --git a/backends/events/sdl/sdl-events.h b/backends/events/sdl/sdl-events.h
+index 695ec1a9..2ef6957a 100644
+--- a/backends/events/sdl/sdl-events.h
++++ b/backends/events/sdl/sdl-events.h
+@@ -112,7 +112,7 @@ protected:
+ 	/**
+ 	 * Pre process an event before it is dispatched.
+ 	 */
+-	virtual void preprocessEvents(SDL_Event *event) {}
++	virtual void preprocessEvents(SDL_Event *event);
+ 
+ 	/**
+ 	 * Dispatchs SDL events for each handler.
+@@ -271,6 +271,104 @@ private:
+ 	void preprocessFingerMotion(SDL_Event *event);
+ 	void finishSimulatedMouseClicks(void);
+ #endif
++
++#if defined(USE_SDL_TS_VMOUSE)
++private:
++    /// Perform initialization of touch-related state structures.
++    void _touchInitialize();
++    /**
++     * Run pre-processing on touch-based events, otherwise null operation.
++     *
++     * @param event Input event to process.
++     */
++    void _touchPreprocessEvent(SDL_Event *event);
++
++    /// Preprocessing specific to SDL_FINGERDOWN.
++    void _touchPreprocessFingerDown(SDL_Event *event);
++    /// Preprocessing specific to SDL_FINGERUP.
++    void _touchPreprocessFingerUp(SDL_Event *event);
++    /// Preprocessing specific to SDL_FINGERMOTION.
++    void _touchPreprocessFingerMotion(SDL_Event *event);
++    /// Convert panel normalized coordinates to window pixel coordinates.
++    void _touchConvertPanelToWindow(
++        float panelX, float panelY, 
++        int32_t &winX, int32_t &winY);
++    /// Run periodic processing updates - e.g. click finalization.
++    void _touchPeriodicUpdate();
++
++    /// Structure representing a single tracked touch point.
++    struct Touch {
++        /// Identifier of the touch point. -1 for no touch.
++        int32_t id;
++        /// Current pixel position of the touch point on the x-axis.
++        int32_t posX;
++        /// Current pixel position of the touch point on the y-axis.
++        int32_t posY;
++        /// Time of last touchdown.
++        uint32_t tdTime;
++        /// Touchdown pixel position on the x-axis.
++        int32_t tdPosX;
++        /// Touchdown pixel position on the y-axis.
++        int32_t tdPosY;
++    }; // struct Touch
++
++    /// Maximum number of supported touch ports.
++    static constexpr uint32_t TOUCH_MAX_PORTS = 16u;
++    /// Maximum number of supported touch points per port.
++    static constexpr uint32_t TOUCH_MAX_POINTS = 16u;
++
++    /// Recognized types of dragging operations.
++    enum TouchDragType {
++        /// No dragging
++        TOUCH_DRAG_NONE = 0, 
++        /// Two-finger drag
++        TOUCH_DRAG_TWO, 
++        /// Three-finger drag
++        TOUCH_DRAG_THREE
++    }; // enum TouchDragType
++
++    /// Types of simulated mouse buttons.
++    enum TouchMouseButton {
++        /// Left mouse button
++        TOUCH_BUTTON_LEFT = 0, 
++        /// Right mouse button
++        TOUCH_BUTTON_RIGHT = 1, 
++        /// Total number of simulated mouse buttons
++        TOUCH_BUTTON_COUNT, 
++    }; // enum TouchMouseButton
++
++    /// Width of the touch panel.
++    uint32_t _touchPanelWidth;
++    /// Height of the touch panel.
++    uint32_t _touchPanelHeight;
++    /// Width of the touch window.
++    uint32_t _touchWindowWidth;
++    /// Height of the touch window.
++    uint32_t _touchWindowHeight;
++
++    /// Maximum time of contact in milliseconds which counts as a tap.
++    uint32_t _touchMaxTapTime;
++    /// Maximum distance of motion in squared pixels which counts as a tap.
++    uint32_t _touchMaxTapSqDist;
++    /// Length of a simulated mouse click in milliseconds.
++    uint32_t _touchClickDuration;
++    /// Multiplier used for sub-pixel touch precision - higher = smaller movement.
++    uint32_t _touchPrecisionMult;
++
++    /// Finger-tracking structure.
++    Touch _touchFingers[TOUCH_MAX_PORTS][TOUCH_MAX_POINTS];
++
++    /// Drag type being executed for each port.
++    TouchDragType _touchDragType[TOUCH_MAX_PORTS];
++
++    /// Tracking of start time for mouse button clicks.
++    uint32_t _touchClickTime[TOUCH_MAX_PORTS][TOUCH_BUTTON_COUNT];
++
++    /// High resolution x-axis delta for the simulated touchpad cursor.
++    int32_t _touchHighResDX;
++    /// High resolution y-axis delta for the simulated touchpad cursor.
++    int32_t _touchHighResDY;
++#endif // defined(SDL_TS_VMOUSE)
+ };
+ 
+ #endif
+diff --git a/backends/events/sdl/sdl2-events.cpp b/backends/events/sdl/sdl2-events.cpp
+index af2a0acb..12aef826 100644
+--- a/backends/events/sdl/sdl2-events.cpp
++++ b/backends/events/sdl/sdl2-events.cpp
+@@ -70,6 +70,9 @@ void SdlEventSource::loadGameControllerMappingFile() {
  				debug("Game controller DB file loaded: %s", file.getPath().toString(Common::Path::kNativeSeparator).c_str());
  		}
  	}
@@ -10,11 +128,11 @@ index 3cd124e6dfa..b7d719a56ca 100644
 +    _touchInitialize();
 +#endif // defined(USE_SDL_TS_VMOUSE)
  }
- #endif
  
-@@ -722,6 +725,10 @@ bool SdlEventSource::pollEvent(Common::Event &event) {
+ SdlEventSource::SdlEventSource()
+@@ -640,6 +643,10 @@ bool SdlEventSource::pollEvent(Common::Event &event) {
+ 		return true;
  	}
- #endif
  
 +#if defined(USE_SDL_TS_VMOUSE)
 +	_touchPeriodicUpdate();
@@ -23,7 +141,7 @@ index 3cd124e6dfa..b7d719a56ca 100644
  	// If the screen changed, send an Common::EVENT_SCREEN_CHANGED
  	int screenID = g_system->getScreenChangeID();
  	if (screenID != _lastScreenID) {
-@@ -1125,6 +1132,13 @@ void SdlEventSource::closeJoystick() {
+@@ -954,6 +961,13 @@ void SdlEventSource::closeJoystick() {
  	}
  }
  
@@ -34,10 +152,10 @@ index 3cd124e6dfa..b7d719a56ca 100644
 +#endif // defined(USE_SDL_TS_VMOUSE)
 +}
 +
- int SdlEventSource::mapSDLJoystickButtonToOSystem(Uint8 sdlButton) {
- 	Common::JoystickButton osystemButtons[] = {
- 	    Common::JOYSTICK_BUTTON_A,
-@@ -1423,3 +1437,434 @@ uint32 SdlEventSource::obtainUnicode(const SDL_Keysym keySym) {
+ bool SdlEventSource::handleJoystickAdded(const SDL_JoyDeviceEvent &device, Common::Event &event) {
+ 	debug(5, "SdlEventSource: Received joystick added event for index '%d'", device.which);
+ 
+@@ -1094,3 +1108,434 @@ uint32 SdlEventSource::obtainUnicode(const SDL_KeyboardEvent &key) {
  }
  
  #endif
@@ -472,129 +590,11 @@ index 3cd124e6dfa..b7d719a56ca 100644
 +}
 +
 +#endif // defined(USE_SDL_TS_VMOUSE)
-diff --git a/backends/events/sdl/sdl-events.h b/backends/events/sdl/sdl-events.h
-index 2fcf289e7bc..0b71181871c 100644
---- a/backends/events/sdl/sdl-events.h
-+++ b/backends/events/sdl/sdl-events.h
-@@ -109,7 +109,7 @@ protected:
- 	/**
- 	 * Pre process an event before it is dispatched.
- 	 */
--	virtual void preprocessEvents(SDL_Event *event) {}
-+	virtual void preprocessEvents(SDL_Event *event);
- 
- 	/**
- 	 * Dispatchs SDL events for each handler.
-@@ -262,6 +262,104 @@ private:
- 	void preprocessFingerMotion(SDL_Event *event);
- 	void finishSimulatedMouseClicks(void);
- #endif
-+
-+#if defined(USE_SDL_TS_VMOUSE)
-+private:
-+    /// Perform initialization of touch-related state structures.
-+    void _touchInitialize();
-+    /**
-+     * Run pre-processing on touch-based events, otherwise null operation.
-+     *
-+     * @param event Input event to process.
-+     */
-+    void _touchPreprocessEvent(SDL_Event *event);
-+
-+    /// Preprocessing specific to SDL_FINGERDOWN.
-+    void _touchPreprocessFingerDown(SDL_Event *event);
-+    /// Preprocessing specific to SDL_FINGERUP.
-+    void _touchPreprocessFingerUp(SDL_Event *event);
-+    /// Preprocessing specific to SDL_FINGERMOTION.
-+    void _touchPreprocessFingerMotion(SDL_Event *event);
-+    /// Convert panel normalized coordinates to window pixel coordinates.
-+    void _touchConvertPanelToWindow(
-+        float panelX, float panelY, 
-+        int32_t &winX, int32_t &winY);
-+    /// Run periodic processing updates - e.g. click finalization.
-+    void _touchPeriodicUpdate();
-+
-+    /// Structure representing a single tracked touch point.
-+    struct Touch {
-+        /// Identifier of the touch point. -1 for no touch.
-+        int32_t id;
-+        /// Current pixel position of the touch point on the x-axis.
-+        int32_t posX;
-+        /// Current pixel position of the touch point on the y-axis.
-+        int32_t posY;
-+        /// Time of last touchdown.
-+        uint32_t tdTime;
-+        /// Touchdown pixel position on the x-axis.
-+        int32_t tdPosX;
-+        /// Touchdown pixel position on the y-axis.
-+        int32_t tdPosY;
-+    }; // struct Touch
-+
-+    /// Maximum number of supported touch ports.
-+    static constexpr uint32_t TOUCH_MAX_PORTS = 16u;
-+    /// Maximum number of supported touch points per port.
-+    static constexpr uint32_t TOUCH_MAX_POINTS = 16u;
-+
-+    /// Recognized types of dragging operations.
-+    enum TouchDragType {
-+        /// No dragging
-+        TOUCH_DRAG_NONE = 0, 
-+        /// Two-finger drag
-+        TOUCH_DRAG_TWO, 
-+        /// Three-finger drag
-+        TOUCH_DRAG_THREE
-+    }; // enum TouchDragType
-+
-+    /// Types of simulated mouse buttons.
-+    enum TouchMouseButton {
-+        /// Left mouse button
-+        TOUCH_BUTTON_LEFT = 0, 
-+        /// Right mouse button
-+        TOUCH_BUTTON_RIGHT = 1, 
-+        /// Total number of simulated mouse buttons
-+        TOUCH_BUTTON_COUNT, 
-+    }; // enum TouchMouseButton
-+
-+    /// Width of the touch panel.
-+    uint32_t _touchPanelWidth;
-+    /// Height of the touch panel.
-+    uint32_t _touchPanelHeight;
-+    /// Width of the touch window.
-+    uint32_t _touchWindowWidth;
-+    /// Height of the touch window.
-+    uint32_t _touchWindowHeight;
-+
-+    /// Maximum time of contact in milliseconds which counts as a tap.
-+    uint32_t _touchMaxTapTime;
-+    /// Maximum distance of motion in squared pixels which counts as a tap.
-+    uint32_t _touchMaxTapSqDist;
-+    /// Length of a simulated mouse click in milliseconds.
-+    uint32_t _touchClickDuration;
-+    /// Multiplier used for sub-pixel touch precision - higher = smaller movement.
-+    uint32_t _touchPrecisionMult;
-+
-+    /// Finger-tracking structure.
-+    Touch _touchFingers[TOUCH_MAX_PORTS][TOUCH_MAX_POINTS];
-+
-+    /// Drag type being executed for each port.
-+    TouchDragType _touchDragType[TOUCH_MAX_PORTS];
-+
-+    /// Tracking of start time for mouse button clicks.
-+    uint32_t _touchClickTime[TOUCH_MAX_PORTS][TOUCH_BUTTON_COUNT];
-+
-+    /// High resolution x-axis delta for the simulated touchpad cursor.
-+    int32_t _touchHighResDX;
-+    /// High resolution y-axis delta for the simulated touchpad cursor.
-+    int32_t _touchHighResDY;
-+#endif // defined(SDL_TS_VMOUSE)
- };
- 
- #endif
 diff --git a/backends/platform/sdl/sdl.cpp b/backends/platform/sdl/sdl.cpp
-index f694923ff9a..bed607288c2 100644
+index a6f0d170..aadae90c 100644
 --- a/backends/platform/sdl/sdl.cpp
 +++ b/backends/platform/sdl/sdl.cpp
-@@ -197,6 +197,9 @@ bool OSystem_SDL::hasFeature(Feature f) {
+@@ -219,6 +219,9 @@ bool OSystem_SDL::hasFeature(Feature f) {
  	if (f == kFeatureJoystickDeadzone || f == kFeatureKbdMouseSpeed) {
  		return _eventSource->isJoystickConnected();
  	}
@@ -602,13 +602,13 @@ index f694923ff9a..bed607288c2 100644
 +    if (f == kFeatureTouchpadMode) return true;
 +#endif
  #if defined(USE_OPENGL_GAME) || defined(USE_OPENGL_SHADERS)
- 	/* Even if we are using the 2D graphics manager,
+ 	/* Even if we are using the SDL graphics manager,
  	 * we are at one initGraphics3d call of supporting OpenGL */
 diff --git a/configure b/configure
-index cacc10675e3..753f6afd6cf 100755
+index 41342e0d..32121347 100755
 --- a/configure
 +++ b/configure
-@@ -229,6 +229,7 @@ _nuked_opl=yes
+@@ -244,6 +244,7 @@ _nuked_opl=yes
  _builtin_resources=yes
  _windows_console=yes
  _windows_unicode=yes
@@ -616,16 +616,16 @@ index cacc10675e3..753f6afd6cf 100755
  _cygwin_build=no
  _ext_sse2=auto
  _ext_avx2=auto
-@@ -987,6 +988,8 @@ Optional Features:
+@@ -1053,6 +1054,8 @@ Optional Features:
    --disable-windows-console do not show console output on Windows
    --enable-windows-unicode  use Windows Unicode APIs (default)
    --disable-windows-unicode use Windows ANSI APIs
 +  --enable-sdl-ts-vmouse    enable SDL touchscreen virtual mouse support
 +  --disable-sdl-ts-vmouse   disable SDL touchscreen virtual mouse support
-   --enable-ext-sse2         allow code to use sse2 extensions on x86/amd64
-   --enable-ext-avx2         allow code to use avx2 extensions on x86/amd64
-   --enable-ext-neon         allow code to use neon extensions on ARM
-@@ -1323,6 +1326,8 @@ for ac_option in $@; do
+   --enable-ext-sse2        allow code to use sse2 extensions on x86/amd64
+   --enable-ext-avx2        allow code to use avx2 extensions on x86/amd64
+   --enable-ext-neon        allow code to use neon extensions on ARM
+@@ -1398,6 +1401,8 @@ for ac_option in $@; do
  	--disable-eventrecorder)     _eventrec=no            ;;
  	--enable-text-console)       _text_console=yes       ;;
  	--disable-text-console)      _text_console=no        ;;
@@ -634,7 +634,7 @@ index cacc10675e3..753f6afd6cf 100755
  	--enable-ext-sse2)           _ext_sse2=yes           ;;
  	--disable-ext-sse2)          _ext_sse2=no            ;;
  	--enable-ext-avx2)           _ext_avx2=yes           ;;
-@@ -6122,6 +6127,9 @@ define_in_config_h_if_yes "$_readline" 'USE_READLINE'
+@@ -6450,6 +6455,9 @@ define_in_config_h_if_yes "$_readline" 'USE_READLINE'
  
  define_in_config_h_if_yes "$_text_console" 'USE_TEXT_CONSOLE_FOR_DEBUGGER'
  

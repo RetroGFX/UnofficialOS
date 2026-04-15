@@ -3,7 +3,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="flycast-sa"
-PKG_VERSION="5f4eefab5852d1c832ad8ffdf514fef8c217f1ac" # v2.5
+PKG_VERSION="392a429e8b040b3e5bf6696cb4f984274fc44123" # v2.6
 PKG_LICENSE="GPLv2"
 PKG_SITE="https://github.com/flyinghead/flycast"
 PKG_URL="${PKG_SITE}.git"
@@ -14,7 +14,7 @@ PKG_PATCH_DIRS+="${DEVICE}"
 
 if [[ "${OPENGL_SUPPORT}" = "yes" ]] && [[ ! "${DEVICE}" = "S922X" ]]; then
   PKG_DEPENDS_TARGET+=" ${OPENGL} glu libglvnd"
-  PKG_CMAKE_OPTS_TARGET+="  -USE_OPENGL=ON -DUSE_GLES=OFF"
+  PKG_CMAKE_OPTS_TARGET+="  -DUSE_OPENGL=ON -DUSE_GLES=OFF"
 
 elif [ "${OPENGLES_SUPPORT}" = yes ]; then
   PKG_DEPENDS_TARGET+=" ${OPENGLES}"

@@ -2,7 +2,7 @@
 # Copyright (C) 2018-present 5schatten (https://github.com/5schatten)
 
 PKG_NAME="hatarisa"
-PKG_VERSION="39b5854b31e4c103360e193b1cbddb21d7d46842"
+PKG_VERSION="2116764b58699dc495c999eaaabe394fba3bd316"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/hatari/hatari"
 PKG_URL="https://github.com/hatari/hatari/archive/${PKG_VERSION}.tar.gz"
@@ -38,6 +38,6 @@ makeinstall_target() {
 
   # copy binary & start script
   cp src/hatari ${INSTALL}/usr/bin/hatarisa
-  cp -R ${PKG_DIR}/scripts/start_hatari.sh ${INSTALL}/usr/bin/
-  chmod 0755 ${INSTALL}/usr/bin/start_hatari.sh
+  cp -R ${PKG_DIR}/scripts/start_hatarisa.sh ${INSTALL}/usr/bin/
+  chmod 0755 ${INSTALL}/usr/bin/start_hatarisa.sh
 }

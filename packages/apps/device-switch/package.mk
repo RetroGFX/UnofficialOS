@@ -15,5 +15,6 @@ makeinstall_target() {
 
   mkdir -p ${INSTALL}/usr/bin
   cp ${PKG_DIR}/scripts/${DEVICE}/device-switch ${INSTALL}/usr/bin
+  cp ${PKG_DIR}/scripts/${DEVICE}/device-switch-k36 ${INSTALL}/usr/bin
   chmod 0755 ${INSTALL}/usr/bin/*
 }

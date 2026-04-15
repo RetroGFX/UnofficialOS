@@ -181,7 +181,10 @@ case ${EMULATOR} in
     case ${HW_ARCH} in
       aarch64)
         if [[ "${CORE}" =~ pcsx_rearmed32 ]] || \
+           [[ "${CORE}" =~ ludicrousn64_xtreme32 ]] || \
+           [[ "${CORE}" =~ morpheuscast_xtreme32 ]] || \
            [[ "${CORE}" =~ gpsp ]] || \
+           [[ "${CORE}" =~ gametank32 ]] || \
            [[ "${CORE}" =~ desmume ]]
         then
           ### Configure for 32bit Retroarch
@@ -277,18 +280,21 @@ case ${EMULATOR} in
       "gamecube")
         RUNTHIS='${RUN_SHELL} /usr/bin/start_dolphin_gc.sh "${ROMNAME}"'
       ;;
-      "wii")
+      "wii"|"wiiware")
         RUNTHIS='${RUN_SHELL} /usr/bin/start_dolphin_wii.sh "${ROMNAME}"'
       ;;
       "ports")
         RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
-	sed -i "/^ACTIVE_GAME=/c\ACTIVE_GAME=\"${ROMNAME}\"" /storage/.config/PortMaster/mapper.txt
+	      sed -i "/^ACTIVE_GAME=/c\ACTIVE_GAME=\"${ROMNAME}\"" /storage/.config/PortMaster/mapper.txt
+      ;;
+      "windows")
+        RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
       ;;
       "shell")
         RUNTHIS='${RUN_SHELL} "${ROMNAME}"'
       ;;
       *)
-        RUNTHIS='${RUN_SHELL} "start_${CORE%-*}.sh" "${ROMNAME}"'
+        RUNTHIS='${RUN_SHELL} "start_${CORE%-*}.sh" "${ROMNAME}" "${PLATFORM}"'
       ;;
     esac
   ;;
@@ -363,6 +369,14 @@ then
   fi
 fi
 
+### Mesa Panfrost Forcepack if selected.
+FORCEPACK=$(get_setting "forcepack" "${PLATFORM}" "${ROMNAME##*/}")
+if [ ! -z "${FORCEPACK}" ] && ([ "${FORCEPACK}" = "1" ] || [ "${FORCEPACK}" = "On" ])
+then
+    ${VERBOSE} && log $0 "Enabling panfrost forcepack"
+    export PAN_MESA_DEBUG=forcepack
+fi
+
 ### Offline all but the number of threads we need for this game if configured.
 NUMTHREADS=$(get_setting "threads" "${PLATFORM}" "${ROMNAME##*/}")
 if [ -n "${NUMTHREADS}" ] &&
@@ -378,7 +392,7 @@ ${VERBOSE} && log $0 "Set emulation performance mode to (${PERFORMANCE_MODE})"
 ${PERFORMANCE_MODE}
 
 # If the rom is a shell script just execute it, useful for DOSBOX and ScummVM scan scripts
-if [[ "${ROMNAME}" == *".sh" ]]; then
+if [[ "${ROMNAME}" == *".sh" ]] && [ ! "${PLATFORM}" = "ports" ] && [ ! "${PLATFORM}" = "windows" ]; then
         ${VERBOSE} && log $0 "Executing shell script ${ROMNAME}"
         "${ROMNAME}" &>>${OUTPUT_LOG}
         ret_error=$?

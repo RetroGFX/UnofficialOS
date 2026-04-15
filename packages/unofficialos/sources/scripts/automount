@@ -127,7 +127,7 @@ function mount_games() {
           then
             rm -f /storage/.ms_unsupported
           fi
-	  touch /storage/.ms_supported
+      touch /storage/.ms_supported
         ;;
         *)
           log $0 "Partition does not support overlayfs, disabling."
@@ -154,11 +154,18 @@ function mount_games() {
         ### Udevil shouldn't mount it this early, but just in-case.
         umount /var/media/* 2>/dev/null
 
-        log $0 "Checking filesystem ${1}."
-        fsck -Mly ${1} >/dev/null 2>&1
-
         log $0 "Mounting ${1} on ${MOUNT_PATH}"
-        /usr/bin/busybox mount ${1} ${MOUNT_PATH} >/dev/null 2>&1
+        /usr/bin/busybox mount ${MOUNT_ARGS} ${1} ${MOUNT_PATH} >/dev/null 2>&1
+
+        log $0 "Checking filesystem ${1}."
+        if ! touch "${MOUNT_PATH}/.tmp-unofficialos" 2>/dev/null; then
+          log $0 "Fixing filesystem ${1}."
+          /usr/bin/busybox umount ${1} >/dev/null 2>&1
+          fsck -Mly ${1} >/dev/null 2>&1
+          /usr/bin/busybox mount ${MOUNT_ARGS} ${1} ${MOUNT_PATH} >/dev/null 2>&1
+        else
+          rm "${MOUNT_PATH}/.tmp-unofficialos"
+        fi
       fi
       start_ms external
       add_readme

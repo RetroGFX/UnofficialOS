@@ -1,0 +1,8 @@
+#!/bin/sh
+. /etc/profile
+
+if [ -f "/usr/lib/autostart/quirks/devices/${QUIRK_DEVICE}/bin/battery_led_status" ]; then
+  exec "/usr/lib/autostart/quirks/devices/${QUIRK_DEVICE}/bin/battery_led_status" $*
+elif [ -f "/usr/lib/autostart/quirks/platforms/${HW_DEVICE}/bin/battery_led_status" ]; then
+  exec "/usr/lib/autostart/quirks/platforms/${HW_DEVICE}/bin/battery_led_status" $*
+fi

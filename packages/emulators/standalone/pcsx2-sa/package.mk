@@ -2,11 +2,12 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="pcsx2-sa"
-PKG_VERSION="v1.7.4709"
+PKG_VERSION="v2.7.248"
 PKG_ARCH="x86_64"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/pcsx2/pcsx2"
-PKG_URL="${PKG_SITE}/releases/download/${PKG_VERSION}/pcsx2-${PKG_VERSION}-linux-AppImage-64bit-Qt.AppImage"
+PKG_URL="${PKG_SITE}/releases/download/${PKG_VERSION}/pcsx2-${PKG_VERSION}-linux-AppImage-x64-Qt.AppImage"
+PKG_DEPENDS_TARGET="toolchain libcom-err fuse2"
 PKG_LONGDESC="PS2 Emulator appimage"
 PKG_TOOLCHAIN="manual"
 

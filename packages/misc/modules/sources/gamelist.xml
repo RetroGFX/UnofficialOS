@@ -13,18 +13,6 @@
         <image>./images/diagnostic.svg</image>
     </game>
     <game>
-        <path>./Joystick Calibration.py</path>
-        <name>Joystick Calibration Tool</name>
-        <desc>Calibrates your gamepad by detecting stick directions and updates your system’s overlay file so controls feel right—no guesswork, no manual edits.</desc>
-        <developer>UnofficialOS</developer>
-        <publisher>UnofficialOS</publisher>
-        <rating>5.0</rating>
-        <releasedate>2025</releasedate>
-        <genre>Tool</genre>
-        <players>1</players>
-        <image>./images/joystick.svg</image>
-    </game>
-    <game>
         <path>./fileman.sh</path>
         <name>File Manager</name>
         <desc>Enables you to browse the UnofficialOS filesystem and manage files directly on your device.  You can also use this tool to copy files from external drives to your UnofficialOS filesystem.</desc>
@@ -97,6 +85,18 @@
         <image>./images/remove-mac-files.svg</image>
     </game>
     <game>
+        <path>./Start AetherSX2.sh</path>
+        <name>Start AetherSX2</name>
+        <desc>Opens the AetherSX2 GUI (PS2) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2021</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/aethersx2.svg</image>
+    </game>
+    <game>
         <path>./Start CEMU.sh</path>
         <name>Start Cemu</name>
         <desc>Opens the Cemu GUI (WiiU) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. Software to emulate Wii U games and applications.</desc>
@@ -109,6 +109,18 @@
         <image>./images/cemu.svg</image>
     </game>
     <game>
+        <path>./Start Duckstation.sh</path>
+        <name>Start Duckstation</name>
+        <desc>Opens the Duckstation GUI (PS1) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2024</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/duckstation.svg</image>
+    </game>
+    <game>
         <path>./Start HATARISA.sh</path>
         <name>Start Hatari</name>
         <desc>Opens the Hatari GUI to enable global configuration changes to be made directly. Hatari is an Atari ST/STE/TT/Falcon emulator for GNU/Linux, BSD, Mac OS X, Windows and other systems which are supported by the SDL library. The Atari ST was a 16/32 bit computer system which was first released by Atari in 1985. Using the Motorola 68000 CPU, it was a very popular computer having quite a lot of CPU power at that time. Unlike many other Atari ST emulators which try to give you a good environment for running GEM applications, Hatari tries to emulate the hardware of a ST as close as possible so that it is able to run most of the old ST games and demos. Hatari is open source software and is distributed under the terms of the GNU General Public License (GPL).</desc>
@@ -119,6 +131,18 @@
         <genre>Emulator</genre>
         <players>1</players>
         <image>./images/hatari.svg</image>
+    </game>
+    <game>
+        <path>./Start MelonDS.sh</path>
+        <name>Start MelonDS</name>
+        <desc>Opens the MelonDS GUI (Nintendo DS) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard to modify settings.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2024</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/melonds.svg</image>
     </game>
     <game>
         <path>./Start Moonlight.sh</path>
@@ -183,9 +207,7 @@
     <game>
         <path>./Start RPCS3.sh</path>
         <name>Start RPCS3</name>
-        <desc>Opens the RPCS3 GUI (PS3) to enable configuration changes to be made directly to the emulator. You can use this to set up firmware, update controls and install packages. It's recommended to have a mouse and keyboard available to modify settings. RPCS3 is a multi-platform open-source Sony PlayStation 3 emulator and debugger written in C++ for Windows, Linux, macOS and FreeBSD.
-
-</desc>
+        <desc>Opens the RPCS3 GUI (PS3) to enable configuration changes to be made directly to the emulator. You can use this to set up firmware, update controls and install packages. It's recommended to have a mouse and keyboard available to modify settings. RPCS3 is a multi-platform open-source Sony PlayStation 3 emulator and debugger written in C++ for Windows, Linux, macOS and FreeBSD.</desc>
         <developer>UnofficialOS</developer>
         <publisher>UnofficialOS</publisher>
         <rating>5.0</rating>
@@ -207,6 +229,54 @@
         <image>./images/scummvm.svg</image>
     </game>
     <game>
+        <path>./Start Vita3K.sh</path>
+        <name>Start Vita3K</name>
+        <desc>Opens the Vita3K GUI (PS Vita) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. Vita3K is a free and open-source PlayStation Vita emulator for Windows, macOS, and Linux systems.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Scan Vita3K Games.sh</path>
+        <name>Scan Vita3K Games</name>
+        <desc>Creates EmulationStation launchers for installed PS Vita games.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Install Vita3K Content.sh</path>
+        <name>Install Vita3K Content</name>
+        <desc>Installs games and content into the Vita3K emulator.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
+        <path>./Install Vita3K FW.sh</path>
+        <name>Install Vita3K FW</name>
+        <desc>Installs the Vita3K Firmware.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/vita3k.svg</image>
+    </game>
+    <game>
         <path>./Start Xemu.sh</path>
         <name>Start Xemu</name>
         <desc>Opens the Xemu GUI (Xbox) to enable global configuration changes to be made directly to the emulator. It's recommended to have a mouse and keyboard available to modify settings. A free and open-source application that emulates the original Microsoft Xbox game console, enabling people to play their original Xbox games on Windows, macOS, and Linux systems.</desc>
@@ -217,5 +287,17 @@
         <genre>Emulator</genre>
         <players>1</players>
         <image>./images/xemu.svg</image>
+    </game>
+    <game>
+        <path>./Scan id Tech Files.sh</path>
+        <name>Scan id Tech Files</name>
+        <desc>Creates launchers for id Software games.</desc>
+        <developer>UnofficialOS</developer>
+        <publisher>UnofficialOS</publisher>
+        <rating>5.0</rating>
+        <releasedate>2023</releasedate>
+        <genre>Emulator</genre>
+        <players>1</players>
+        <image>./images/idtech.svg</image>
     </game>
 </gameList>

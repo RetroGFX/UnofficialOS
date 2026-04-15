@@ -12,6 +12,7 @@ ROM_DIR="/storage/roms/saturn/yabasanshiro"
 CONFIG_DIR="/storage/.config/yabasanshiro"
 SOURCE_DIR="/usr/config/yabasanshiro"
 BIOS_BACKUP="/storage/roms/bios/yabasanshiro"
+SAVESTATE_DIR="/storage/roms/savestates/saturn/yabasanshiro/"
 
 if [ ! -d "${ROM_DIR}" ]
 then
@@ -26,6 +27,11 @@ fi
 if [ ! -d "${CONFIG_DIR}" ]
 then
   mkdir -p "${CONFIG_DIR}"
+fi
+
+if [ ! -d "${SAVESTATE_DIR}" ]
+then
+  mkdir -p "${SAVESTATE_DIR}"
 fi
 
 if [ ! -e "${CONFIG_DIR}/input.cfg" ]
@@ -84,5 +90,5 @@ else
   unset EMUPERF
 fi
 
-echo "Command: yabasanshiro -r 2 -i "${1}" ${BIOS}" >/var/log/exec.log 2>&1
+echo "Command: yabasanshiro -r 2 -i "${1}" ${BIOS}" >>/var/log/exec.log 2>&1
 ${EMUPERF} yabasanshiro -r 2 -i "${1}" ${BIOS} >>/var/log/exec.log 2>&1 ||:

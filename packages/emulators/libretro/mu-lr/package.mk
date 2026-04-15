@@ -2,7 +2,7 @@
 # Copyright (C) 2024 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="mu-lr"
-PKG_VERSION="2b6c079ca84b3d56835c64ff8e6efad811d99626"
+PKG_VERSION="d9766f139ece646703b5785097374a3a68dd07ad"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="CC BY-NC 3.0 US"

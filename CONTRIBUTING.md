@@ -18,13 +18,13 @@ We use Github to host code, to track issues and feature requests, as well as acc
 Pull requests are the best way to propose changes to the codebase (we use [Github Flow](https://guides.github.com/introduction/flow/index.html)). We actively welcome your pull requests:
 
 1. Join our discord and chat with us, we'll be happy to help you successfully implement your change.
-2. Fork the repo and create your branch from `uos-dev`.
+2. Fork the repo and create your branch from `dev`.
 3. Ensure your code is built locally and tested.
 4. Any changes should be reflected in the documentation.
-5. Issue a pull request back to our `uos-dev` branch.
+5. Issue a pull request back to our `dev` branch.
 
-## Any contributions you make will be under the Apache 2 Software License
-In short, when you submit code changes, your submissions are understood to be contributed under the same license as the original project code or under [Apache 2](https://choosealicense.com/licenses/apache-2.0/) license when no other license applies.
+## Any contributions you make will be under the GNU GPLv2 License
+In short, when you submit code changes, your submissions are understood to be contributed under the same license as the original project code or under [GNU GPL Version 2](https://choosealicense.com/licenses/gpl-2.0/) license when no other license applies.
 
 ## Use a Consistent Coding Style
 * Follow the same style as the source you are editing.
@@ -33,7 +33,7 @@ In short, when you submit code changes, your submissions are understood to be co
 * Use 2 spaces for indentation rather than tabs when possible.
 
 ## License
-By contributing, you agree that your contributions will be licensed under the license of the existing project code being modified or Apache 2.
+By contributing, you agree that your contributions will be licensed under the license of the existing project code being modified or GNU GPLv2.
 
 ## References
 This document was adapted from the open-source contribution guidelines for [Facebook's Draft](https://github.com/facebook/draft-js/blob/a9316a723f9e918afde44dea68b5f9f39b7d9b00/CONTRIBUTING.md)
