@@ -1,0 +1,16 @@
+Fix go2_presenter rotation for RG Arc panel orientation.
+The Arc's portrait panel is mounted opposite to OGA/OGS devices,
+requiring 90 degrees CW correction instead of 270.
+diff -rupN retroarch.orig/gfx/drivers_context/drm_go2_ctx.c retroarch/gfx/drivers_context/drm_go2_ctx.c
+--- retroarch.orig/gfx/drivers_context/drm_go2_ctx.c
++++ retroarch/gfx/drivers_context/drm_go2_ctx.c
+@@ -345,7 +345,7 @@ static void gfx_ctx_go2_drm_swap_buffers(void *data)
+    go2_presenter_post(drm->presenter,
+          surf,
+          src_x, src_y, src_w, src_h,
+          out_y, out_x, out_h, out_w,
+-         GO2_ROTATION_DEGREES_270, 2);
++         GO2_ROTATION_DEGREES_90, 2);
+    go2_context_surface_unlock(drm->context, surf);
+ #endif
+ }
