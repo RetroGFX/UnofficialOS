@@ -1,0 +1,15 @@
+Flip Rotate90 direction for RG Arc panel orientation.
+The Arc's panel needs 90 degrees CW correction, opposite to OGA-style
+devices (which need 270 CW). Change the ROTATE==1 shader to rotate CW.
+diff -rupN flycast.orig/core/rend/gles/quad.cpp flycast/core/rend/gles/quad.cpp
+--- flycast.orig/core/rend/gles/quad.cpp
++++ flycast/core/rend/gles/quad.cpp
+@@ -29,7 +29,7 @@ void main()
+ {
+ 	vtx_uv = in_uv;
+ #if ROTATE == 1
+-	gl_Position = vec4(-in_pos.y, in_pos.x, in_pos.z, 1.0);
++	gl_Position = vec4(in_pos.y, -in_pos.x, in_pos.z, 1.0);
+ #else
+ 	gl_Position = vec4(in_pos, 1.0);
+ #endif

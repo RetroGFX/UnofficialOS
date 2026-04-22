@@ -105,9 +105,9 @@ index 638af4ea..6cef355a 100644
  
 +  switch(g_settings.display_rotate & 3)
 +  {
-+    case 1: m_display->SetDisplayRotation(HostDisplay::Rotation::R90Degrees);
-+    case 2: m_display->SetDisplayRotation(HostDisplay::Rotation::R180Degrees);
-+    case 3: m_display->SetDisplayRotation(HostDisplay::Rotation::R270Degrees);
++    case 1: m_display->SetDisplayRotation(HostDisplay::Rotation::R90Degrees); break;
++    case 2: m_display->SetDisplayRotation(HostDisplay::Rotation::R180Degrees); break;
++    case 3: m_display->SetDisplayRotation(HostDisplay::Rotation::R270Degrees); break;
 +    case 0:
 +    default: break;
 +  }

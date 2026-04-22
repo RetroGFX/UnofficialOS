@@ -1,0 +1,133 @@
+# SPDX-License-Identifier: GPL-2.0
+# Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
+
+#Set mupen64-plus-sa config for R33S
+if [ ! -d "/storage/.config/mupen64plus" ]; then
+    mkdir -p "/storage/.config/mupen64plus/"
+    cp -r /usr/local/share/mupen64plus/mupen64plus.cfg* /storage/.config/mupen64plus/
+fi
+if [ ! -f "/storage/.config/mupen64plus/custominput.ini" ]; then
+cat <<EOF >/storage/.config/mupen64plus/custominput.ini
+[rg_arc_joypad]
+plugged = True
+mouse = False
+AnalogDeadzone = 0,0
+AnalogPeak = 32768,32768
+DPad R = button(16)
+DPad L = button(15)
+DPad D = button(14)
+DPad U = button(13)
+Start = button(9)
+Z Trig = button(6)
+B Button = button(2)
+A Button = button(1)
+C Button R = button(12)
+C Button L = button(3)
+C Button D = button(0)
+C Button U = button(11)
+R Trig = button(5)
+L Trig = button(4)
+Mempak switch = 
+Rumblepak switch = 
+# Analog axis configuration mappings
+X Axis = 
+Y Axis = 
+EOF
+fi
+
+# Copy over device specific retroarch remappings unless they already exist
+REMAP_DIR="/usr/lib/autostart/quirks/devices/${QUIRK_DEVICE}/remappings"
+if [ -d "${REMAP_DIR}" ]; then
+    for dir in "${REMAP_DIR}"/*/; do
+        CORE_NAME=$(basename "${dir}")
+        if [ ! -d "/storage/remappings/${CORE_NAME}" ]; then
+            cp -r "${dir}" "/storage/remappings/"
+        fi
+    done
+fi
+
+# hypseus aka daphne
+if [ ! -d "/storage/.config/game/configs/hypseus/" ]; then
+    mkdir -p /storage/.config/game/configs/hypseus/
+fi
+if grep -q "RG ARC" "/storage/.config/game/configs/hypseus/hypinput.ini" 2>/dev/null; then
+  : # already configured for RG ARC
+else
+cat <<EOF >/storage/.config/game/configs/hypseus/hypinput.ini
+# Hypseus button mappings for RG ARC (BSP kernel)
+#
+#Controller Button		ID#		Game Function
+#Dpad Up			14		Dpad Up
+#Dpad Down			15		Dpad Down
+#Dpad Left			16		Dpad Left
+#Dpad Right			17		Dpad Right
+#Select				9		Insert Coin
+#Start				10		Start Game
+#A Button			1		Button 1
+#B Button			2		Button 2
+#C Button (R3)		13		Toggle Scoreboard
+#X Button			3		Skill 1
+#Y Button			4		Skill 2
+#Z Button (L3)		12		Skill 3
+#L1				    5		Pause
+#R1				    6		Test Mode
+#L2				    7		Reset
+#R2				    8		Service Mode
+
+[KEYBOARD]
+KEY_UP = 1073741906 SDLK_UP 14
+KEY_DOWN = 1073741905 SDLK_DOWN 15
+KEY_LEFT = 1073741904 SDLK_LEFT 16
+KEY_RIGHT = 1073741903 SDLK_RIGHT 17
+KEY_COIN1 = SDLK_5 0 9
+KEY_COIN2 = SDLK_6 0 0
+KEY_START1 = SDLK_1 0 10
+KEY_START2 = SDLK_2 0 0
+KEY_BUTTON1 = SDLK_LCTRL 0 1
+KEY_BUTTON2 = SDLK_LALT 0 2
+KEY_BUTTON3 = SDLK_SPACE 0 13
+KEY_SKILL1 = SDLK_LSHIFT 0 3
+KEY_SKILL2 = SDLK_z 0 4
+KEY_SKILL3 = SDLK_x 0 12
+KEY_SERVICE = SDLK_9 0 8
+KEY_TEST = SDLK_F2 SDLK_F4 6
+KEY_RESET = SDLK_0 0 7
+KEY_SCREENSHOT = SDLK_F12 0 0
+KEY_QUIT = SDLK_ESCAPE 0 0
+KEY_PAUSE = SDLK_p 0 5
+KEY_CONSOLE = SDLK_BACKSLASH 0 0
+KEY_TILT = SDLK_t 0 0
+END
+EOF
+fi
+
+# PPSSPP controls
+if  grep RGARC -q "/storage/.config/ppsspp/PSP/SYSTEM/controls.ini"
+then
+  exit 1
+else
+  cat <<EOF >/storage/.config/ppsspp/PSP/SYSTEM/controls.ini
+#RGARC
+[ControlMapping]
+Up = 10-19
+Down = 10-20
+Left = 10-21
+Right = 10-22
+Circle = 10-189
+Cross = 10-190
+Square = 10-191
+Triangle = 10-188
+Start = 10-197
+Select = 10-196
+L = 10-193
+R = 10-192
+An.Up = 10-4003
+An.Down = 10-4002
+An.Left = 10-4001
+An.Right = 10-4000
+Pause = 10-4,10-106
+Save State = 10-4010
+Load State = 10-4008
+EOF
+fi
+
