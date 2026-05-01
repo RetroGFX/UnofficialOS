@@ -13,6 +13,7 @@ sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-kinhank-k36\.dtb|#  load mm
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-mymini\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-mymini.dtb|' /flash/boot.ini
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' /flash/boot.ini
 sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-gameconsole-r36-ultra\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-gameconsole-r36-ultra.dtb|' /flash/boot.ini
+sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-aislpc-r36t-max\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-aislpc-r36t-max.dtb|' /flash/boot.ini
 
 case $1 in
   CLONE)
@@ -32,6 +33,9 @@ case $1 in
     ;;
   XIFAN_XF35_40H)
     sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' /flash/boot.ini
+    ;;
+  AISLPC_R36T_MAX)
+    sed -i 's|^[# ]*load mmc 1:1 \${dtb_loadaddr} rk3326-aislpc-r36t-max\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-aislpc-r36t-max.dtb|' /flash/boot.ini
     ;;
 esac
 

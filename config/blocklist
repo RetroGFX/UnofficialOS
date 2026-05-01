@@ -24,6 +24,7 @@ ppsspp-sa # Manually update to release versions.
 retroarch # Manually update to release versions.
 rpcs3-sa # Manually update Appimage.
 scummvmsa # Manually update to release versions.
+stella-lr # Compiler related issues.
 vice-sa # Doesn't support updating with the script.
 vita3k-sa # Should be manually updated.
 xemu-sa # Manually update Appimage.
