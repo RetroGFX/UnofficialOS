@@ -95,7 +95,7 @@
  
 -  this->m_fb_width = this->m_drm_mode->hdisplay;
 -  this->m_fb_height = this->m_drm_mode->vdisplay;
-+  /* Physical panel dimensions (portrait for Arc). */
++  /* Physical panel dimensions (portrait for X55). */
 +  this->m_phys_width = this->m_drm_mode->hdisplay;
 +  this->m_phys_height = this->m_drm_mode->vdisplay;
 +
