@@ -1,10 +1,10 @@
 [GCPad1]
-Device = evdev/0/rg_arc_joypad
+Device = evdev/0/zed_joystick
 Buttons/A = Button 0
 Buttons/B = Button 1
 Buttons/Start = Button 9
-Buttons/X = Button 3
-Buttons/Y = Button 2
+Buttons/X = Button 2
+Buttons/Y = Button 3
 Buttons/Z = Button 7
 Buttons/Hotkey = Button 8
 C-Stick/Dead Zone = 25.000000000000000
