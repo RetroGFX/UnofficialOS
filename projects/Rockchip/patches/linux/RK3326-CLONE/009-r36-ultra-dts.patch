@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/arch/arm64/boot/dts/rockchip/rk3326-gameconsole-r36-ultra.dts
-@@ -0,0 +1,918 @@
+@@ -0,0 +1,917 @@
 +/// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
 + * Copyright (c) 2024-present ROCKNIX (https://github.com/ROCKNIX)
@@ -823,8 +823,7 @@
 +
 +    vcc5-usb {
 +        vcc5_usb: vcc5-usb {
-+            rockchip,pins = <0x03 0x04 0x00 0x9f>;
-+            phandle = <0xb2>;
++            rockchip,pins = <3 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
 +        };
 +    };
 +
