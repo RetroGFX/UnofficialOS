@@ -13,8 +13,7 @@ idtech-lr # Just a dummy package
 kronos-sa # Using the release version of kronos had better results.
 lrps2-lr # Source moved
 melonds-sa # Broken OpenGL renderer upstream
-mupen64plus-sa-ui-console # Causes segfaults
-mupen64plus-nx-lr # Upstream breaks video out. 
+mupen64plus-sa-ui-console # Causes segfaults 
 nanoboyadvance-sa # SDL version removed after this commit
 np2kai-lr # Last major commit before hiatus is broken.
 openbor # Newer versions break controls, needs research.
@@ -24,7 +23,7 @@ ppsspp-sa # Manually update to release versions.
 retroarch # Manually update to release versions.
 rpcs3-sa # Manually update Appimage.
 scummvmsa # Manually update to release versions.
-stella-lr # Compiler related issues.
+stella-lr # Requires GCC-13 update.
 vice-sa # Doesn't support updating with the script.
 vita3k-sa # Should be manually updated.
 xemu-sa # Manually update Appimage.

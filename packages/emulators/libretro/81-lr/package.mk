@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="81-lr"
-PKG_VERSION="f9e5fa3bef9a6d6e1e19a4b1c7e5922467b582a2"
+PKG_VERSION="fa7094910d040baa5fd8b11dbf6a1a618330ecd9"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv3"

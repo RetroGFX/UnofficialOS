@@ -20,7 +20,7 @@
 ################################################################################
 
 PKG_NAME="tgbdual-lr"
-PKG_VERSION="933707c0ba8f12360f6d79712f735a917713709a"
+PKG_VERSION="12540f0b2d3783259a0dce34ac8aa7a86beeaa11"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2"

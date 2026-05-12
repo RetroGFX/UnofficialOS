@@ -2,7 +2,7 @@
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="arduous-lr"
-PKG_VERSION="fba6f3e418218cf35a17cda8aac62133ff327f2c"
+PKG_VERSION="798e3950f1de7c69455bc988d55eafeebac5a1eb"
 PKG_LICENSE="GPLv3"
 PKG_SITE="https://github.com/libretro/arduous"
 PKG_URL="${PKG_SITE}.git"
