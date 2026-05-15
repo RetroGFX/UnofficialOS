@@ -24,6 +24,15 @@ if [ -f "/storage/.config/drastic/config/drastic.cfg.xut" ]; then
   mv /storage/.config/drastic/config/drastic.cfg.xut /storage/.config/drastic/config/drastic.cfg
 fi
 
+#Set bigpemu config for XU10
+if [ ! -d "/storage/.config/bigpemu" ]; then
+  mkdir -p "/storage/.config/bigpemu"
+  cp -r "/usr/config/bigpemu" "/storage/.config/"
+fi
+if [ -f "/storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.xut" ]; then
+  cp /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.xut /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg
+fi
+
 #Map ppsspp controls
 if  grep XU10 -q "/storage/.config/ppsspp/PSP/SYSTEM/controls.ini"
 then

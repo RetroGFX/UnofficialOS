@@ -24,6 +24,15 @@ if [ -f "/storage/.config/drastic/config/drastic.cfg.rgb20s" ]; then
   mv /storage/.config/drastic/config/drastic.cfg.rgb20s /storage/.config/drastic/config/drastic.cfg
 fi
 
+#Set bigpemu config for RGB20S
+if [ ! -d "/storage/.config/bigpemu" ]; then
+  mkdir -p "/storage/.config/bigpemu"
+  cp -r "/usr/config/bigpemu" "/storage/.config/"
+fi
+if [ -f "/storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.rgb20s" ]; then
+  cp /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.rgb20s /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg
+fi
+
 #Map ppsspp controls
 if  grep RGB20S -q "/storage/.config/ppsspp/PSP/SYSTEM/controls.ini"
 then

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2022-present UnofficialOS (https://github.com/RetroGFX/UnofficialOS)
 
-#Set mupen64-plus-sa config for R33S
+#Set mupen64-plus-sa config for RG ARC
 if [ ! -d "/storage/.config/mupen64plus" ]; then
     mkdir -p "/storage/.config/mupen64plus/"
     cp -r /usr/local/share/mupen64plus/mupen64plus.cfg* /storage/.config/mupen64plus/

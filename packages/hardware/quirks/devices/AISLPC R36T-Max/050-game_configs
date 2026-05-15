@@ -21,6 +21,15 @@ if [ -f "/storage/.config/drastic/config/drastic.cfg.k36" ]; then
   cp /storage/.config/drastic/config/drastic.cfg.k36 /storage/.config/drastic/config/drastic.cfg
 fi
 
+#Set bigpemu config for K36
+if [ ! -d "/storage/.config/bigpemu" ]; then
+  mkdir -p "/storage/.config/bigpemu"
+  cp -r "/usr/config/bigpemu" "/storage/.config/"
+fi
+if [ -f "/storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.k36" ]; then
+  cp /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.k36 /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg
+fi
+
 #Set ppsspp config for OGA
 if [ ! -d "/storage/.config/ppsspp" ]; then
   mkdir -p "/storage/.config/ppsspp"

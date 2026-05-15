@@ -24,6 +24,15 @@ if [ -f "/storage/.config/drastic/config/drastic.cfg.ogs" ]; then
   mv /storage/.config/drastic/config/drastic.cfg.ogs /storage/.config/drastic/config/drastic.cfg
 fi
 
+#Set bigpemu config for OGS
+if [ ! -d "/storage/.config/bigpemu" ]; then
+  mkdir -p "/storage/.config/bigpemu"
+  cp -r "/usr/config/bigpemu" "/storage/.config/"
+fi
+if [ -f "/storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.ogs" ]; then
+  cp /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.ogs /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg
+fi
+
 #Map ppsspp controls
 if  grep OGS -q "/storage/.config/ppsspp/PSP/SYSTEM/controls.ini"
 then
