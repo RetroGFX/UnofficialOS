@@ -167,6 +167,10 @@ if [ -f $SYSTEM_ROOT/usr/share/bootloader/boot.ini ]; then
     echo "Setting XiFan XF35-40H dtb in boot.ini..."
     sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
     sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-xifan-xf35-40h\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-xifan-xf35-40h.dtb|' $BOOT_ROOT/boot.ini
+  elif [ "$DTB_NAME" = 'AISLPC_R36T_MAX' ]; then
+    echo "Setting AISLPC R36T-Max dtb in boot.ini..."
+    sed -i 's|^  load mmc 1:1 \${dtb_loadaddr} rk3326-batlexp-g350\.dtb|#  load mmc 1:1 ${dtb_loadaddr} rk3326-batlexp-g350.dtb|' $BOOT_ROOT/boot.ini
+    sed -i 's|^#  load mmc 1:1 \${dtb_loadaddr} rk3326-aislpc-r36t-max\.dtb|  load mmc 1:1 ${dtb_loadaddr} rk3326-aislpc-r36t-max.dtb|' $BOOT_ROOT/boot.ini
   fi
 fi
 

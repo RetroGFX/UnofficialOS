@@ -2,7 +2,7 @@
 # Copyright (C) 2024 ROCKNIX (https://github.com/ROCKNIX)
 
 PKG_NAME="unofficialos-joypad"
-PKG_VERSION="39eaec26338e40dc823660fea4d5c04fa5cf9fe5"
+PKG_VERSION="b538a04b8958c564fdea62211ebbb8b2f101c98a"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/RetroGFX/unofficialos-joypad"
 PKG_URL="${PKG_SITE}/archive/${PKG_VERSION}.tar.gz"

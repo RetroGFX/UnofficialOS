@@ -2,7 +2,7 @@
 # Copyright (C) 2019-present Shanti Gilbert (https://github.com/shantigilbert)
 
 PKG_NAME="daphne-lr"
-PKG_VERSION="b5481bab34a51369b6749cd95f5f889e43aaa23f"
+PKG_VERSION="6f1695dd1f376060666eec0a416ff56bb6c9cccc"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPLv2+"

@@ -1,0 +1,168 @@
+--- a/Source/Core/Common/GL/GLInterface/EGLDRM.h
++++ b/Source/Core/Common/GL/GLInterface/EGLDRM.h
+@@ -88,6 +88,12 @@
+   bool m_waiting_for_flip;
+   struct gbm_bo* m_bo = nullptr;
+   struct gbm_bo* m_next_bo = nullptr;
++  struct gbm_bo* m_rga_bo[2] = {nullptr, nullptr};
++  int m_rga_dst_fd[2] = {-1, -1};
++  uint32_t m_rga_fb_id[2] = {0, 0};
++  uint32_t m_phys_width = 0;
++  uint32_t m_phys_height = 0;
++  int m_rga_idx = 0;
+   struct gbm_surface* m_gbm_surface = nullptr;
+   struct gbm_device* m_gbm_dev = nullptr;
+ 
+--- a/Source/Core/Common/GL/GLInterface/EGLDRM.cpp
++++ b/Source/Core/Common/GL/GLInterface/EGLDRM.cpp
+@@ -3,6 +3,8 @@
+ // Refer to the license.txt file included.
+ 
+ #include "Common/GL/GLInterface/EGLDRM.h"
++#include <rga/RgaApi.h>
++#include <rga/drmrga.h>
+ #include "Common/Logging/Log.h"
+ #include "Core/HW/VideoInterface.h"  //for TargetRefreshRate
+ 
+@@ -221,17 +223,31 @@
+ 
+ bool EGLDRM::QueueFlip()
+ {
+-  struct drm_fb* fb = nullptr;
+-
+   this->m_next_bo = gbm_surface_lock_front_buffer(this->m_gbm_surface);
+-  fb = (struct drm_fb*)gbm_bo_get_user_data(this->m_next_bo);
+ 
+-  if (!fb)
+-    fb = (struct drm_fb*)GetFbFromBo(this->m_next_bo);
++  /* Double-buffered RGA blit: write into the BO not currently on display. */
++  int rga_write = (this->m_rga_idx + 1) % 2;
++  int src_fd = gbm_bo_get_fd(this->m_next_bo);
++  rga_info_t src_info = {};
++  rga_info_t dst_info = {};
++  src_info.fd = src_fd;
++  src_info.mmuFlag = 1;
++  src_info.rotation = HAL_TRANSFORM_ROT_270; /* 270 deg CW: X55 panel bottom-on-left fix */
++  rga_set_rect(&src_info.rect, 0, 0, this->m_fb_width, this->m_fb_height,
++               this->m_fb_width, this->m_fb_height, RK_FORMAT_BGRA_8888);
++  dst_info.fd = this->m_rga_dst_fd[rga_write];
++  dst_info.mmuFlag = 1;
++  rga_set_rect(&dst_info.rect, 0, 0, this->m_phys_width, this->m_phys_height,
++               this->m_phys_width, this->m_phys_height, RK_FORMAT_BGRA_8888);
++  c_RkRgaBlit(&src_info, &dst_info, NULL);
++  close(src_fd);
+ 
+-  if (drmModePageFlip(this->m_drm_fd, this->m_crtc_id, fb->fb_id, DRM_MODE_PAGE_FLIP_EVENT,
+-                      &this->m_waiting_for_flip) == 0)
++  if (drmModePageFlip(this->m_drm_fd, this->m_crtc_id, this->m_rga_fb_id[rga_write],
++                      DRM_MODE_PAGE_FLIP_EVENT, &this->m_waiting_for_flip) == 0)
++  {
++    this->m_rga_idx = rga_write;
+     return true;
++  }
+ 
+   /* Failed to queue page flip. */
+   INFO_LOG(VIDEO, "\nFailed to queue page flip\n");
+@@ -520,6 +536,25 @@
+     this->m_orig_crtc = nullptr;
+   }
+ 
++  for (int i = 0; i < 2; i++)
++  {
++    if (this->m_rga_dst_fd[i] >= 0)
++    {
++      close(this->m_rga_dst_fd[i]);
++      this->m_rga_dst_fd[i] = -1;
++    }
++    if (this->m_rga_fb_id[i])
++    {
++      drmModeRmFB(this->m_drm_fd, this->m_rga_fb_id[i]);
++      this->m_rga_fb_id[i] = 0;
++    }
++    if (this->m_rga_bo[i])
++    {
++      gbm_bo_destroy(this->m_rga_bo[i]);
++      this->m_rga_bo[i] = nullptr;
++    }
++  }
++
+   if (this->m_gbm_surface)
+     gbm_surface_destroy(this->m_gbm_surface);
+ 
+@@ -784,10 +819,16 @@
+     goto error;
+   }
+ 
+-  this->m_fb_width = this->m_drm_mode->hdisplay;
+-  this->m_fb_height = this->m_drm_mode->vdisplay;
++  /* Physical panel dimensions (portrait for X55). */
++  this->m_phys_width = this->m_drm_mode->hdisplay;
++  this->m_phys_height = this->m_drm_mode->vdisplay;
++
++  /* Swap to logical landscape dimensions so EGL/Dolphin render correctly. */
++  this->m_fb_width = this->m_phys_height;
++  this->m_fb_height = this->m_phys_width;
+ 
+-  /* Create GBM surface. */
++  /* Create GBM render surface at logical (landscape) dimensions.
++     GBM_BO_USE_SCANOUT forces linear allocation so RGA can read the prime FD. */
+   this->m_gbm_surface =
+       gbm_surface_create(this->m_gbm_dev, this->m_fb_width, this->m_fb_height, GBM_FORMAT_XRGB8888,
+                          GBM_BO_USE_SCANOUT | GBM_BO_USE_RENDERING);
+@@ -798,6 +839,29 @@
+     goto error;
+   }
+ 
++  /* Create two RGA scanout BOs at physical (portrait) dimensions, double-buffered. */
++  for (int i = 0; i < 2; i++)
++  {
++    this->m_rga_bo[i] = gbm_bo_create(this->m_gbm_dev, this->m_phys_width, this->m_phys_height,
++                                      GBM_FORMAT_XRGB8888, GBM_BO_USE_SCANOUT);
++    if (!this->m_rga_bo[i])
++    {
++      INFO_LOG(VIDEO, "[KMS/EGL]: Couldn't create RGA scanout BO %d.\n", i);
++      goto error;
++    }
++    uint32_t rga_stride = gbm_bo_get_stride(this->m_rga_bo[i]);
++    uint32_t rga_handle = gbm_bo_get_handle(this->m_rga_bo[i]).u32;
++    if (drmModeAddFB(this->m_drm_fd, this->m_phys_width, this->m_phys_height, 24, 32,
++                     rga_stride, rga_handle, &this->m_rga_fb_id[i]) != 0)
++    {
++      INFO_LOG(VIDEO, "[KMS/EGL]: drmModeAddFB for RGA BO %d failed.\n", i);
++      goto error;
++    }
++    this->m_rga_dst_fd[i] = gbm_bo_get_fd(this->m_rga_bo[i]);
++  }
++  this->m_rga_idx = 0;
++  c_RkRgaInit();
++
+   if (!SetEGLVideoMode())
+   {
+     INFO_LOG(VIDEO, "[KMS/EGL]: Couldn't set EGL video mode.\n");
+@@ -806,13 +870,8 @@
+ 
+   this->m_bo = gbm_surface_lock_front_buffer(this->m_gbm_surface);
+ 
+-  fb = (struct drm_fb*)gbm_bo_get_user_data(this->m_bo);
+-
+-  if (!fb)
+-    fb = GetFbFromBo(this->m_bo);
+-
+-  ret = drmModeSetCrtc(this->m_drm_fd, this->m_crtc_id, fb->fb_id, 0, 0, &this->m_connector_id, 1,
+-                       this->m_drm_mode);
++  ret = drmModeSetCrtc(this->m_drm_fd, this->m_crtc_id, this->m_rga_fb_id[0], 0, 0,
++                       &this->m_connector_id, 1, this->m_drm_mode);
+   if (ret < 0)
+   {
+     INFO_LOG(VIDEO, "[KMS/EGL]: drmModeSetCrtc failed\n");
+--- a/Source/Core/Common/CMakeLists.txt
++++ b/Source/Core/Common/CMakeLists.txt
+@@ -248,7 +248,7 @@
+   endif()
+   if (LIBDRM_FOUND AND LIBGBM_FOUND)
+     target_include_directories(common PRIVATE ${EGL_INCLUDE_DIRS} ${LIBDRM_INCLUDE_DIRS} ${LIBGBM_INCLUDE_DIRS})
+-    target_link_libraries(common PUBLIC ${EGL_LIBRARIES} ${LIBDRM_LIBRARIES} ${LIBGBM_LIBRARIES})
++    target_link_libraries(common PUBLIC ${EGL_LIBRARIES} ${LIBDRM_LIBRARIES} ${LIBGBM_LIBRARIES} rga)
+   else()
+     target_include_directories(common PRIVATE ${EGL_INCLUDE_DIRS})
+     target_link_libraries(common PUBLIC ${EGL_LIBRARIES})

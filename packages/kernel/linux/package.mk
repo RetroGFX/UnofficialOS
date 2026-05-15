@@ -20,9 +20,9 @@ case ${DEVICE} in
     PKG_URL="https://github.com/armbian/linux-rockchip/archive/${PKG_VERSION}.tar.gz"
     PKG_GIT_CLONE_BRANCH="rk-5.10-rkr6"
   ;;
-  RK3566-BSP)
+  RK3566-BSP|RK3566-BSP-RGARC)
     PKG_URL="https://github.com/RetroGFX/rk356x-kernel.git"
-    PKG_VERSION="bf340e252cd15e5857560b10e28be1746b0d0260"
+    PKG_VERSION="a1d45748a0ad279ad5f1c3b12be96be1d3aa6a0a"
     GET_HANDLER_SUPPORT="git"
     PKG_GIT_CLONE_BRANCH="main"
   ;;

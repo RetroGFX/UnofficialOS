@@ -2,7 +2,7 @@
 # Copyright (C) 2019-present asakous (https://github.com/asakous)
 
 PKG_NAME="xmil-lr"
-PKG_VERSION="6a52dc21a5ff106137670bb600ab2ce3fcebeb1b"
+PKG_VERSION="3e7960a433c3bca820f8b8f5511a2b92bd666829"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="Unknown"

@@ -1,8 +1,8 @@
 diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
-index 8877194..af441d4 100644
+index 8877194..bbc2dc4 100644
 --- a/es-app/src/guis/GuiMenu.cpp
 +++ b/es-app/src/guis/GuiMenu.cpp
-@@ -1033,6 +1033,148 @@ void GuiMenu::openSystemSettings_batocera()
+@@ -1033,6 +1033,171 @@ void GuiMenu::openSystemSettings_batocera()
          });
          }
  
@@ -145,7 +145,30 @@ index 8877194..af441d4 100644
 +                        [r36ultra_switch] {
 +                                r36ultra_switch->setState(false);
 +                        }));
-+        });		
++        });	
++
++        // AISLPC R36T-Max Switch
++        auto r36tmax_switch = std::make_shared<SwitchComponent>(mWindow);
++        bool r36tmaxEnabled = SystemConf::getInstance()->get("system.device-aislpc-r36t-max") == "1";
++        r36tmax_switch->setState(r36tmaxEnabled);
++        s->addWithLabel(_("DEVICE IS AISLPC R36T / R36T MAX"), r36tmax_switch);
++        r36tmax_switch->setOnChangedCallback([this, r36tmax_switch] {
++                if (!r36tmax_switch->getState()) return;
++                
++                std::string msg = _("The system will restart\n and user settings will be reset") + " \n ";
++                msg += _("Do you want to continue?");
++                
++                mWindow->pushGui(new GuiMsgBox(mWindow, msg, _("YES"),
++                        [this, r36tmax_switch] {
++                                bool tswitchenabled = r36tmax_switch->getState();
++                                SystemConf::getInstance()->set("system.device-aislpc-r36t-max", tswitchenabled ? "1" : "0");
++                                SystemConf::getInstance()->saveSystemConf();
++                                runSystemCommand("/usr/bin/device-switch-k36 AISLPC_R36T_MAX", " ", nullptr);
++                        }, _("NO"),
++                        [r36tmax_switch] {
++                                r36tmax_switch->setState(false);
++                        }));
++        });
 +        }
 +
  	s->addGroup(_("HARDWARE / STORAGE"));

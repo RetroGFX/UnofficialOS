@@ -1,3 +1,4 @@
+#!/bin/sh
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2022-present JELOS (https://github.com/JustEnoughLinuxOS)
 
@@ -21,6 +22,15 @@ fi
 if [ -f "/storage/.config/drastic/config/drastic.cfg.oga" ]; then
   rm /storage/.config/drastic/config/drastic.cfg
   mv /storage/.config/drastic/config/drastic.cfg.oga /storage/.config/drastic/config/drastic.cfg
+fi
+
+#Set bigpemu config for OGA
+if [ ! -d "/storage/.config/bigpemu" ]; then
+  mkdir -p "/storage/.config/bigpemu"
+  cp -r "/usr/config/bigpemu" "/storage/.config/"
+fi
+if [ -f "/storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.oga" ]; then
+  cp /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg.oga /storage/.config/bigpemu/userdata/BigPEmuConfig.bigpcfg
 fi
 
 #Map ppsspp controls

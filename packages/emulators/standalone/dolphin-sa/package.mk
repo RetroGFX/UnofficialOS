@@ -20,6 +20,12 @@ case ${DEVICE} in
     PKG_VERSION="0b160db48796f727311cea16072174d96b784f80"
     PKG_GIT_CLONE_BRANCH="egldrm"
     PKG_PATCH_DIRS+=" legacy"
+    PKG_PATCH_DIRS+=" ${DEVICE}"
+    case ${DEVICE} in
+      RK3566-BSP-RGARC|RK3566-BSP-X55)
+        PKG_DEPENDS_TARGET+=" librga"
+      ;;
+    esac
   ;;
 esac
 

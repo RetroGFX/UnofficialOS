@@ -8,7 +8,7 @@ PKG_SECTION="emulation" # Do not change to virtual or makeinstall_target will no
 PKG_LONGDESC="Emulation metapackage."
 PKG_TOOLCHAIN="manual"
 
-PKG_EMUS="amiberry flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight mupen64plus-sa openbor pico-8 ppsspp-sa scummvmsa vice-sa"         
+PKG_EMUS="amiberry bigpemu-sa flycast-sa gzdoom-sa hatarisa hypseus-singe moonlight mupen64plus-sa openbor pico-8 ppsspp-sa scummvmsa vice-sa"         
 
 PKG_RETROARCH="core-info libretro-database retroarch retroarch-assets retroarch-joypads retroarch-overlays slang-shaders"              
 
@@ -17,13 +17,13 @@ LIBRETRO_CORES="81-lr a5200-lr arduous-lr atari800-lr b2-lr beetle-gba-lr beetle
                 beetle-supergrafx-lr beetle-vb-lr beetle-wswan-lr bluemsx-lr cap32-lr crocods-lr daphne-lr doublecherrygb-lr               \
                 dosbox-svn-lr dosbox-pure-lr duckstation-lr easyrpg-lr emuscv-lr fake08-lr fbalpha2012-lr fbalpha2019-lr                   \
                 fbneo-lr fceumm-lr flycast-lr flycast2021-lr fmsx-lr freechaf-lr freeintv-lr freej2me-lr fuse-lr  gambatte-lr              \
-                gearboy-lr gearcoleco-lr gearsystem-lr genesis-plus-gx-lr genesis-plus-gx-wide-lr gw-lr handy-lr hatari-lr idtech-lr       \
-                jaxe-lr mame-lr mame2003-plus-lr mame2010-lr mame2015-lr melonds-lr melonds-ds-lr mesen-lr mgba-lr minivmac-lr             \
-                mojozork-lr mu-lr mupen64plus-lr mupen64plus-nx-lr neocd_lr nestopia-lr np2kai-lr o2em-lr opera-lr parallel-n64-lr         \
-                pcsx_rearmed-lr picodrive-lr pokemini-lr potator-lr ppsspp-lr prosystem-lr puae-lr puae2021-lr px68k-lr quasi88-lr         \
-                quicknes-lr race-lr same_cdi-lr sameboy-lr sameduck-lr scummvm-lr skyemu-lr smsplus-gx-lr snes9x-lr snes9x2002-lr          \
-                snes9x2005_plus-lr snes9x2010-lr stella-lr swanstation-lr tgbdual-lr theodore-lr tic80-lr uzem-lr vba-next-lr vbam-lr      \
-                vecx-lr vice-lr vircon32-lr virtualjaguar-lr xmil-lr wasm4-lr yabasanshiro-lr"
+                gearboy-lr gearcoleco-lr geargrafx-lr gearlynx-lr gearsystem-lr genesis-plus-gx-lr genesis-plus-gx-wide-lr gw-lr           \
+                handy-lr hatari-lr idtech-lr jaxe-lr mame-lr mame2003-plus-lr mame2010-lr mame2015-lr melonds-lr melonds-ds-lr             \
+                mesen-lr mgba-lr minivmac-lr mojozork-lr mu-lr mupen64plus-lr mupen64plus-nx-lr neocd_lr nestopia-lr np2kai-lr             \
+                o2em-lr opera-lr parallel-n64-lr pcsx_rearmed-lr picodrive-lr pokemini-lr potator-lr ppsspp-lr prosystem-lr puae-lr        \
+                puae2021-lr px68k-lr quasi88-lr quicknes-lr race-lr same_cdi-lr sameboy-lr sameduck-lr scummvm-lr skyemu-lr smsplus-gx-lr  \
+                snes9x-lr snes9x2002-lr snes9x2005_plus-lr snes9x2010-lr stella-lr swanstation-lr tgbdual-lr theodore-lr tic80-lr          \
+                uzem-lr vba-next-lr vbam-lr vecx-lr vice-lr vircon32-lr virtualjaguar-lr xmil-lr wasm4-lr yabasanshiro-lr"
 
 ### Emulators or cores for specific devices
 case "${DEVICE}" in
@@ -598,11 +598,13 @@ makeinstall_target() {
 
   ### Atari Jaguar
   add_emu_core atarijaguar retroarch virtualjaguar true
+  add_emu_core atarijaguar bigpemu bigpemu-sa false
   add_es_system atarijaguar
 
   ### Atari Lynx
   add_emu_core atarilynx retroarch handy true
   add_emu_core atarilynx retroarch beetle_lynx false
+  add_emu_core atarilynx retroarch gearlynx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core atarilynx mednafen lynx false
@@ -705,6 +707,7 @@ makeinstall_target() {
   ### SNK NeoCD
   add_emu_core neocd retroarch neocd true
   add_emu_core neocd retroarch fbneo false
+  add_emu_core neocd retroarch geolith false
   add_es_system neocd
 
   ### SNK NeoGeo Pocket
@@ -865,6 +868,7 @@ makeinstall_target() {
   add_emu_core pcengine retroarch beetle_pce_fast true
   add_emu_core pcengine retroarch beetle_pce false
   add_emu_core pcengine retroarch beetle_supergrafx false
+  add_emu_core pcengine retroarch geargrafx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core pcengine mednafen pce false
@@ -877,6 +881,7 @@ makeinstall_target() {
   add_emu_core pcenginecd retroarch beetle_pce_fast true
   add_emu_core pcenginecd retroarch beetle_pce false
   add_emu_core pcenginecd retroarch beetle_supergrafx false
+  add_emu_core pcenginecd retroarch geargrafx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core pcenginecd mednafen pce false
@@ -1132,6 +1137,7 @@ makeinstall_target() {
   ### NEC Super Grafx
   add_emu_core supergrafx retroarch beetle_supergrafx true
   add_emu_core supergrafx retroarch beetle_pce false
+  add_emu_core supergrafx retroarch geargrafx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core supergrafx mednafen pce false
@@ -1257,6 +1263,7 @@ makeinstall_target() {
   add_emu_core tg16 retroarch beetle_pce_fast true
   add_emu_core tg16 retroarch beetle_pce false
   add_emu_core tg16 retroarch beetle_supergrafx false
+  add_emu_core tg16 retroarch geargrafx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core tg16 mednafen pce false
@@ -1269,6 +1276,7 @@ makeinstall_target() {
   add_emu_core tg16cd retroarch beetle_pce_fast true
   add_emu_core tg16cd retroarch beetle_pce false
   add_emu_core tg16cd retroarch beetle_supergrafx false
+  add_emu_core tg16cd retroarch geargrafx false
   case ${DEVICE} in
     RK3399|AMD64|RK3326*|RK35*)
       add_emu_core tg16cd mednafen pce false
