@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="hypseus-singe"
-PKG_VERSION="dac37bcac963407ae719f04b178f80353a4bbc12" # v2.11.6
+PKG_VERSION="dac37bcac963407ae719f04b178f80353a4bbc12" # v2.12.0
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL3"
