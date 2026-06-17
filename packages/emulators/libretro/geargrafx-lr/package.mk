@@ -15,7 +15,7 @@
 ################################################################################
 
 PKG_NAME="geargrafx-lr"
-PKG_VERSION="faaef77303eaab62fe65870589ae0487ea1a1aa8"
+PKG_VERSION="951820a68fc81cc9babb291abd94687db414f171"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="https://github.com/drhelius/Geargrafx"
