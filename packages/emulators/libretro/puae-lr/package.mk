@@ -21,7 +21,7 @@
 ################################################################################
 
 PKG_NAME="puae-lr"
-PKG_VERSION="20e019d4405e33472a3c20824c53bcd79f474a1b"
+PKG_VERSION="2b0ed42fe565fb997a0627aaa8f44e0948b527f8"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"

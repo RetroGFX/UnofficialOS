@@ -3,7 +3,7 @@
 # Copyright (C) 2023 JELOS (https://github.com/JustEnoughLinuxOS)
 
 PKG_NAME="freej2me-lr"
-PKG_VERSION="2af9143f5ad07498fad2b1ddf8d393a79dce05f1"
+PKG_VERSION="26316c9b1502fabbbad8dcbba7f487e699a5e4b6"
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_SITE="https://github.com/TASEmulators/freej2me-plus"

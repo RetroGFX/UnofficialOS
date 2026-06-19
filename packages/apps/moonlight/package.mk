@@ -14,7 +14,7 @@ if [ "${TARGET_ARCH}" = "x86_64" ]
 then
   PKG_SITE+="qt"
   PKG_URL="${PKG_SITE}.git"
-  PKG_VERSION="8cc3b3064211dfd91d1f9bfdbe6aeed97b1a9db8"
+  PKG_VERSION="02004bac3f61d630b6a5e388603a3dc4eec2b30b"
   PKG_DEPENDS_TARGET+=" qt5"
   PKG_TOOLCHAIN="manual"
   make_target() {
@@ -32,7 +32,7 @@ then
 else
   PKG_SITE+="embedded"
   PKG_URL="${PKG_SITE}.git"
-  PKG_VERSION="f7dc33c87064e97f7f4e29457e312b9cceb24349"
+  PKG_VERSION="f32e415aea6797d261d6b470dcf8bf18727341c2"
   PKG_TOOLCHAIN="cmake"
   post_makeinstall_target() {
     mkdir -p ${INSTALL}/usr/config/moonlight

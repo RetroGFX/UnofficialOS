@@ -19,7 +19,7 @@
 ################################################################################
 
 PKG_NAME="yabasanshiro-lr"
-PKG_VERSION="0096f0e482a9d55576ce59b714240e69d10de3ed"
+PKG_VERSION="f448097b69a6037246a08e9dc09eabaa420d7893"
 PKG_GIT_CLONE_BRANCH="yabasanshiro"
 PKG_REV="1"
 PKG_ARCH="any"
