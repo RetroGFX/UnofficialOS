@@ -143,6 +143,10 @@ set_kill stop
 ### Determine which emulator we're launching and make appropriate adjustments before launching.
 ${VERBOSE} && log $0 "Configuring for ${EMULATOR}"
 case ${EMULATOR} in
+  retrorun)
+    set_kill set "retrorun-sdl2"
+    RUNTHIS='${EMUPERF} ${RUN_SHELL} /usr/bin/start_retrorun.sh "${ROMNAME}" "${CORE}" "${PLATFORM}"'
+  ;;
   mednafen)
     set_kill set "-9 mednafen"
     RUNTHIS='${RUN_SHELL} /usr/bin/start_mednafen.sh "${ROMNAME}" "${CORE}" "${PLATFORM}"'

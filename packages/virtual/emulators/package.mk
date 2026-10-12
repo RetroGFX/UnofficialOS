@@ -66,6 +66,14 @@ case "${DEVICE}" in
   ;;
 esac
 
+# Images containing handhelds with Retrorun hardware profiles.
+case "${DEVICE}" in
+  RK3326|RK3566|RK3566-BSP|RK3399)
+    PKG_EMUS+=" retrorun"
+    LIBRETRO_CORES+=" flycast2021le-lr"
+  ;;
+esac
+
 PKG_DEPENDS_TARGET+=" ${PKG_EMUS} ${EMUS_32BIT} ${PKG_RETROARCH} ${LIBRETRO_CORES}"
 
 install_script() {
@@ -322,6 +330,14 @@ makeinstall_target() {
       add_emu_core dreamcast retroarch flycast true    
       add_emu_core dreamcast retroarch flycast2021 false
       add_emu_core dreamcast flycast flycast-sa false
+    ;;
+  esac
+  case "${DEVICE}" in
+    RK3326|RK3566|RK3566-BSP|RK3399)
+      add_emu_core dreamcast retroarch flycast2021le false
+      add_emu_core dreamcast retrorun flycast false
+      add_emu_core dreamcast retrorun flycast2021 false
+      add_emu_core dreamcast retrorun flycast2021le false
     ;;
   esac
   add_es_system dreamcast

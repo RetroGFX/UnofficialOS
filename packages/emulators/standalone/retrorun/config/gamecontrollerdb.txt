@@ -1,0 +1,8 @@
+# RG353M RK3566-BSP retrogame_joypad, verified against evdev/ES/RetroArch.
+# SDL Xbox positions: bottom=b0 (B), right=b1 (A), left=b3 (Y), top=b2 (X).
+19009b4d4b4800000111000000010000,retrogame_joypad,a:b0,b:b1,x:b3,y:b2,back:b8,start:b9,dpleft:b15,dpdown:b14,dpright:b16,dpup:b13,leftshoulder:b4,lefttrigger:b6,rightshoulder:b5,righttrigger:b7,leftstick:b11,rightstick:b12,leftx:a0,lefty:a1,rightx:a2,righty:a3,platform:Linux,crc:4d9b,
+# Other supported kernel layouts from UnofficialOS's SDL database. Only the
+# face buttons change from Nintendo labels to SDL's positional convention.
+19009b4d4b4800000111000000020000,retrogame_joypad,a:b0,b:b1,x:b3,y:b2,back:b8,start:b9,dpleft:b15,dpdown:b14,dpright:b16,dpup:b13,leftshoulder:b4,lefttrigger:b6,rightshoulder:b5,righttrigger:b7,leftstick:b11,rightstick:b12,leftx:a0,lefty:a1,rightx:a2,righty:a3,platform:Linux,
+1900e7444b4800000111000034020000,rg552_joypad,a:b0,b:b1,x:b3,y:b2,back:b8,start:b9,dpleft:b15,dpdown:b14,dpright:b16,dpup:b13,leftshoulder:b4,lefttrigger:b6,rightshoulder:b5,righttrigger:b7,leftstick:b11,rightstick:b12,leftx:a0,lefty:a1,rightx:a2,righty:a3,platform:Linux,
+03002758091200000031000011010000,OpenSimHardware OSH PB Controller,a:b1,b:b0,x:b3,y:b2,back:b7,start:b6,dpleft:h0.8,dpdown:h0.4,dpright:h0.2,dpup:h0.1,leftshoulder:b4,lefttrigger:b10,rightshoulder:b5,righttrigger:b11,leftstick:b8,rightstick:b9,leftx:a0,lefty:a1,rightx:a2,righty:a3,platform:Linux,
